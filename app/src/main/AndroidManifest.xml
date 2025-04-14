@@ -16,6 +16,9 @@
             android:name=".HomeAlunoActivity"
             android:exported="false" />
         <activity
+            android:name=".CadastroActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeProfessorActivity"
             android:exported="false" />
         <activity
