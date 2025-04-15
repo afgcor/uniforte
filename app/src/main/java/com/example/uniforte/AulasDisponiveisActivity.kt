@@ -27,7 +27,5 @@ class AulasDisponiveisActivity : AppCompatActivity() {
         // Configurando os botões de agendar aula
         val agendarAula1Button: Button = findViewById(R.id.agendarAula1)
         val agendarAula2Button: Button = findViewById(R.id.agendarAula2)
-
-
     }
 }
