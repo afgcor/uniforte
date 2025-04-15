@@ -59,12 +59,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Entrar"
-        android:background="@drawable/button_background"
         app:layout_constraintTop_toBottomOf="@+id/etSenha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp" />
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#000000"/>
 
     <TextView
         android:id="@+id/tvCadastrar"

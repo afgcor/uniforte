@@ -1,57 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_aluno_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <ScrollView
+        android:id="@+id/scrollViewConteudo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llNavegacaoInferior"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/llConteudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Saudação -->
+            <TextView
+                android:id="@+id/tvOlaUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Olá, Narak"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Título da seção: Agendamentos da semana -->
+            <LinearLayout
+                android:id="@+id/llAgendamentosHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tvAgendamentosSemana"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Agendamentos da semana"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvVerTudo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver tudo"
+                    android:textSize="15sp"
+                    android:textColor="#0000FF"
+                    />
+            </LinearLayout>
+
+            <!-- Card simulado para Agendamento 1 -->
+            <LinearLayout
+                android:id="@+id/llCardAula1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_agendados"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:elevation="2dp">
+
+
+                <TextView
+                    android:id="@+id/tvTituloAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilates"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDescricaoAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Descrição da aula"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp" />
+
+                <LinearLayout
+                    android:id="@+id/llDataHoraAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDataAula1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12/01" />
+
+                    <TextView
+                        android:id="@+id/tvHoraAula1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 18:01"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Card simulado para Agendamento 2 -->
+            <LinearLayout
+                android:id="@+id/llCardAula2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_agendados"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:elevation="2dp">
+
+                <TextView
+                    android:id="@+id/tvTituloAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yoga"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDescricaoAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Descrição da aula"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp" />
+
+                <LinearLayout
+                    android:id="@+id/llDataHoraAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDataAula2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13/01" />
+
+                    <TextView
+                        android:id="@+id/tvHoraAula2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 09:00"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Botão para agendar nova aula -->
+            <Button
+                android:id="@+id/btnAgendarNovaAula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginBottom="24dp"
+                android:text="Agendar nova aula"
+                android:backgroundTint="#557AF2"/>
+
+            <!-- Seção Meus objetivos -->
+            <TextView
+                android:id="@+id/tvMeusObjetivos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meus objetivos"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Card simulado para Objetivos -->
+            <LinearLayout
+                android:id="@+id/llCardObjetivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp"
+                android:elevation="2dp">
+
+                <!-- Texto do Objetivo -->
+                <LinearLayout
+                    android:id="@+id/llObjetivoTexto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/tvTituloObjetivo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Perda de Gordura"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/tvDescricaoObjetivo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Perda de Gordura e ganho de massa magra"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Imagem/ícone simulando o objetivo -->
+                <ImageView
+                    android:id="@+id/ivObjetivo"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:src="@drawable/ic_objetivo"
+                    android:contentDescription="Imagem do objetivo"
+                    android:layout_marginEnd="8dp" />
+
+            </LinearLayout>
+
+            <!-- Seção Feedback Calórico -->
+            <TextView
+                android:id="@+id/tvFeedbackCalorico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feedback Calórico"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Card para Feedback Calórico -->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <!-- Imagem de fundo (feedback calórico) -->
+                <ImageView
+                    android:id="@+id/ivFeedbackCalorico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cardfeedback"
+                    android:contentDescription="Imagem de feedback calórico" />
+
+                <!-- Imagem sobreposta (mundo) -->
+                <ImageView
+                    android:id="@+id/ivObjetivo3"
+                    android:layout_width="161dp"
+                    android:layout_height="99dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:translationX="100dp"
+                    android:contentDescription="Imagem do objetivo"
+                    android:src="@drawable/mundo" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 
     <LinearLayout
+        android:id="@+id/llNavegacaoInferior"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Home do Aluno"
-            android:textSize="22sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_weight="1"
+            android:text="Home"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_home"
+            android:drawablePadding="4dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
 
-        <Button
-            android:id="@+id/btnAgendamentos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Agendamentos"
-            android:layout_marginBottom="8dp"/>
 
-        <Button
-            android:id="@+id/btnFeedback"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/navFicha"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Feedback"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/btnAulas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Aulas Disponíveis"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/btnFicha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Ficha de Treino"
-            android:layout_marginBottom="8dp"/>
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_ficha"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
 
-        <Button
-            android:id="@+id/btnPerfil"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Perfil"
-            android:layout_marginBottom="8dp"/>
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_perfil"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
 
     </LinearLayout>
-</ScrollView>
+
+</RelativeLayout>
