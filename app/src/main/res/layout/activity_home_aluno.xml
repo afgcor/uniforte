@@ -162,6 +162,7 @@
                 android:layout_gravity="end"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/button_background"
+                android:backgroundTint="#557AF2"
                 android:text="Agendar nova aula" />
 
             <!-- Seção Meus objetivos -->
