@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">uniforte</string>
+
+    <string-array name="lista_exercicios">
+        <item>Selecione um exercício</item>
+        <item>Supino</item>
+        <item>Agachamento</item>
+        <item>Abdominal</item>
+        <item>Burpee</item>
+        <item>Leg Press</item>
+    </string-array>
 </resources>
