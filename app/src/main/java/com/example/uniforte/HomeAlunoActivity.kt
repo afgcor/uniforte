@@ -36,7 +36,6 @@ class HomeAlunoActivity : AppCompatActivity() {
             startActivity(Intent(this, PerfilActivity::class.java))
         }
 
-
         findViewById<TextView>(R.id.navHome).setOnClickListener {
         }
 
