@@ -10,11 +10,17 @@ class HomeProfessorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_professor)
 
-        findViewById<Button>(R.id.btnAlunos).setOnClickListener {
-            startActivity(Intent(this, AlunosActivity::class.java))
+
+        findViewById<Button>(R.id.btnEditarAula2).setOnClickListener {
+            startActivity(Intent(this, EditarAulaActivity::class.java))
         }
-        findViewById<Button>(R.id.btnPerfilAluno).setOnClickListener {
-            startActivity(Intent(this, PerfilAlunosActivity::class.java))
+
+        findViewById<Button>(R.id.btnAdicionarAula).setOnClickListener {
+            startActivity(Intent(this, AdicionarAulaActivity::class.java))
+        }
+
+        findViewById<Button>(R.id.navHome).setOnClickListener {
+            startActivity(Intent(this, HomeProfessorActivity::class.java))
         }
 
 
