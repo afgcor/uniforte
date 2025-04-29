@@ -1,39 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_aluno_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <ScrollView
+        android:id="@+id/scrollViewConteudo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llNavegacaoInferior"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/llConteudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvOlaUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="16dp"
+                android:text="Olá, {Usuário}"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llAgendamentosHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvAgendamentosSemana"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Suas aulas da semana"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/llCardAula2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/card_agendados"
+                android:elevation="2dp"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTituloAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yoga"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDescricaoAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTituloAula2"
+                    android:layout_marginTop="4dp"
+                    android:text="Descrição da aula"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/llDataHoraAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvDescricaoAula2"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDataAula2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12/01" />
+
+                    <TextView
+                        android:id="@+id/tvHoraAula2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="09:00" />
+
+                    <ImageView
+                        android:id="@+id/ic_delete2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:contentDescription="Excluir"
+                        android:src="@drawable/ic_delete" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnEditarAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/dark_gray"
+                    android:text="Editar Aula"
+                    android:textColor="#1F0B0B"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/llCardAula2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/card_agendados"
+                android:elevation="2dp"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTituloAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilates"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDescricaoAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTituloAula2"
+                    android:layout_marginTop="4dp"
+                    android:text="Descrição da aula"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/llDataHoraAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvDescricaoAula2"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDataAula2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13/01" />
+
+                    <TextView
+                        android:id="@+id/tvHoraAula2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="09:00" />
+
+                    <ImageView
+                        android:id="@+id/ic_delete2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:contentDescription="Excluir"
+                        android:src="@drawable/ic_delete" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnEditarAula2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/dark_gray"
+                    android:text="Editar Aula"
+                    android:textColor="#1F0B0B"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnAdicionarAula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="@color/black"
+                android:text="Adicionar aula"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
 
     <LinearLayout
+        android:id="@+id/llNavegacaoInferior"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Home do Professor"
-            android:textSize="22sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_weight="1"
+            android:text="Home"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_home"
+            android:drawablePadding="4dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
 
-        <Button
-            android:id="@+id/btnAlunos"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/navFicha"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Meus Alunos"
-            android:layout_marginBottom="8dp"/>
+            android:layout_weight="1"
+            android:text="Ficha de Treino"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_ficha"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
 
-        <Button
-            android:id="@+id/btnPerfilAluno"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Perfil Aluno"
-            android:layout_marginBottom="8dp"/>
-
-
+            android:layout_weight="1"
+            android:text="Perfil"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_perfil"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
 
 
     </LinearLayout>
-</ScrollView>
+
+</RelativeLayout>

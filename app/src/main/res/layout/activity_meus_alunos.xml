@@ -102,7 +102,6 @@
                         android:paddingRight="16dp"
                         android:paddingBottom="8dp">
 
-                        <!-- Área do aluno -->
                         <LinearLayout
                             android:id="@+id/teste123"
                             android:layout_width="match_parent"
@@ -112,7 +111,6 @@
                             android:paddingTop="8dp"
                             android:paddingBottom="8dp">
 
-                            <!-- Foto do aluno -->
                             <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -121,13 +119,12 @@
                                 <ImageView
                                     android:layout_width="66dp"
                                     android:layout_height="66dp"
-                                    android:background="@drawable/background_redondo"
+                                    android:background="@drawable/background_redondo_escuro"
                                     android:padding="12dp"
                                     android:scaleType="centerCrop"
                                     android:src="@android:drawable/ic_menu_gallery" />
                             </androidx.cardview.widget.CardView>
 
-                            <!-- Nome + Email do aluno -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -154,7 +151,6 @@
                                     android:textSize="16sp" />
                             </LinearLayout>
 
-                            <!-- Botão de deletar -->
                             <ImageView
                                 android:id="@+id/btnDeletarMA"
                                 android:layout_width="wrap_content"
@@ -165,7 +161,6 @@
 
                         </LinearLayout>
 
-                        <!-- Botão editar -->
                         <Button
                             android:id="@+id/button3"
                             android:layout_width="match_parent"
@@ -190,7 +185,6 @@
                         android:paddingRight="16dp"
                         android:paddingBottom="8dp">
 
-                        <!-- Área do aluno -->
                         <LinearLayout
                             android:id="@+id/teste123"
                             android:layout_width="match_parent"
@@ -200,7 +194,6 @@
                             android:paddingTop="8dp"
                             android:paddingBottom="8dp">
 
-                            <!-- Foto do aluno -->
                             <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -209,13 +202,12 @@
                                 <ImageView
                                     android:layout_width="66dp"
                                     android:layout_height="66dp"
-                                    android:background="@drawable/background_redondo"
+                                    android:background="@drawable/background_redondo_escuro"
                                     android:padding="12dp"
                                     android:scaleType="centerCrop"
                                     android:src="@android:drawable/ic_menu_gallery" />
                             </androidx.cardview.widget.CardView>
 
-                            <!-- Nome + Email do aluno -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -242,7 +234,6 @@
                                     android:textSize="16sp" />
                             </LinearLayout>
 
-                            <!-- Botão de deletar -->
                             <ImageView
                                 android:id="@+id/btnDeletarMA"
                                 android:layout_width="wrap_content"
@@ -253,7 +244,6 @@
 
                         </LinearLayout>
 
-                        <!-- Botão editar -->
                         <Button
                             android:id="@+id/button3"
                             android:layout_width="match_parent"
@@ -268,12 +258,11 @@
                 </LinearLayout>
             </ScrollView>
 
-            <!-- Corpo principal -->
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Barra de navegação inferior -->
     <LinearLayout
         android:id="@+id/llNavegacaoInferior"
         android:layout_width="match_parent"
