@@ -40,7 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView">
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        >
 
         <TextView
             android:id="@+id/tvTituloAula1"
@@ -76,6 +77,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text=" 18:01" />
+
+            <TextView
+                android:id="@+id/ic_delete"
+                android:layout_width="254dp"
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/ic_delete" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -127,6 +135,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text=" 09:00" />
+
+            <TextView
+                android:id="@+id/ic_delete2"
+                android:layout_width="254dp"
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/ic_delete" />
         </LinearLayout>
     </LinearLayout>
 
@@ -178,6 +192,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text=" 11:00" />
+
+            <TextView
+                android:id="@+id/ic_delete3"
+                android:layout_width="254dp"
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/ic_delete" />
         </LinearLayout>
     </LinearLayout>
 
@@ -229,6 +249,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text=" 10:30" />
+
+            <TextView
+                android:id="@+id/ic_delete4"
+                android:layout_width="254dp"
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/ic_delete" />
         </LinearLayout>
     </LinearLayout>
 

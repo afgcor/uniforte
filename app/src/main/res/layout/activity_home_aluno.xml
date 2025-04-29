@@ -103,6 +103,12 @@
                         android:layout_height="wrap_content"
                         android:text=" 18:01"
                         android:layout_marginStart="8dp" />
+
+                    <TextView
+                        android:id="@+id/ic_delete1"
+                        android:layout_width="254dp"
+                        android:layout_height="match_parent"
+                        android:drawableEnd="@drawable/ic_delete" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -151,6 +157,12 @@
                         android:layout_height="wrap_content"
                         android:text=" 09:00"
                         android:layout_marginStart="8dp" />
+
+                    <TextView
+                        android:id="@+id/ic_delete2"
+                        android:layout_width="254dp"
+                        android:layout_height="match_parent"
+                        android:drawableEnd="@drawable/ic_delete" />
                 </LinearLayout>
             </LinearLayout>
 
