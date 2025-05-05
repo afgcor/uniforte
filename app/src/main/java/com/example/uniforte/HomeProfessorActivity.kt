@@ -3,6 +3,7 @@ package com.example.uniforte
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class HomeProfessorActivity : AppCompatActivity() {
@@ -10,7 +11,22 @@ class HomeProfessorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_professor)
 
+        // Corrigido para TextView em vez de Button
+        findViewById<TextView>(R.id.navHome).setOnClickListener {
+            startActivity(Intent(this, HomeProfessorActivity::class.java))
+        }
 
+        findViewById<TextView>(R.id.navFicha).setOnClickListener {
+            // Navegação para Ficha de Treino (se necessário)
+            startActivity(Intent(this, AlunosActivity::class.java))
+        }
+
+        findViewById<TextView>(R.id.navPerfil).setOnClickListener {
+            // Navegação para Perfil (se necessário)
+            startActivity(Intent(this, PerfilAdminActivity::class.java))
+        }
+
+        // Botões para editar e adicionar aula
         findViewById<Button>(R.id.btnEditarAula2).setOnClickListener {
             startActivity(Intent(this, EditarAulaActivity::class.java))
         }
@@ -18,11 +34,5 @@ class HomeProfessorActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnAdicionarAula).setOnClickListener {
             startActivity(Intent(this, AdicionarAulaActivity::class.java))
         }
-
-        findViewById<Button>(R.id.navHome).setOnClickListener {
-            startActivity(Intent(this, HomeProfessorActivity::class.java))
-        }
-
-
     }
 }
