@@ -7,7 +7,7 @@ import com.google.android.material.chip.ChipGroup
 
 class AdicionarFichaTreinoActivity : AppCompatActivity() {
 
-    private lateinit var btnVoltar: Button
+    private lateinit var btnVoltar: ImageButton
     private lateinit var etTituloFicha: EditText
     private lateinit var etDescricaoFicha: EditText
     private lateinit var spSelecioneExercicios: Spinner

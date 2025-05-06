@@ -110,6 +110,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/EditarInfo"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginLeft="16dp"

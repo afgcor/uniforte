@@ -147,6 +147,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/scrollAlunos2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="aluno@gmail.com"
@@ -196,6 +197,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/scrollAlunos3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="aluno@gmail.com"

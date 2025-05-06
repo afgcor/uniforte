@@ -27,7 +27,16 @@ class AlunosActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.scrollAlunos).setOnClickListener {
             // Navegação para Ficha de Treino (se necessário)
-            startActivity(Intent(this, PerfilAlunosActivity::class.java))
+            startActivity(Intent(this, PerfilAlunoActivity::class.java))
+        }
+        findViewById<TextView>(R.id.scrollAlunos2).setOnClickListener {
+            // Navegação para Ficha de Treino (se necessário)
+            startActivity(Intent(this, PerfilAlunoActivity::class.java))
+        }
+
+        findViewById<TextView>(R.id.scrollAlunos3).setOnClickListener {
+            // Navegação para Ficha de Treino (se necessário)
+            startActivity(Intent(this, PerfilAlunoActivity::class.java))
         }
 
         findViewById<TextView>(R.id.addAluno).setOnClickListener {

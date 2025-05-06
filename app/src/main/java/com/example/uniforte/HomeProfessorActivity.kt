@@ -11,13 +11,13 @@ class HomeProfessorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_professor)
 
-        // Corrigido para TextView em vez de Button
+        // navegar para Home
         findViewById<TextView>(R.id.navHome).setOnClickListener {
             startActivity(Intent(this, HomeProfessorActivity::class.java))
         }
-
+        //navegar para tela de Alunos
         findViewById<TextView>(R.id.navFicha).setOnClickListener {
-            // Navegação para Ficha de Treino (se necessário)
+
             startActivity(Intent(this, AlunosActivity::class.java))
         }
 
@@ -26,6 +26,10 @@ class HomeProfessorActivity : AppCompatActivity() {
             startActivity(Intent(this, PerfilAdminActivity::class.java))
         }
 
+        // Botões para editar e adicionar aula
+        findViewById<Button>(R.id.btnEditarAula1).setOnClickListener {
+            startActivity(Intent(this, EditarAulaActivity::class.java))
+        }
         // Botões para editar e adicionar aula
         findViewById<Button>(R.id.btnEditarAula2).setOnClickListener {
             startActivity(Intent(this, EditarAulaActivity::class.java))

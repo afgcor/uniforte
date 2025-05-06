@@ -219,7 +219,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:backgroundTint="#444444"
-                        android:text="Editar informações"
+                        android:text="Salvar"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 

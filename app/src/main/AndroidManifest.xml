@@ -70,7 +70,7 @@
             android:name=".PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".PerfilAlunosActivity"
+            android:name=".PerfilAlunoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
