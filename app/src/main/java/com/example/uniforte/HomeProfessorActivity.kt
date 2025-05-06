@@ -3,6 +3,7 @@ package com.example.uniforte
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -11,28 +12,34 @@ class HomeProfessorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_professor)
 
-        // Corrigido para TextView em vez de Button
-        findViewById<TextView>(R.id.navHome).setOnClickListener {
-            startActivity(Intent(this, HomeProfessorActivity::class.java))
+        val btnEditarAula = findViewById<Button>(R.id.btnEditarAula)
+        btnEditarAula.setOnClickListener {
+            val intent = Intent(this, EditarAulaActivity::class.java)
+            startActivity(intent)
         }
 
-        findViewById<TextView>(R.id.navFicha).setOnClickListener {
-            // Navegação para Ficha de Treino (se necessário)
-            startActivity(Intent(this, AlunosActivity::class.java))
+        val btnAdicionarAula = findViewById<Button>(R.id.btnAdicionarAula)
+        btnAdicionarAula.setOnClickListener {
+            val intent = Intent(this, AdicionarAulaActivity::class.java)
+            startActivity(intent)
         }
 
-        findViewById<TextView>(R.id.navPerfil).setOnClickListener {
-            // Navegação para Perfil (se necessário)
-            startActivity(Intent(this, PerfilAdminActivity::class.java))
+        val navHome = findViewById<TextView>(R.id.navHome)
+        navHome.setOnClickListener {
+            val intent = Intent(this, HomeProfessorActivity::class.java)
+            startActivity(intent)
         }
 
-        // Botões para editar e adicionar aula
-        findViewById<Button>(R.id.btnEditarAula2).setOnClickListener {
-            startActivity(Intent(this, EditarAulaActivity::class.java))
+        val navMeusAlunos = findViewById<TextView>(R.id.navMeusAlunos)
+        navMeusAlunos.setOnClickListener {
+            val intent = Intent(this, MeusAlunosActivity::class.java)
+            startActivity(intent)
         }
 
-        findViewById<Button>(R.id.btnAdicionarAula).setOnClickListener {
-            startActivity(Intent(this, AdicionarAulaActivity::class.java))
+        val navPerfilAdmin = findViewById<TextView>(R.id.navPerfilAdmin)
+        navPerfilAdmin.setOnClickListener {
+            val intent = Intent(this, PerfilAdminActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -6,30 +6,28 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-class AdicionarAulaActivity : AppCompatActivity() {
+class EditarFichaTreinoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_adicionar_aula)
+        setContentView(R.layout.activity_editar_ficha_treino)
 
-        val btnVoltar = findViewById<ImageView>(R.id.buttonVoltar)
+        val btnVoltar = findViewById<ImageView>(R.id.btnVoltar)
         btnVoltar.setOnClickListener{
             finish()
         }
 
-        val btnCancelar = findViewById<Button>(R.id.buttonCancelar)
-        btnCancelar.setOnClickListener{
-            finish()
+        val btnNomeAluno = findViewById<TextView>(R.id.tvNomeAlunoFicha)
+        btnNomeAluno.setOnClickListener{
+            val intent = Intent(this, PerfilAlunoActivity::class.java)
+            startActivity(intent)
         }
 
-        val btnSalvar = findViewById<Button>(R.id.buttonSalvar)
-        btnSalvar.setOnClickListener{
+        val btnSalvarFicha = findViewById<Button>(R.id.btnSalvarFicha)
+        btnSalvarFicha.setOnClickListener{
             finish()
-            Toast.makeText(this, "Aula adicionada com sucesso!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Ficha editada com sucesso!", Toast.LENGTH_SHORT).show()
         }
 
         val navHome = findViewById<TextView>(R.id.navHome)

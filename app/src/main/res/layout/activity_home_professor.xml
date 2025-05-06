@@ -96,7 +96,7 @@
                         android:text="09:00" />
 
                     <ImageView
-                        android:id="@+id/ic_delete1"
+                        android:id="@+id/btnDeletarAulaHome"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -105,7 +105,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btnEditarAula1"
+                    android:id="@+id/btnEditarAula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -166,7 +166,7 @@
                         android:text="09:00" />
 
                     <ImageView
-                        android:id="@+id/ic_delete2"
+                        android:id="@+id/btnDeletarAulaHome"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
@@ -175,7 +175,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btnEditarAula2"
+                    android:id="@+id/btnEditarAula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -222,7 +222,7 @@
             android:paddingBottom="4dp" />
 
         <TextView
-            android:id="@+id/navFicha"
+            android:id="@+id/navMeusAlunos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -233,7 +233,7 @@
             android:text="Meus Alunos" />
 
         <TextView
-            android:id="@+id/navPerfil"
+            android:id="@+id/navPerfilAdmin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

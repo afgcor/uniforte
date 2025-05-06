@@ -6,178 +6,234 @@
     android:layout_height="match_parent"
     tools:context=".AulasDisponiveisActivity">
 
-    <!-- Título -->
-
-
-    <ImageButton
-        android:id="@+id/btnVoltar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="68dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tituloTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aulas Disponíveis"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="80dp"/>
-
-
-    <!-- Card de Aula 1 -->
-
+    <!-- Cabeçalho com botão voltar e título centralizado -->
     <LinearLayout
-        android:id="@+id/aula1Layout"
-        android:layout_width="348dp"
-        android:layout_height="183dp"
+        android:id="@+id/llTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:background="@drawable/rounded_card"
-        android:elevation="2dp"
-        android:orientation="vertical"
-        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloTextView">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Título da Aula -->
+        <ImageButton
+            android:id="@+id/btnVoltar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/white"
+            android:contentDescription="Voltar"
+            android:src="@drawable/ic_back" />
+
         <TextView
-            android:id="@+id/tituloAula1"
+            android:id="@+id/tituloTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pilates"
-            android:textSize="16sp"
+            android:layout_weight="1"
+            android:text="Aulas Disponíveis"
+            android:textAlignment="center"
+            android:textSize="18sp"
             android:textStyle="bold" />
-
-        <!-- Descrição da Aula -->
-        <TextView
-            android:id="@+id/descritivoAula1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Descrição da aula"
-            android:textSize="14sp" />
-
-        <!-- Data e Hora da Aula -->
-        <LinearLayout
-            android:id="@+id/llDataHoraAula1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvDataAula1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="12/01" />
-
-            <TextView
-                android:id="@+id/tvHoraAula1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text=" 18:01" />
-        </LinearLayout>
-
-        <!-- Nome do Professor -->
-        <TextView
-            android:id="@+id/professorAula1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Professor: Nome do Professor"
-            android:textSize="14sp" />
-
-        <!-- Botão para Agendar Aula -->
-        <Button
-            android:id="@+id/agendarAula1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/button_background"
-            android:text="Agendar Aula" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/aula2Layout"
-        android:layout_width="344dp"
-        android:layout_height="176dp"
-        android:layout_marginTop="20dp"
-        android:elevation="2dp"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_card"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+    <!-- ScrollView abaixo do cabeçalho -->
+    <ScrollView
+        android:id="@+id/scrollConteudo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/llTitulo"
+        app:layout_constraintBottom_toTopOf="@id/llNavegacaoInferior"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aula1Layout">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Título da Aula -->
-        <TextView
-            android:id="@+id/tituloAula2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pilates"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <!-- Descrição da Aula -->
-        <TextView
-            android:id="@+id/descritivoAula2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Descrição"
-            android:textSize="14sp" />
-
-        <!-- Data e Hora da Aula -->
         <LinearLayout
-            android:id="@+id/llDataHoraAula2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvDataAula2"
-                android:layout_width="wrap_content"
+            <!-- Exemplo de aula -->
+            <LinearLayout
+                android:id="@+id/aula1Layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="12/01" />
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_card"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvHoraAula2"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tituloAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilates"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/descritivoAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Descrição da aula"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/llDataHoraAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDataAula1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12/01" />
+
+                    <TextView
+                        android:id="@+id/tvHoraAula1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="17:00" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/professorAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Professor: Nome do Professor"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/agendarAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/button_background"
+                    android:text="Agendar Aula" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aula1Layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text=" 18:01" />
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_card"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tituloAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zumba"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/descritivoAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Descrição da aula"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/llDataHoraAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDataAula1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13/01" />
+
+                    <TextView
+                        android:id="@+id/tvHoraAula1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="19:30" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/professorAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Professor: Nome do Professor"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/agendarAula1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/button_background"
+                    android:text="Agendar Aula" />
+            </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Nome do Professor -->
+    <!-- Navegação inferior fixa -->
+    <LinearLayout
+        android:id="@+id/llNavegacaoInferior"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
         <TextView
-            android:id="@+id/professorAula2"
-            android:layout_width="wrap_content"
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Professor: Nome do Professor"
-            android:textSize="14sp" />
+            android:layout_weight="1"
+            android:text="Home"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_home"
+            android:drawablePadding="4dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
 
-        <!-- Botão para Agendar Aula -->
-        <Button
-            android:id="@+id/agendarAula2"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/navFicha"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/button_background"
-            android:text="Agendar Aula" />
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_ficha"
+            android:gravity="center"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="Ficha de Treino" />
+
+        <TextView
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Perfil"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_perfil"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

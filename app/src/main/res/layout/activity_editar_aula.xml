@@ -70,14 +70,14 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Digite aqui"
                         android:textColorHint="@color/dark_gray">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTitulo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/chipgroup_background" />
+                            android:background="@drawable/chipgroup_background"
+                            android:text="Zumba" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -126,14 +126,14 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Data">
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editData"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/chipgroup_background" />
+                            android:background="@drawable/chipgroup_background"
+                            android:text="13/01" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -155,14 +155,14 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Horário">
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editHorario"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/chipgroup_background" />
+                            android:background="@drawable/chipgroup_background"
+                            android:text="19:30" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -219,18 +219,18 @@
             android:paddingBottom="4dp" />
 
         <TextView
-            android:id="@+id/navFicha"
+            android:id="@+id/navMeusAlunos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ficha de Treino"
-            android:gravity="center"
             android:drawableTop="@drawable/ic_ficha"
+            android:gravity="center"
             android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
+            android:paddingBottom="4dp"
+            android:text="Meus Alunos" />
 
         <TextView
-            android:id="@+id/navPerfil"
+            android:id="@+id/navPerfilAdmin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

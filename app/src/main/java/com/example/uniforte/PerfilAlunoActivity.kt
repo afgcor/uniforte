@@ -3,33 +3,31 @@ package com.example.uniforte
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-class AdicionarAulaActivity : AppCompatActivity() {
+class PerfilAlunoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_adicionar_aula)
+        setContentView(R.layout.activity_perfil_aluno)
 
-        val btnVoltar = findViewById<ImageView>(R.id.buttonVoltar)
+        val btnVoltar = findViewById<ImageButton>(R.id.back_button)
         btnVoltar.setOnClickListener{
             finish()
         }
 
-        val btnCancelar = findViewById<Button>(R.id.buttonCancelar)
-        btnCancelar.setOnClickListener{
-            finish()
+        val btnEditarFicha = findViewById<Button>(R.id.btnEditarFicha)
+        btnEditarFicha.setOnClickListener {
+            val intent = Intent(this, EditarFichaTreinoActivity::class.java)
+            startActivity(intent)
         }
 
-        val btnSalvar = findViewById<Button>(R.id.buttonSalvar)
-        btnSalvar.setOnClickListener{
-            finish()
-            Toast.makeText(this, "Aula adicionada com sucesso!", Toast.LENGTH_SHORT).show()
+        val btnAdicionarFicha = findViewById<TextView>(R.id.tvAdicionarFicha)
+        btnAdicionarFicha.setOnClickListener {
+            val intent = Intent(this, AdicionarFichaTreinoActivity::class.java)
+            startActivity(intent)
         }
 
         val navHome = findViewById<TextView>(R.id.navHome)
