@@ -16,10 +16,10 @@
             android:name=".PerfilAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".UsuarioAdmin"
+            android:name=".AgendamentosProfessorActivity"
             android:exported="false" />
         <activity
-            android:name=".AgendamentosProfessorActivity"
+            android:name=".EditarFichaTreinoActivity"
             android:exported="false" />
         <activity
             android:name=".EditarInformacoesActivity"
@@ -37,9 +37,6 @@
             android:name=".DadosTreinoActivity"
             android:exported="false" />
         <activity
-            android:name=".AlterarFichaTreinoActivity"
-            android:exported="false" />
-        <activity
             android:name=".AdicionarFichaTreinoActivity"
             android:exported="false" />
         <activity
@@ -55,9 +52,6 @@
             android:name=".AgendamentosActivity"
             android:exported="false" />
         <activity
-            android:name=".AlunosActivity"
-            android:exported="false" />
-        <activity
             android:name=".AulasDisponiveisActivity"
             android:exported="false" />
         <activity
@@ -70,7 +64,7 @@
             android:name=".PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".PerfilAlunosActivity"
+            android:name=".PerfilAlunoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -81,10 +75,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
-
     </application>
 
 </manifest>

@@ -198,18 +198,18 @@
             android:paddingBottom="4dp" />
 
         <TextView
-            android:id="@+id/navFicha"
+            android:id="@+id/navMeusAlunos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ficha de Treino"
+            android:text="Meus Alunos"
             android:gravity="center"
             android:drawableTop="@drawable/ic_ficha"
             android:paddingTop="4dp"
             android:paddingBottom="4dp" />
 
         <TextView
-            android:id="@+id/navPerfil"
+            android:id="@+id/navPerfilAdmin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

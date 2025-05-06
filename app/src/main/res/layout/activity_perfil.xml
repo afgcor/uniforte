@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/llNavegacaoInferior"
         android:background="@android:color/white"
+        android:layout_alignParentTop="true"
         android:padding="24dp">
 
         <LinearLayout
@@ -19,16 +20,35 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textTitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="Meu Perfil"
-                android:textColor="@android:color/black"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/llTituloPerfilAluno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="32dp"
+                android:paddingBottom="16dp">
+
+                <ImageButton
+                    android:id="@+id/btnVoltar3"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Voltar"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:id="@+id/textTitulo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Meu Perfil"
+                    android:textColor="@android:color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textNome"
@@ -155,6 +175,17 @@
                 android:backgroundTint="#D3D3D3"
                 android:text="Aumentar tamanho da fonte"
                 android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/btnSair"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:backgroundTint="#444444"
+                android:text="Sair da conta"
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
     </ScrollView>

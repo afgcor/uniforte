@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_detalhes_aluno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,6 +19,7 @@
             android:orientation="vertical">
 
             <!-- Header -->
+
             <LinearLayout
                 android:id="@+id/llHeaderPerfil"
                 android:layout_width="match_parent"
@@ -26,6 +28,16 @@
                 android:layout_marginBottom="24dp"
                 android:orientation="horizontal"
                 android:gravity="top">
+
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Voltar"
+                    app:srcCompat="@drawable/ic_back" />
 
                 <FrameLayout
                     android:id="@+id/frameLayout"
@@ -45,6 +57,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@drawable/background_redondo_claro"
+                            android:contentDescription="img drawable"
                             android:padding="20dp"
                             android:scaleType="centerCrop"
                             android:src="@android:drawable/ic_menu_gallery" />
@@ -107,7 +120,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/btnAdicionarFicha"
+                    android:id="@+id/tvAdicionarFicha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Adicionar Nova Ficha"
@@ -173,7 +186,7 @@
                         android:backgroundTint="@color/dark_gray"
                         android:text="Editar"
                         android:textColor="@color/black"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
@@ -230,30 +243,30 @@
             android:layout_weight="1"
             android:text="Home"
             android:gravity="center"
-            android:drawableTop="@drawable/ic_home"
+            app:drawableTopCompat="@drawable/ic_home"
             android:drawablePadding="4dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp" />
 
         <TextView
-            android:id="@+id/navFicha"
+            android:id="@+id/navMeusAlunos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ficha de Treino"
+            app:drawableTopCompat="@drawable/ic_ficha"
             android:gravity="center"
-            android:drawableTop="@drawable/ic_ficha"
             android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
+            android:paddingBottom="4dp"
+            android:text="Meus Alunos" />
 
         <TextView
-            android:id="@+id/navPerfil"
+            android:id="@+id/navPerfilAdmin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Perfil"
             android:gravity="center"
-            android:drawableTop="@drawable/ic_perfil"
+            app:drawableTopCompat="@drawable/ic_perfil"
             android:paddingTop="4dp"
             android:paddingBottom="4dp" />
     </LinearLayout>

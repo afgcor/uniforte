@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 
@@ -21,10 +22,17 @@ class HomeAlunoActivity : AppCompatActivity() {
             startActivity(Intent(this, AgendamentosActivity::class.java))
         }
 
-         // Botão para agendar nova aula
-         findViewById<Button>(R.id.btnAgendarNovaAula).setOnClickListener {
-             startActivity(Intent(this, AulasDisponiveisActivity::class.java))
-         }
+//         // Botão para agendar nova aula
+//         findViewById<Button>(R.id.btnAgendarNovaAula).setOnClickListener {
+//             startActivity(Intent(this, AulasDisponiveisActivity::class.java))
+//         }
+
+        val btnAgendarNovaAula = findViewById<Button>(R.id.btnAgendarNovaAula)
+        btnAgendarNovaAula.setOnClickListener{
+            val intent = Intent(this, AulasDisponiveisActivity::class.java)
+            startActivity(intent)
+        }
+
 
         // Navegação inferior: Item "Ficha de Treino"
         findViewById<TextView>(R.id.navFicha).setOnClickListener {
