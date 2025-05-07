@@ -39,6 +39,20 @@ class PerfilActivity : AppCompatActivity() {
 //            startActivity(intent)
 //        }
 
+        val navHome = findViewById<TextView>(R.id.navHome)
+        navHome.setOnClickListener {
+            val intent = Intent(this, HomeAlunoActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+        }
+
+        val navPerfil = findViewById<TextView>(R.id.navPerfil)
+        navPerfil.setOnClickListener {
+            val intent = Intent(this, PerfilActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+        }
+
         val navFicha = findViewById<TextView>(R.id.navFicha)
         navFicha.setOnClickListener {
             val intent = Intent(this, FichaTreinoActivity::class.java)

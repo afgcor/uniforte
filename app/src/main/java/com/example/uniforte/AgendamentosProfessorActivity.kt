@@ -20,6 +20,12 @@ class AgendamentosProfessorActivity : AppCompatActivity() {
             finish()
         }
 
+        val btnEditar = findViewById<TextView>(R.id.btnEditarAgendamento)
+        btnEditar.setOnClickListener{
+            val intent = Intent(this, EditarAulaActivity::class.java)
+            startActivity(intent)
+        }
+
         val navHome = findViewById<TextView>(R.id.navHome)
         navHome.setOnClickListener {
             val intent = Intent(this, HomeProfessorActivity::class.java)

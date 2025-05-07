@@ -18,6 +18,10 @@ class HomeProfessorActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        findViewById<TextView>(R.id.tvVerTudo).setOnClickListener {
+            startActivity(Intent(this, AgendamentosProfessorActivity::class.java))
+        }
+
         val btnAdicionarAula = findViewById<Button>(R.id.btnAdicionarAula)
         btnAdicionarAula.setOnClickListener {
             val intent = Intent(this, AdicionarAulaActivity::class.java)

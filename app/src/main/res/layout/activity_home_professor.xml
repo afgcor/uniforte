@@ -45,6 +45,15 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/tvVerTudo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver tudo"
+                    android:textSize="15sp"
+                    android:textColor="#0000FF"
+                    />
+
             </LinearLayout>
 
             <!-- Card de Aula 1 -->
