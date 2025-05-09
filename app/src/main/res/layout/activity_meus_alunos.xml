@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
 
             <LinearLayout
                 android:id="@+id/llHeaderBusca"
@@ -171,6 +172,7 @@
                             android:orientation="horizontal">
 
                             <Button
+                                android:id="@+id/bntEditarAluno"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -180,7 +182,7 @@
                                 android:textSize="16sp" />
 
                             <ImageView
-                                android:id="@+id/btnDeletarMA"
+                                android:id="@+id/btnDeletarMAZ"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_marginStart="16dp"

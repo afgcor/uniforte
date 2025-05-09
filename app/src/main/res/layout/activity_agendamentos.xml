@@ -6,17 +6,20 @@
     android:layout_height="match_parent">
 
     <!-- Cabeçalho fixo -->
+
+    <!-- Conteúdo rolável -->
     <LinearLayout
         android:id="@+id/llTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/back_button"
@@ -36,7 +39,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Conteúdo rolável -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"

@@ -1,5 +1,6 @@
 package com.example.uniforte
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -23,6 +24,12 @@ class MeusAlunosActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val tvAdicionarAluno = findViewById<TextView>(R.id.tvAdicionarAluno)
+        tvAdicionarAluno.setOnClickListener{
+            val intent = Intent(this, BuscarAlunoActivity::class.java)
+            startActivity(intent)
+        }
+
         val navPerfilAdmin = findViewById<TextView>(R.id.navPerfilAdmin)
         navPerfilAdmin.setOnClickListener {
             val intent = Intent(this, PerfilAdminActivity::class.java)
@@ -34,7 +41,7 @@ class MeusAlunosActivity : AppCompatActivity() {
             finish()
         }
 
-        val aluno1 = findViewById<TextView>(R.id.tvNomeAlunoMA)
+        val aluno1 = findViewById<TextView>(R.id.bntEditarAluno)
         aluno1.setOnClickListener{
             val intent = Intent(this, PerfilAlunoActivity::class.java)
             startActivity(intent)
