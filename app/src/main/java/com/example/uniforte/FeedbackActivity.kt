@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.KeyEvent
@@ -14,7 +15,11 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.uniforte.ai.AIService
+import kotlinx.coroutines.launch
 
 class FeedbackActivity : AppCompatActivity() {
 
@@ -24,97 +29,128 @@ class FeedbackActivity : AppCompatActivity() {
     private lateinit var btnSend: ImageButton
     private lateinit var backButton: ImageButton
 
+    private val TAG = "FeedbackActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
 
-        // Mapear referências de views do layout para manipulação em código
         scrollMessages   = findViewById(R.id.scrollMessages)
         messageContainer = findViewById(R.id.messageContainer)
         etMessage        = findViewById(R.id.etMessage)
         btnSend          = findViewById(R.id.btnSend)
         backButton       = findViewById(R.id.back_button)
 
-        // Configurar navegação inferior: ao tocar em “Ficha de Treino”, abre a activity correspondente
-        findViewById<TextView>(R.id.navFicha).setOnClickListener {
-            startActivity(Intent(this, FichaTreinoActivity::class.java))
-        }
-        // Configurar navegação inferior: ao tocar em “Perfil”, abre a activity de perfil
-        findViewById<TextView>(R.id.navPerfil).setOnClickListener {
-            startActivity(Intent(this, PerfilActivity::class.java))
-        }
 
-        // Voltar para a tela inicial do aluno, finalizando esta activity para não ficar no stack
         backButton.setOnClickListener {
-            startActivity(Intent(this, HomeAlunoActivity::class.java))
-            finish()
+
+            onBackPressedDispatcher.onBackPressed()
         }
 
-        // Envio de mensagem ao tocar no botão de envio
         btnSend.setOnClickListener {
-            sendCurrentMessage()
+            sendCurrentMessageAndGetResponse()
         }
 
-        // Também permitir envio ao pressionar a tecla ENTER (física ou virtual)
         etMessage.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                sendCurrentMessage()
+                sendCurrentMessageAndGetResponse()
                 true
             } else {
                 false
             }
         }
+        addMessageFromAI("Olá! Eu sou o FitBot, seu assistente virtual da UniFort. Como posso te ajudar hoje? ✨💪")
     }
 
-    /**
-     * Lê o texto do EditText, adiciona ao container de mensagens e mantém o foco
-     * no campo de entrada para permitir envio contínuo sem fechar o teclado.
-     */
-    private fun sendCurrentMessage() {
-        val text = etMessage.text.toString().trim()
-        if (text.isNotEmpty()) {
-            addMessage(text)
+    private fun sendCurrentMessageAndGetResponse() {
+        val userText = etMessage.text.toString().trim()
+        if (userText.isNotEmpty()) {
+            addMessageFromUser(userText)
             etMessage.text.clear()
 
-            // Garantir que o campo permaneça em foco e o teclado continue visível
-            etMessage.requestFocus()
+            // Ocultar teclado após enviar
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(etMessage, InputMethodManager.SHOW_IMPLICIT)
+            imm.hideSoftInputFromWindow(etMessage.windowToken, 0)
+
+            // Mostrar uma mensagem de "FitBot está a escrever..."
+            val thinkingMessage = "FitBot está a pensar... 🤔"
+            addMessageFromAI(thinkingMessage, isThinking = true)
+
+            lifecycleScope.launch {
+                Log.d(TAG, "Enviando para IA: $userText")
+                val result = AIService.getChatResponse(userText)
+
+                removeLastMessageIfThinking()
+
+                result.fold(
+                    onSuccess = {
+                            aiResponse ->
+                        Log.d(TAG, "Resposta da IA: $aiResponse")
+                        addMessageFromAI(aiResponse)
+                    },
+                    onFailure = {
+                            error ->
+                        Log.e(TAG, "Erro da IA: ${error.message}", error)
+                        addMessageFromAI("Desculpe, não consegui processar sua mensagem agora. Tente novamente mais tarde. 😟")
+                        Toast.makeText(this@FeedbackActivity, "Erro: ${error.localizedMessage}", Toast.LENGTH_LONG).show()
+                    }
+                )
+            }
         }
     }
 
-    /**
-     * Cria dinamicamente uma TextView formatada como bolha de mensagem,
-     * define margem e largura mínima, adiciona ao container e rola até o fim.
-     */
-    private fun addMessage(message: String) {
+    private fun addMessageFromUser(message: String) {
+        addMessage(message, true)
+    }
+
+    private fun addMessageFromAI(message: String, isThinking: Boolean = false) {
+        addMessage(message, false, isThinking)
+    }
+
+    private fun removeLastMessageIfThinking() {
+        val lastView = messageContainer.getChildAt(messageContainer.childCount - 1)
+        if (lastView != null && lastView.tag == "thinking_message") {
+            messageContainer.removeView(lastView)
+        }
+    }
+
+    private fun addMessage(message: String, isUserMessage: Boolean, isThinking: Boolean = false) {
         val bubble = TextView(this).apply {
             text = message
             setTextColor(Color.BLACK)
-            setBackgroundResource(R.drawable.bg_bubble_sent)
+            setBackgroundResource(if (isUserMessage) R.drawable.bg_bubble_sent else R.drawable.bg_bubble_received)
+            if (isThinking) {
+                tag = "thinking_message"
+            }
         }
 
-        // Definir largura mínima de bolha (200dp convertido para pixels)
         val minWidthPx = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            200f,
+            150f,
             resources.displayMetrics
         ).toInt()
         bubble.minWidth = minWidthPx
 
-        // Configurar LayoutParams para alinhamento à direita com margens padrão
-        bubble.layoutParams = LinearLayout.LayoutParams(
+        val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            gravity = Gravity.END
-            setMargins(16, 8, 16, 8)
+            gravity = if (isUserMessage) Gravity.END else Gravity.START
+            // Ajustar margens para melhor visualização
+            val horizontalMargin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, resources.displayMetrics).toInt()
+            val verticalMargin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4f, resources.displayMetrics).toInt()
+            setMargins(horizontalMargin, verticalMargin, horizontalMargin, verticalMargin)
         }
+        bubble.layoutParams = params
+
+        val paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f, resources.displayMetrics).toInt()
+        bubble.setPadding(paddingPx, paddingPx, paddingPx, paddingPx)
+
 
         messageContainer.addView(bubble)
-        // Agendar scroll para garantir que a nova mensagem fique visível
         scrollMessages.post {
             scrollMessages.fullScroll(View.FOCUS_DOWN)
         }
     }
 }
+
