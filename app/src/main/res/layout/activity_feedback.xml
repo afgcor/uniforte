@@ -102,36 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp" />
-
-        <TextView
-            android:id="@+id/navFicha"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ficha de Treino"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_ficha"
-            android:drawablePadding="4dp" />
-
-        <TextView
-            android:id="@+id/navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_perfil"
-            android:drawablePadding="4dp" />
-
 
     </LinearLayout>
 

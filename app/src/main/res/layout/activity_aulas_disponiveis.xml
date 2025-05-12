@@ -23,7 +23,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="16dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="Voltar"
             android:src="@drawable/ic_back" />
 
