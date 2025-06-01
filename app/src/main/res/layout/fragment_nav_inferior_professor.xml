@@ -1,0 +1,58 @@
+<!-- res/layout/fragment_bottom_nav.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llNavegacaoInferior"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:background="#FFFFFF"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_home"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/unifor_marinho"
+        android:fontFamily="@font/satoshi_medium"
+        android:foregroundTint="@color/unifor_marinho"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="@string/home"
+        android:textColor="@color/unifor_anil"
+        android:textColorLink="@color/unifor_anil" />
+
+    <TextView
+        android:id="@+id/navMeusAlunos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@android:drawable/ic_menu_my_calendar"
+        android:drawableTint="@color/unifor_marinho"
+        android:fontFamily="@font/satoshi_medium"
+        android:foregroundTint="@color/unifor_marinho"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="@string/meus_alunos"
+        android:textColor="@color/unifor_anil"
+        android:textColorLink="@color/unifor_anil" />
+
+    <TextView
+        android:id="@+id/navPerfilAdmin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_perfil"
+        android:drawableTint="@color/unifor_marinho"
+        android:fontFamily="@font/satoshi_medium"
+        android:foregroundTint="@color/unifor_marinho"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="@string/perfil"
+        android:textColor="@color/unifor_anil"
+        android:textColorLink="@color/unifor_anil" />
+</LinearLayout>

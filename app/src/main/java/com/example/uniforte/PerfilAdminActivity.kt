@@ -1,28 +1,21 @@
 package com.example.uniforte
 
-import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import android.widget.TextView
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-
+import androidx.appcompat.app.AppCompatActivity
 
 class PerfilAdminActivity : AppCompatActivity() {
-
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_perfil_admin)
-        
-        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar3)
-        btnVoltar.setOnClickListener{
-            finish()
+
+        val btnEditarInformacoes = findViewById<Button>(R.id.btnEditarInformacoes)
+        btnEditarInformacoes.setOnClickListener {
+            val intent = Intent(this, EditarInformacoesActivity::class.java)
+            intent.putExtra("tipoUsuario", "professor")
+            startActivity(intent)
         }
 
         val btnSair = findViewById<Button>(R.id.btnSair)
@@ -31,29 +24,30 @@ class PerfilAdminActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val navHome = findViewById<TextView>(R.id.navHome)
-        navHome.setOnClickListener {
-            val intent = Intent(this, HomeProfessorActivity::class.java)
-            startActivity(intent)
+        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
+        btnVoltar.setOnClickListener{
+            finish()
         }
 
-        val navMeusAlunos = findViewById<TextView>(R.id.navMeusAlunos)
-        navMeusAlunos.setOnClickListener {
-            val intent = Intent(this, MeusAlunosActivity::class.java)
-            startActivity(intent)
-        }
+        // Inserir o fragmento da navegação inferior no container
+        val navInferiorProfessorFragment = NavInferiorProfessorFragment   ()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_nav_inferior, navInferiorProfessorFragment)
+            .commit()
 
-        val navPerfilAdmin = findViewById<TextView>(R.id.navPerfilAdmin)
-        navPerfilAdmin.setOnClickListener {
-            val intent = Intent(this, PerfilAdminActivity::class.java)
-            startActivity(intent)
+        // Configurar o callback para tratar cliques na navegação inferior
+        navInferiorProfessorFragment.onNavItemSelected = { itemId ->
+            when (itemId) {
+                R.id.navHome -> {
+                    // Página atual, nada a fazer
+                }
+                R.id.navMeusAlunos -> {
+                    startActivity(Intent(this, MeusAlunosActivity::class.java))
+                }
+                R.id.navPerfilAdmin -> {
+                    startActivity(Intent(this, PerfilAdminActivity::class.java))
+                }
+            }
         }
-
-        val btnEditarInformacoes = findViewById<Button>(R.id.btnEditarInformacoes)
-        btnEditarInformacoes.setOnClickListener{
-            val intent = Intent(this, EditarInformacoesActivity::class.java)
-            startActivity(intent)
-        }
-
     }
 }

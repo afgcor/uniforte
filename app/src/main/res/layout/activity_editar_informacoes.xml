@@ -1,248 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <!-- Scroll com conteúdo -->
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/container_nav_inferior"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/unifor_gelo"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="40dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
 
-            <!-- Botão voltar -->
-            <ImageButton
-                android:id="@+id/buttonVoltar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="Voltar"
-                app:srcCompat="@drawable/ic_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <!-- Layout do título com botão voltar -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <!-- Título -->
-            <TextView
-                android:id="@+id/tvEditarInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Editar Informações"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                <ImageButton
+                    android:id="@+id/btnVoltar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/grafismo_unifor_4"
+                    android:backgroundTint="@color/unifor_azulclaro"
+                    android:contentDescription="@string/voltar"
+                    android:scaleX="-1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Layout conteúdo -->
+                <TextView
+                    android:id="@+id/tituloTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:gravity="center"
+                    android:text="@string/editar_informa_es"
+                    android:textColor="@color/unifor_marinho"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnVoltar"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Foto com botão editar -->
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="1dp"
+                    app:cardCornerRadius="200dp">
+
+                    <ImageView
+                        android:id="@+id/imgUsuario"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/background_redondo_claro"
+                        android:padding="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery" />
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/iconEditarFoto"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom|end"
+                    android:background="@drawable/grafismo_unifor_6"
+                    android:backgroundTint="@color/unifor_marinho"
+                    android:elevation="3dp"
+                    android:padding="6dp"
+                    android:src="@android:drawable/ic_menu_edit" />
+            </FrameLayout>
+
+            <!-- Nome -->
             <LinearLayout
-                android:id="@+id/layoutConteudo"
+                android:id="@+id/llNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/tvEditarInfo">
-
-                <!-- Foto com botão editar -->
-
-                <!-- Nome -->
-                <FrameLayout
-                    android:id="@+id/frameLayout"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="16dp">
-
-                    <!-- CardView com a imagem do perfil -->
-                    <ImageView
-                        android:id="@+id/iconEditarFoto"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="bottom|end"
-                        android:background="@drawable/background_redondo_escuro"
-                        android:elevation="3dp"
-                        android:padding="6dp"
-                        android:src="@android:drawable/ic_menu_edit" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="1dp"
-                        app:cardCornerRadius="200dp">
-
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:background="@drawable/background_redondo_claro"
-                            android:padding="20dp"
-                            android:scaleType="centerCrop"
-                            android:src="@android:drawable/ic_menu_gallery" />
-                    </androidx.cardview.widget.CardView>
-                </FrameLayout>
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nome"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/nome"
+                    android:textColor="@color/unifor_marinho"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="4dp"/>
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Digite seu nome">
+                    android:hint="@string/nome"
+                    android:textColorHint="@color/material_dynamic_neutral30"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editNome"
+                        android:id="@+id/inputNome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/chipgroup_background" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:inputType="text"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorHint="@color/dark_gray" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Email -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="4dp"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite seu email">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/chipgroup_background" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Telefone -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Telefone"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="4dp"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite seu telefone">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTelefone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/chipgroup_background" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Endereço -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Endereço"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="4dp"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite seu endereço">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEndereco"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/chipgroup_background" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Botões -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:weightSum="2">
-
-                    <Button
-                        android:id="@+id/buttonSalvar"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#444444"
-                        android:text="Editar informações"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Email -->
+            <LinearLayout
+                android:id="@+id/llEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/e_mail"
+                    android:textColor="@color/unifor_marinho"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/e_mail"
+                    android:textColorHint="@color/material_dynamic_neutral30"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorHint="@color/dark_gray" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Telefone -->
+            <LinearLayout
+                android:id="@+id/llTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTelefone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/telefone"
+                    android:textColor="@color/unifor_marinho"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputTelefone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/telefone"
+                    android:textColorHint="@color/material_dynamic_neutral30"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputTelefone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:inputType="phone"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorHint="@color/dark_gray" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Endereço -->
+            <LinearLayout
+                android:id="@+id/llEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvEndereco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/endere_o"
+                    android:textColor="@color/unifor_marinho"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputEndereco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/endere_o"
+                    android:textColorHint="@color/material_dynamic_neutral30"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputEndereco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:inputType="textPostalAddress"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorHint="@color/dark_gray" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <!-- Botões -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/cancelar"
+                    android:textColor="@color/unifor_gelo"
+                    android:textColorLink="@color/unifor_gelo"
+                    app:cornerRadius="40dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSalvar"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="@string/salvar"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="@color/unifor_anil"
+                    app:cornerRadius="40dp" />
+            </LinearLayout>
+        </LinearLayout>
+
     </ScrollView>
 
-    <!-- Rodapé (opcional) -->
-    <LinearLayout
+    <!-- Rodapé: container para navInferior -->
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:gravity="center">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Home"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/navFicha"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Ficha"
-            android:drawableTop="@drawable/ic_ficha"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Perfil"
-            android:drawableTop="@drawable/ic_perfil"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"/>
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

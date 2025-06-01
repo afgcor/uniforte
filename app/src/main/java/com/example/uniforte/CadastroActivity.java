@@ -25,7 +25,7 @@ public class CadastroActivity extends AppCompatActivity {
         etConfirmarSenha = findViewById(R.id.etConfirmarSenha);
         btnCadastrar = findViewById(R.id.btnCadastrar);
 
-        // Configuração do botão de voltar
+        // Botão voltar
         ImageButton btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,10 +44,9 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que realiza a validação dos dados e efetua o cadastro do usuário.
+     * Valida os dados e efetua o "cadastro"
      */
     private void cadastrarUsuario() {
-
         String cpf = etCpf.getText().toString().trim();
         String email = etEmailRegister.getText().toString().trim();
         String senha = etSenhaRegister.getText().toString().trim();
@@ -59,14 +58,32 @@ public class CadastroActivity extends AppCompatActivity {
             return;
         }
 
+        if (cpf.length() < 11) {
+            etCpf.setError("CPF deve ter ao menos 11 caracteres");
+            etCpf.requestFocus();
+            return;
+        }
+
         if (email.isEmpty()) {
             etEmailRegister.setError("Informe o email");
             etEmailRegister.requestFocus();
             return;
         }
 
+        if (!email.contains("@")) {
+            etEmailRegister.setError("Email inválido");
+            etEmailRegister.requestFocus();
+            return;
+        }
+
         if (senha.isEmpty()) {
             etSenhaRegister.setError("Informe a senha");
+            etSenhaRegister.requestFocus();
+            return;
+        }
+
+        if (senha.length() < 6) {
+            etSenhaRegister.setError("A senha deve ter pelo menos 6 caracteres");
             etSenhaRegister.requestFocus();
             return;
         }

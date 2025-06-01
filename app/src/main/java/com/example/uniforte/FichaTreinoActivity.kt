@@ -23,38 +23,35 @@ class FichaTreinoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ficha_treino)
 
-        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar2)
+        // Inserir o fragmento da navegação inferior no container
+        val navInferiorAlunoFragment = NavInferiorAlunoFragment   ()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_nav_inferior, navInferiorAlunoFragment)
+            .commit()
+
+        // Configurar o callback para tratar cliques na navegação inferior
+        navInferiorAlunoFragment.onNavItemSelected = { itemId ->
+            when (itemId) {
+                R.id.navHome -> {
+                    startActivity(Intent(this, HomeAlunoActivity::class.java))
+                }
+                R.id.navFicha -> {
+                    startActivity(Intent(this, FichaTreinoActivity::class.java))
+                }
+                R.id.navPerfil -> {
+                    startActivity(Intent(this, PerfilActivity::class.java))
+                }
+            }
+        }
+
+        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener{
             finish()
         }
 
-        val llCardTreino = findViewById<LinearLayout>(R.id.llCardTreino)
+        val llCardTreino = findViewById<LinearLayout>(R.id.llCardTreino1)
         llCardTreino.setOnClickListener {
             val intent = Intent(this, DadosTreinoActivity::class.java)
-            startActivity(intent)
-        }
-
-        val navHome = findViewById<TextView>(R.id.navHome)
-        navHome.setOnClickListener {
-            val intent = Intent(this, HomeAlunoActivity::class.java)
-            startActivity(intent)
-        }
-
-        val navFicha = findViewById<TextView>(R.id.navFicha)
-        navFicha.setOnClickListener {
-            val intent = Intent(this, FichaTreinoActivity::class.java)
-            startActivity(intent)
-        }
-
-        val navPerfil = findViewById<TextView>(R.id.navPerfil)
-        navPerfil.setOnClickListener {
-            val intent = Intent(this, PerfilActivity::class.java)
-            startActivity(intent)
-        }
-
-        val btnProfessor = findViewById<Button>(R.id.btnProfessor)
-        btnProfessor.setOnClickListener {
-            val intent = Intent(this, PerfilAdminActivity::class.java)
             startActivity(intent)
         }
 
