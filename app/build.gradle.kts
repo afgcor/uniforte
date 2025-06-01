@@ -75,6 +75,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation ("com.google.android.flexbox:flexbox:3.0.0")
+
     implementation("io.coil-kt:coil:2.2.2")
     implementation("io.coil-kt:coil-svg:2.2.2")
 

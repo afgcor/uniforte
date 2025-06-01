@@ -4,15 +4,15 @@
     android:id="@+id/layout_detalhes_aluno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/unifor_gelo">
 
     <ScrollView
         android:id="@+id/scrollViewContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/llNavegacaoInferior"
-        android:padding="24dp"
-        android:layout_marginTop="40dp">
+        android:layout_above="@id/container_nav_inferior"
+        android:layout_marginTop="20dp"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,255 +20,364 @@
             android:orientation="vertical">
 
             <!-- Header -->
-
             <LinearLayout
                 android:id="@+id/llHeaderPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
-                android:orientation="horizontal"
-                android:gravity="top">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="Voltar"
-                    app:srcCompat="@drawable/ic_back" />
+                    android:id="@+id/btnVoltar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/grafismo_unifor_4"
+                    android:backgroundTint="@color/unifor_azulclaro"
+                    android:contentDescription="@string/voltar"
+                    android:scaleX="-1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <FrameLayout
-                    android:id="@+id/frameLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="0dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvFotoAluno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="1dp">
-
-                        <ImageView
-                            android:id="@+id/imgFotoAluno"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@drawable/background_redondo_claro"
-                            android:contentDescription="img drawable"
-                            android:padding="20dp"
-                            android:scaleType="centerCrop"
-                            android:src="@android:drawable/ic_menu_gallery" />
-                    </androidx.cardview.widget.CardView>
-                </FrameLayout>
-
+                <!-- LinearLayout horizontal para avatar e cardAluno -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textNomeAluno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nome aluno"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                    <ImageView
+                        android:id="@+id/imgFotoAluno"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/background_redondo_claro"
+                        android:contentDescription="@string/foto_do_aluno"
+                        android:padding="4dp"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery" />
 
-                    <TextView
-                        android:id="@+id/textEmailAluno"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/cardAluno"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="aluno@gmail.com"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp" />
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/card_agendados"
+                        android:elevation="2dp"
+                        android:gravity="start"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/textTelefoneAluno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(85) 99999-9999"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_black"
+                            android:text="@string/nome_do_aluno"
+                            android:textColor="@color/unifor_marinho"
+                            android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/textEnderecoAluno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rua Alameda 4, 503"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp" />
+                        <!-- Linha E-mail -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="8dp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/e_mail2"
+                                android:textColor="@color/unifor_marinho"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvEmail"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/satoshi_regular"
+                                android:text="@string/aluno_gmail_com"
+                                android:textColor="@color/unifor_marinho"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Linha Telefone -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/telefone2"
+                                android:textColor="@color/unifor_marinho"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvTelefone"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/satoshi_regular"
+                                android:text="@string/telefone_do_aluno"
+                                android:textColor="@color/unifor_marinho"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Linha Endereço -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="8dp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/endere_o2"
+                                android:textColor="@color/unifor_marinho"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvEndereco"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/satoshi_regular"
+                                android:text="@string/endere_o_do_aluno"
+                                android:textColor="@color/unifor_marinho"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textFicha"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Ficha do Aluno"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/ficha_de_treino"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tvAdicionarFicha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adicionar Nova Ficha"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/holo_blue_dark" />
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/adicionar_nova_ficha"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Substituição do cardFicha pelo novo card estilo llCardTreino1 -->
             <LinearLayout
-                android:id="@+id/cardFicha"
+                android:id="@+id/llCardTreino1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/card_perfil"
-                android:orientation="vertical"
-                android:padding="24dp">
-
-                <TextView
-                    android:id="@+id/textTituloFicha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Treino AB"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textDescricaoFicha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="8dp"
-                    android:text="Treino com foco em bíceps e costas"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/textExercicios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="4dp"
-                    android:text="Exercícios"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textListaExercicios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Supino 3x14\nPuxada Frente 3x10\nElevação Lateral 4x12\nRosca Scott 4x12"
-                    android:textColor="@android:color/black" />
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/card_agendados"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="12dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:orientation="horizontal"
-                    android:paddingTop="12dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btnEditarFicha"
+                    <TextView
+                        android:id="@+id/textTituloFicha"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/dark_gray"
-                        android:text="Editar"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/satoshi_black"
+                        android:text="@string/treino_ab"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textDescricaoFicha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/treino_com_foco_em_b_ceps_e_costas"
+                        android:textColor="@color/material_dynamic_neutral30"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textListaExercicios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/supino_3x14_puxada_frente_3x10_eleva_o_lateral_4x12_rosca_scott_4x12"
+                        android:textColor="@color/material_dynamic_neutral30"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/btnProfessor1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/nome_do_professor"
+                            android:textColor="@color/unifor_anil"
+                            android:textColorLink="@color/unifor_anil" />
+
+                        <ImageView
+                            android:id="@+id/btnEditarFicha"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/baseline_edit_24"
+                            android:backgroundTint="@color/unifor_marinho"
+                            android:contentDescription="@string/excluir"
+                            android:src="@drawable/baseline_edit_24"
+                            app:tint="@color/unifor_marinho" />
+
+                        <ImageView
+                            android:id="@+id/btnDeletarFicha"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="10dp"
+                            android:backgroundTint="@color/unifor_marinho"
+                            android:contentDescription="@string/excluir"
+                            android:src="@drawable/ic_delete"
+                            app:tint="@color/unifor_marinho" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textTituloObjetivo"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerFichas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Objetivo do Aluno"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="24dp"
-                android:paddingBottom="8dp" />
+                android:layout_gravity="end"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/satoshi_medium"
+                android:text="Ver mais fichas"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="14sp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                app:icon="@drawable/grafismo_unifor_4"
+                app:iconGravity="end"
+                app:iconSize="16dp"
+                app:iconTint="@color/unifor_anil" />
 
+            <!-- Seção Meus objetivos -->
+            <TextView
+                android:id="@+id/tvMeusObjetivos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/objetivo_do_aluno"
+                android:textColor="@color/unifor_marinho"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Card simulado para Objetivos -->
             <LinearLayout
-                android:id="@+id/boxObjetivo"
+                android:id="@+id/llCardObjetivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_perfil_aluno"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/rounded_card"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/textTituloObjetivoBox"
-                    android:layout_width="wrap_content"
+                <!-- Texto do Objetivo -->
+                <LinearLayout
+                    android:id="@+id/llObjetivoTexto"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Título"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textDescricaoObjetivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Descrição do objetivo"
-                    android:textColor="@android:color/darker_gray" />
+                    <TextView
+                        android:id="@+id/tvTituloObjetivo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/perda_de_gordura"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDescricaoObjetivo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/perda_de_gordura_e_ganho_de_massa_magra"
+                        android:textColor="@color/material_dynamic_neutral30"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Imagem/ícone simulando o objetivo -->
+                <ImageView
+                    android:id="@+id/ivObjetivo"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/imagem_do_objetivo"
+                    android:src="@drawable/ic_objetivo" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/llNavegacaoInferior"
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:gravity="center"
-            app:drawableTopCompat="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/navMeusAlunos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:drawableTopCompat="@drawable/ic_ficha"
-            android:gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="Meus Alunos" />
-
-        <TextView
-            android:id="@+id/navPerfilAdmin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:gravity="center"
-            app:drawableTopCompat="@drawable/ic_perfil"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-    </LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </RelativeLayout>

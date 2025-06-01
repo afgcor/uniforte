@@ -4,5 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#D9D9D9</color>
     <color name="dark_gray">#9C9C9C</color>
+    <color name="unifor_anil">#004AF7</color>
+    <color name="unifor_marinho">#132190</color>
+    <color name="unifor_gelo">#E4F2FE</color>
+    <color name="unifor_azulclaro">#87B7FE</color>
+    <color name="unifor_azulclaro_low">#BFCDE3F9</color>
 
 </resources>

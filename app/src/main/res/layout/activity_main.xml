@@ -1,83 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFE"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#F8FAFE">
 
+    <!-- CONTEÚDO PRINCIPAL -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/unifor_gelo">
 
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:layout_marginTop="150dp"
-        android:clickable="true"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitCenter"
-        android:src="@drawable/malhado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- Botão VLibras centralizado no topo -->
 
-    <EditText
-        android:id="@+id/etLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:hint="Login"
-        android:padding="12dp"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp" />
+        <!-- Logo posicionada abaixo do botão -->
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:layout_marginTop="180dp"
+            android:clickable="true"
+            android:contentDescription="@string/app_name"
+            android:focusable="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mascote_uniforte"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Campo de login com padrão de senha -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/login"
+            android:textColorHint="@color/material_dynamic_neutral30"
+            app:boxBackgroundColor="@color/unifor_azulclaro_low"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/unifor_azulclaro"
+            app:cursorColor="@color/unifor_azulclaro"
+            app:endIconTint="@color/unifor_anil"
+            app:hintTextColor="@color/unifor_azulclaro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgLogo">
 
-    <EditText
-        android:id="@+id/etSenha"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Senha"
-        android:padding="12dp"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etLogin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshi_regular"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:textColor="@color/unifor_anil"
+                android:textColorHint="@color/dark_gray"
+                android:textColorLink="@color/unifor_anil" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnEntrar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Entrar"
-        app:layout_constraintTop_toBottomOf="@+id/etSenha"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="#000000"/>
+        <!-- Campo de senha com toggle -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutSenha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/senha"
+            android:textColorHint="@color/material_dynamic_neutral30"
+            app:boxBackgroundColor="@color/unifor_azulclaro_low"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/unifor_azulclaro"
+            app:cursorColor="@color/unifor_azulclaro"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/unifor_anil"
+            app:hintTextColor="@color/unifor_azulclaro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLogin">
 
-    <TextView
-        android:id="@+id/tvCadastrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Não Possui Conta? Cadastre-se"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/btnEntrar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshi_regular"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textColor="@color/unifor_anil"
+                android:textColorHint="@color/dark_gray"
+                android:textColorLink="@color/unifor_anil" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEntrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:gravity="center"
+            android:backgroundTint="@color/unifor_anil"
+            android:contentDescription="@string/entrar"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/entrar"
+            android:textColor="@color/unifor_gelo"
+            android:textAllCaps="false"
+            app:cornerRadius="40dp"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutSenha"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCadastrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/link_para_cadastro"
+            android:fontFamily="@font/satoshi_medium"
+            android:text="@string/n_o_possui_conta_cadastre_se"
+            android:textColor="@android:color/black"
+            android:textColorLink="@color/unifor_marinho"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- VLibras WebView FLUTUANTE -->
+    <com.example.uniforte.DraggableWebView
+        android:id="@+id/webVLibras"
+        android:layout_width="320dp"
+        android:layout_height="340dp"
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"
+        android:overScrollMode="never"
+        android:visibility="invisible"
+        tools:visibility="gone" />
+
+</FrameLayout>

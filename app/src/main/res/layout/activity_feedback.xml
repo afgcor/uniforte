@@ -6,7 +6,20 @@
     android:id="@+id/rootFeedback"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/unifor_gelo"
     tools:context=".FeedbackActivity">
+
+    <!-- Fundo com padrão -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:alpha="0.35"
+        android:contentDescription="@string/fundo_padr_o_unifor"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pattern_unifor"
+        app:layout_constraintBottom_toTopOf="@id/container_nav_inferior"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Botão de voltar -->
     <ImageButton
@@ -17,25 +30,26 @@
         android:layout_marginTop="48dp"
         android:background="@null"
         android:src="@drawable/ic_back"
+        android:contentDescription="@string/voltar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Título da tela -->
-
-    <!-- Histórico de mensagens -->
+    <!-- Título -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Feedback Calórico"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.384"
+        android:fontFamily="@font/satoshi_bold"
+        android:text="@string/feedback_cal_rico"
+        android:textColor="@color/unifor_marinho"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/back_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0" />
 
+    <!-- Histórico de mensagens -->
     <ScrollView
         android:id="@+id/scrollMessages"
         android:layout_width="0dp"
@@ -52,21 +66,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+
             android:gravity="bottom" />
     </ScrollView>
 
-    <!-- Campo de digitar e botão enviar -->
+    <!-- Campo de entrada e envio -->
     <LinearLayout
         android:id="@+id/messageInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:background="@drawable/rounded_lightgray"
         android:orientation="horizontal"
         android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@id/container_nav_inferior"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/llNavegacaoInferior">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <EditText
             android:id="@+id/etMessage"
@@ -74,35 +89,32 @@
             android:layout_height="36dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="Digite sua mensagem"
-            android:padding="8dp"
+            android:hint="@string/digite_sua_mensagem"
+            android:autofillHints=""
             android:imeOptions="actionSend"
-            android:inputType="text" />
+            android:inputType="text"
+            android:padding="8dp"
+            android:textColor="@color/unifor_marinho"
+            android:textColorHint="@color/material_dynamic_neutral30" />
 
         <ImageButton
             android:id="@+id/btnSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:contentDescription="Enviar"
-            android:src="@android:drawable/ic_menu_send" />
+            android:contentDescription="@string/enviar"
+            android:src="@android:drawable/ic_menu_send"
+            app:tint="@color/unifor_anil" />
     </LinearLayout>
 
     <!-- Navegação inferior -->
-    <LinearLayout
-        android:id="@+id/llNavegacaoInferior"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:gravity="center"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

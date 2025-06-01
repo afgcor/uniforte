@@ -4,51 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/unifor_gelo"
     tools:context=".AulasDisponiveisActivity">
 
-    <!-- Cabeçalho com botão voltar e título centralizado -->
-    <LinearLayout
+    <!-- Cabeçalho -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/btnVoltar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="16dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Voltar"
-            android:src="@drawable/ic_back" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/grafismo_unifor_4"
+            android:contentDescription="@string/voltar"
+            android:scaleX="-1"
+            android:backgroundTint="@color/unifor_azulclaro"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/tituloTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Aulas Disponíveis"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/aulas_dispon_veis"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textColor="@color/unifor_marinho"
+            android:textColorLink="@color/unifor_marinho"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- ScrollView abaixo do cabeçalho -->
+    <!-- Conteúdo rolável -->
     <ScrollView
         android:id="@+id/scrollConteudo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/llTitulo"
-        app:layout_constraintBottom_toTopOf="@id/llNavegacaoInferior"
+        app:layout_constraintBottom_toTopOf="@id/container_nav_inferior"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/llTitulo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,184 +65,178 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Exemplo de aula -->
+            <!-- Aula 1 -->
             <LinearLayout
-                android:id="@+id/aula1Layout"
+                android:id="@+id/aulaPilates"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_card"
+                android:background="@drawable/card_agendados"
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tituloAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pilates"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/pilates"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/descritivoAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Descrição da aula"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
                 <LinearLayout
-                    android:id="@+id/llDataHoraAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tvDataAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12/01" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_12_01"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <TextView
-                        android:id="@+id/tvHoraAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="17:00" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_17_00"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/professorAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Professor: Nome do Professor"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/nome_do_professor"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/agendarAula1"
+                    android:id="@+id/agendarPilates"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="right"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/button_background"
-                    android:text="Agendar Aula" />
+                    android:backgroundTint="@color/unifor_azulclaro"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/unifor_gelo"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/agendar"
+                    android:textColorLink="@color/unifor_marinho"
+                    app:icon="@drawable/grafismo_unifor_4"
+                    app:iconPadding="6dp"
+                    app:iconSize="16dp" />
             </LinearLayout>
 
+            <!-- Aula 2 -->
             <LinearLayout
-                android:id="@+id/aula1Layout"
+                android:id="@+id/aulaZumba"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_card"
+                android:background="@drawable/card_agendados"
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tituloAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zumba"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/zumba"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/descritivoAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Descrição da aula"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
                 <LinearLayout
-                    android:id="@+id/llDataHoraAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tvDataAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13/01" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_13_01"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <TextView
-                        android:id="@+id/tvHoraAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="19:30" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_19_30"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/professorAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Professor: Nome do Professor"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/nome_do_professor"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/agendarAula1"
+                    android:id="@+id/agendarZumba"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="right"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/button_background"
-                    android:text="Agendar Aula" />
+                    android:backgroundTint="@color/unifor_azulclaro"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/unifor_gelo"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/agendar"
+                    android:textColorLink="@color/unifor_marinho"
+                    app:icon="@drawable/grafismo_unifor_4"
+                    app:iconPadding="6dp"
+                    app:iconSize="16dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <!-- Navegação inferior fixa -->
-    <LinearLayout
-        android:id="@+id/llNavegacaoInferior"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/navFicha"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_ficha"
-            android:gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="Ficha de Treino" />
-
-        <TextView
-            android:id="@+id/navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_perfil"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-    </LinearLayout>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

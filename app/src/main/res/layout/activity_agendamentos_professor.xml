@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/unifor_gelo"
+    android:foregroundTint="@color/unifor_marinho">
 
     <!-- Cabeçalho fixo -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/back_button"
+            android:id="@+id/btnVoltar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_back" />
+            android:layout_marginStart="16dp"
+            android:background="@drawable/grafismo_unifor_4"
+            android:backgroundTint="@color/unifor_azulclaro"
+            android:contentDescription="@string/voltar"
+            android:scaleX="-1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tituloTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:text="Agendamentos"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/agendamentos"
+            android:textColor="@color/unifor_marinho"
+            android:textColorLink="@color/unifor_marinho"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Conteúdo rolável -->
     <ScrollView
@@ -42,77 +52,101 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/llTitulo"
-        app:layout_constraintBottom_toTopOf="@id/llNavegacaoInferior"
+        app:layout_constraintBottom_toTopOf="@id/container_nav_inferior"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/llTitulo">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="24dp"
             android:paddingStart="16dp"
+            android:paddingTop="24dp"
             android:paddingEnd="16dp">
 
             <!-- CARD 1 -->
             <LinearLayout
-                android:id="@+id/llCardAula1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/card_agendados"
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-
                 <TextView
-                    android:id="@+id/tvTituloAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pilates"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/pilates"
+                    android:textColor="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvDescricaoAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:text="Descrição da aula"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
-                <LinearLayout
-                    android:id="@+id/llDataHoraAula1"
+                <!-- Linha com data, hora e ícone -->
+                <!-- Linha com data, hora e ícones -->
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
 
                     <TextView
-                        android:id="@+id/tvDataHoraAula1"
-                        android:layout_width="0dp"
+                        android:id="@+id/txtData1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="12/01 - 18:01"
-                        android:textSize="14sp" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_12_01"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/btnEditarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:drawableEnd="@drawable/baseline_edit_24" />
+                        android:id="@+id/txtHora1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_18_00"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintStart_toEndOf="@id/txtData1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1" />
 
                     <ImageView
-                        android:id="@+id/btnDeletarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="8dp"
-                        android:scaleType="centerInside"
-                        app:srcCompat="@android:drawable/ic_menu_delete" />
-                </LinearLayout>
+                        android:id="@+id/btnEditarAula"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="6dp"
+                        android:contentDescription="@string/editar"
+                        android:src="@android:drawable/ic_menu_edit"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toStartOf="@id/btnDeletarAula1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+
+                    <ImageView
+                        android:id="@+id/btnDeletarAula1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="0dp"
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <!-- CARD 2 -->
@@ -130,7 +164,10 @@
                     android:id="@+id/tvTituloAula2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yoga"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/yoga"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -139,39 +176,65 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Descrição da aula"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
-                <LinearLayout
-                    android:id="@+id/llDataHoraAula1"
+                <!-- Linha com data, hora e ícone -->
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
 
                     <TextView
-                        android:id="@+id/tvDataHoraAula1"
-                        android:layout_width="0dp"
+                        android:id="@+id/txtData1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="13/01 - 09:00"
-                        android:textSize="14sp" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_12_01"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/btnEditarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:drawableEnd="@drawable/baseline_edit_24" />
+                        android:id="@+id/txtHora1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_18_00"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintStart_toEndOf="@id/txtData1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1" />
 
                     <ImageView
-                        android:id="@+id/btnDeletarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="8dp"
-                        android:scaleType="centerInside"
-                        app:srcCompat="@android:drawable/ic_menu_delete" />
-                </LinearLayout>
+                        android:id="@+id/btnEditarAula"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="6dp"
+                        android:contentDescription="@string/editar"
+                        android:src="@android:drawable/ic_menu_edit"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toStartOf="@id/btnDeletarAula1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+
+                    <ImageView
+                        android:id="@+id/btnDeletarAula1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="0dp"
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <!-- CARD 3 -->
@@ -184,11 +247,15 @@
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="16dp">
+
                 <TextView
                     android:id="@+id/tvTituloAula3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zumba"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/zumba"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -197,39 +264,65 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Descrição da aula"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
-                <LinearLayout
-                    android:id="@+id/llDataHoraAula1"
+                <!-- Linha com data, hora e ícone -->
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
 
                     <TextView
-                        android:id="@+id/tvDataHoraAula1"
-                        android:layout_width="0dp"
+                        android:id="@+id/txtData1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="14/01 - 11:00"
-                        android:textSize="14sp" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_12_01"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/btnEditarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:drawableEnd="@drawable/baseline_edit_24" />
+                        android:id="@+id/txtHora1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_18_00"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintStart_toEndOf="@id/txtData1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1" />
 
                     <ImageView
-                        android:id="@+id/btnDeletarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="8dp"
-                        android:scaleType="centerInside"
-                        app:srcCompat="@android:drawable/ic_menu_delete" />
-                </LinearLayout>
+                        android:id="@+id/btnEditarAula"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="6dp"
+                        android:contentDescription="@string/editar"
+                        android:src="@android:drawable/ic_menu_edit"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toStartOf="@id/btnDeletarAula1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+
+                    <ImageView
+                        android:id="@+id/btnDeletarAula1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="0dp"
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <!-- CARD 4 -->
@@ -242,11 +335,15 @@
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="16dp">
+
                 <TextView
                     android:id="@+id/tvTituloAula4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Crossfit"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/crossfit"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -255,88 +352,76 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Descrição da aula"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
-                <LinearLayout
-                    android:id="@+id/llDataHoraAula1"
+                <!-- Linha com data, hora e ícone -->
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
 
                     <TextView
-                        android:id="@+id/tvDataHoraAula1"
-                        android:layout_width="0dp"
+                        android:id="@+id/txtData1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="15/01 - 10:30"
-                        android:textSize="14sp" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_12_01"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/btnEditarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:drawableEnd="@drawable/baseline_edit_24" />
+                        android:id="@+id/txtHora1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_18_00"
+                        android:textColor="@color/unifor_anil"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintStart_toEndOf="@id/txtData1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1" />
 
                     <ImageView
-                        android:id="@+id/btnDeletarAgendamento"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="8dp"
-                        android:scaleType="centerInside"
-                        app:srcCompat="@android:drawable/ic_menu_delete" />
-                </LinearLayout>
+                        android:id="@+id/btnEditarAula"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="6dp"
+                        android:contentDescription="@string/editar"
+                        android:src="@android:drawable/ic_menu_edit"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toStartOf="@id/btnDeletarAula1"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+
+                    <ImageView
+                        android:id="@+id/btnDeletarAula1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="0dp"
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:layout_constraintBottom_toBottomOf="@id/txtData1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/txtData1"
+                        app:tint="@color/unifor_marinho" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
     <!-- Barra de navegação fixa inferior -->
-    <LinearLayout
-        android:id="@+id/llNavegacaoInferior"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/navMeusAlunos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_ficha"
-            android:gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="Meus Alunos" />
-
-        <TextView
-            android:id="@+id/navPerfilAdmin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_perfil"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-    </LinearLayout>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

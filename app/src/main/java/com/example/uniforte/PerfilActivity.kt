@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class PerfilActivity : AppCompatActivity() {
@@ -13,9 +11,10 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
-        val buttonEditarInfo = findViewById<Button>(R.id.buttonEditarInfo)
-        buttonEditarInfo.setOnClickListener {
+        val btnEditarInformacoes = findViewById<Button>(R.id.btnEditarInformacoes)
+        btnEditarInformacoes.setOnClickListener {
             val intent = Intent(this, EditarInformacoesActivity::class.java)
+            intent.putExtra("tipoUsuario", "aluno")
             startActivity(intent)
         }
 
@@ -25,40 +24,30 @@ class PerfilActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar3)
+        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener{
             finish()
         }
 
-//        // ✅ Voltar para a Home do aluno
-//        val navHome = findViewById<TextView>(R.id.navHome)
-//        navHome.setOnClickListener {
-//            val intent = Intent(this, HomeAlunoActivity::class.java)
-//            // Limpa a pilha anterior e evita múltiplas cópias da mesma activity
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-//            startActivity(intent)
-//        }
+        // Inserir o fragmento da navegação inferior no container
+        val navInferiorAlunoFragment = NavInferiorAlunoFragment   ()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_nav_inferior, navInferiorAlunoFragment)
+            .commit()
 
-        val navHome = findViewById<TextView>(R.id.navHome)
-        navHome.setOnClickListener {
-            val intent = Intent(this, HomeAlunoActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
+        // Configurar o callback para tratar cliques na navegação inferior
+        navInferiorAlunoFragment.onNavItemSelected = { itemId ->
+            when (itemId) {
+                R.id.navHome -> {
+                    startActivity(Intent(this, HomeAlunoActivity::class.java))
+                }
+                R.id.navFicha -> {
+                    startActivity(Intent(this, FichaTreinoActivity::class.java))
+                }
+                R.id.navPerfil -> {
+                    // Página atual, nada a fazer
+                }
+            }
         }
-
-        val navPerfil = findViewById<TextView>(R.id.navPerfil)
-        navPerfil.setOnClickListener {
-            val intent = Intent(this, PerfilActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
-        }
-
-        val navFicha = findViewById<TextView>(R.id.navFicha)
-        navFicha.setOnClickListener {
-            val intent = Intent(this, FichaTreinoActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
-        }
-
     }
 }

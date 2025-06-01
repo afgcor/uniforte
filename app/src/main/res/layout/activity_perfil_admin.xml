@@ -1,84 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/unifor_gelo">
 
+    <!-- Cabeçalho -->
+    <RelativeLayout
+        android:id="@+id/llTituloPerfilAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/btnVoltar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/grafismo_unifor_4"
+            android:backgroundTint="@color/unifor_azulclaro"
+            android:contentDescription="@string/voltar"
+            android:scaleX="-1" />
+
+        <TextView
+            android:id="@+id/textTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Meu Perfil"
+            android:textSize="20sp"
+            android:fontFamily="@font/satoshi_bold"
+            android:textColor="@color/unifor_marinho"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Conteúdo Scrollável -->
     <ScrollView
         android:id="@+id/layoutPerfilAdmin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_above="@id/llNavegacaoInferior"
-        android:background="@android:color/transparent"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:layout_below="@id/llTituloPerfilAdmin"
+        android:layout_above="@id/container_nav_inferior"
+        android:padding="16dp"
+        android:fillViewport="true"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/llTituloPerfilAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingTop="32dp"
-                android:paddingBottom="16dp">
-
-                <ImageButton
-                    android:id="@+id/btnVoltar3"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="Voltar"
-                    android:src="@drawable/ic_back" />
-
-                <TextView
-                    android:id="@+id/textTitulo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Meu Perfil"
-                    android:textColor="@android:color/black"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/textNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="Carlos Alves"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/satoshi_black"
+                android:text="@string/nome_do_professor"
+                android:textColor="@color/unifor_marinho"
+                android:textSize="18sp" />
 
             <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="20dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="bottom|end"
-                    android:background="@drawable/background_redondo_escuro"
-                    android:elevation="3dp"
-                    android:padding="6dp"
-                    android:src="@android:drawable/ic_menu_edit" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
@@ -87,6 +74,7 @@
                     app:cardCornerRadius="200dp">
 
                     <ImageView
+                        android:id="@+id/imgUsuario"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:background="@drawable/background_redondo_claro"
@@ -94,137 +82,176 @@
                         android:scaleType="centerCrop"
                         android:src="@android:drawable/ic_menu_gallery" />
                 </androidx.cardview.widget.CardView>
+
             </FrameLayout>
 
+            <!-- Card com informações -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:orientation="vertical"
                 android:background="@drawable/card_agendados"
                 android:elevation="2dp"
-                android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Linha E-mail -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="E-mail: carlos.admin@email.com"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Telefone: (11) 90000-0000"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/email_outline"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/unifor_anil"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="E-mail:"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/professor_email_com"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+                <!-- Linha Telefone -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Endereço: Admin Center 42"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/phone_outline"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/unifor_anil"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="Telefone:"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvTelefone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/telefone_do_professor"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+                <!-- Linha Endereço -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/map_marker_outline"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/unifor_anil"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="Endereço:"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvEndereco"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/endere_o_do_professor"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
             </LinearLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEditarInformacoes"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:backgroundTint="#444444"
+                android:layout_marginEnd="60dp"
+                android:backgroundTint="@color/unifor_marinho"
+                android:fontFamily="@font/satoshi_bold"
                 android:text="Editar Informações"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                app:icon="@drawable/baseline_edit_24"
+                app:iconTint="@color/unifor_gelo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Acessibilidade"
-                android:textColor="@android:color/black"
+                android:textColor="@color/unifor_marinho"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/satoshi_bold" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
                 android:backgroundTint="#D3D3D3"
+                android:fontFamily="@font/satoshi_bold"
                 android:text="Modo daltonismo"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/unifor_marinho" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="60dp"
                 android:backgroundTint="#D3D3D3"
+                android:fontFamily="@font/satoshi_bold"
                 android:text="Aumentar tamanho da fonte"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/unifor_marinho" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSair"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:backgroundTint="#444444"
+                android:layout_marginEnd="60dp"
+                android:backgroundTint="@color/unifor_marinho"
+                android:fontFamily="@font/satoshi_bold"
                 android:text="Sair da conta"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                app:icon="@drawable/logout"
+                app:iconTint="@color/unifor_gelo" />
         </LinearLayout>
-
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/llNavegacaoInferior"
+    <!-- Navegação inferior -->
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/navMeusAlunos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Meus Alunos"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_ficha"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/navPerfilAdmin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_perfil"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-    </LinearLayout>
-
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

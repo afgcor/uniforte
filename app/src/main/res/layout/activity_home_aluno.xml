@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_aluno_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/unifor_gelo">
 
     <ScrollView
         android:id="@+id/scrollViewConteudo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/llNavegacaoInferior"
+        android:layout_above="@+id/container_nav_inferior"
         android:padding="16dp">
 
         <LinearLayout
@@ -20,30 +21,56 @@
             android:orientation="vertical">
 
             <!-- Saudação -->
-            <TextView
-                android:id="@+id/tvOlaUsuario"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Olá, Narak"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="16dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="16dp">
+
+                <!-- Saudação -->
+                <TextView
+                    android:id="@+id/tvOlaUsuario"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/ol"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/ol_narak"
+                    android:textColor="@color/unifor_marinho"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <!-- Botão Libras à direita -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAtivarVLibras"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/ic_libras"
+                    android:contentDescription="@string/ativar_vlibras"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/unifor_marinho" />
+            </LinearLayout>
 
             <!-- Título da seção: Agendamentos da semana -->
+
             <LinearLayout
                 android:id="@+id/llAgendamentosHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvAgendamentosSemana"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Agendamentos da semana"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/agendamentos_da_semana"
+                    android:textColor="@color/unifor_marinho"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -51,10 +78,10 @@
                     android:id="@+id/tvVerTudo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ver tudo"
-                    android:textSize="15sp"
-                    android:textColor="#0000FF"
-                    />
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/ver_tudo"
+                    android:textColor="@color/unifor_anil"
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <!-- Card simulado para Agendamento 1 -->
@@ -62,18 +89,21 @@
                 android:id="@+id/llCardAula1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/card_agendados"
-                android:padding="12dp"
                 android:layout_marginBottom="12dp"
-                android:elevation="2dp">
+                android:background="@drawable/card_agendados"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="12dp">
 
 
                 <TextView
                     android:id="@+id/tvTituloAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pilates"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/pilates"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -81,9 +111,12 @@
                     android:id="@+id/tvDescricaoAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descrição da aula"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:id="@+id/llDataHoraAula1"
@@ -95,20 +128,30 @@
                         android:id="@+id/tvDataAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12/01" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_12_01"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <TextView
                         android:id="@+id/tvHoraAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" 18:01"
-                        android:layout_marginStart="8dp" />
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_18_00"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
-                    <TextView
-                        android:id="@+id/ic_delete1"
-                        android:layout_width="254dp"
-                        android:layout_height="match_parent"
-                        android:drawableEnd="@drawable/ic_delete" />
+                    <ImageView
+                        android:id="@+id/btnDeletarAulaHome1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:tint="@color/unifor_marinho" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -117,17 +160,19 @@
                 android:id="@+id/llCardAula2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/card_agendados"
-                android:padding="12dp"
                 android:layout_marginBottom="12dp"
-                android:elevation="2dp">
+                android:background="@drawable/card_agendados"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <TextView
                     android:id="@+id/tvTituloAula2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yoga"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/yoga"
+                    android:textColor="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -135,9 +180,12 @@
                     android:id="@+id/tvDescricaoAula2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descrição da aula"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:id="@+id/llDataHoraAula2"
@@ -149,81 +197,106 @@
                         android:id="@+id/tvDataAula2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13/01" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_13_01"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <TextView
                         android:id="@+id/tvHoraAula2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" 09:00"
-                        android:layout_marginStart="8dp" />
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_09_00"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
-                    <TextView
-                        android:id="@+id/ic_delete2"
-                        android:layout_width="254dp"
-                        android:layout_height="match_parent"
-                        android:drawableEnd="@drawable/ic_delete" />
+                    <ImageView
+                        android:id="@+id/btnDeletarAulaHome2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:tint="@color/unifor_marinho" />
+
                 </LinearLayout>
             </LinearLayout>
 
             <!-- Botão para agendar nova aula -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAgendarNovaAula"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/button_background"
-                android:backgroundTint="#557AF2"
-                android:text="Agendar nova aula" />
+                android:backgroundTint="@color/unifor_azulclaro"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/agendar_nova_aula"
+                android:textColor="@color/unifor_marinho"
+                android:textColorLink="@color/unifor_marinho"
+                app:icon="@drawable/grafismo_unifor_4"
+                app:iconPadding="6dp"
+                app:iconSize="16dp"
+                app:iconTint="@color/unifor_marinho" />
 
             <!-- Seção Meus objetivos -->
             <TextView
                 android:id="@+id/tvMeusObjetivos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meus objetivos"
-                android:textStyle="bold"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/meus_objetivos"
+                android:textColor="@color/unifor_marinho"
                 android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
+                android:textStyle="bold" />
 
             <!-- Card simulado para Objetivos -->
             <LinearLayout
                 android:id="@+id/llCardObjetivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="#FFFFFF"
-                android:padding="12dp"
                 android:layout_marginBottom="24dp"
-                android:elevation="2dp">
+                android:background="@drawable/rounded_card"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <!-- Texto do Objetivo -->
                 <LinearLayout
                     android:id="@+id/llObjetivoTexto"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="8dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvTituloObjetivo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Perda de Gordura"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginBottom="4dp" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/perda_de_gordura"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvDescricaoObjetivo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Perda de Gordura e ganho de massa magra"
                         android:layout_marginLeft="8dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/perda_de_gordura_e_ganho_de_massa_magra"
+                        android:textColor="@color/material_dynamic_neutral30"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -232,9 +305,9 @@
                     android:id="@+id/ivObjetivo"
                     android:layout_width="95dp"
                     android:layout_height="95dp"
-                    android:src="@drawable/ic_objetivo"
-                    android:contentDescription="Imagem do objetivo"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/imagem_do_objetivo"
+                    android:src="@drawable/ic_objetivo" />
 
             </LinearLayout>
 
@@ -243,10 +316,13 @@
                 android:id="@+id/tvFeedbackCalorico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Feedback Calórico"
-                android:textStyle="bold"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/feedback_cal_rico"
+                android:textColor="@color/unifor_marinho"
+                android:textColorLink="@color/unifor_marinho"
                 android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
+                android:textStyle="bold" />
 
             <!-- Card para Feedback Calórico -->
 
@@ -261,9 +337,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/imagem_de_feedback_cal_rico"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/cardfeedback"
-                    android:contentDescription="Imagem de feedback calórico" />
+                    android:src="@drawable/cardfeedback" />
 
                 <!-- Imagem sobreposta (mundo) -->
                 <ImageView
@@ -273,60 +349,29 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
-                    android:translationX="100dp"
-                    android:contentDescription="Imagem do objetivo"
-                    android:src="@drawable/mundo" />
+                    android:contentDescription="@string/imagem_do_objetivo"
+                    android:src="@drawable/mundo"
+                    android:translationX="100dp" />
             </FrameLayout>
 
         </LinearLayout>
     </ScrollView>
 
-
-    <LinearLayout
-        android:id="@+id/llNavegacaoInferior"
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:gravity="center">
+        android:layout_alignParentBottom="true" />
 
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-
-        <TextView
-            android:id="@+id/navFicha"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ficha de Treino"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_ficha"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_perfil"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-
-    </LinearLayout>
+    <!-- VLibras WebView FLUTUANTE -->
+    <com.example.uniforte.DraggableWebView
+        android:id="@+id/webVLibras"
+        android:layout_width="320dp"
+        android:layout_height="340dp"
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"
+        android:overScrollMode="never"
+        android:visibility="invisible"
+        tools:visibility="gone" />
 
 </RelativeLayout>

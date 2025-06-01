@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/home_aluno_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,8 @@
         android:id="@+id/scrollViewConteudo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/llNavegacaoInferior"
+        android:layout_above="@+id/container_nav_inferior"
+        android:background="@color/unifor_gelo"
         android:padding="16dp">
 
         <LinearLayout
@@ -25,7 +27,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="16dp"
-                android:text="Olá, {Usuário}"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/ol_usu_rio"
+                android:textColor="@color/unifor_marinho"
+                android:textColorLink="@color/unifor_marinho"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -41,7 +46,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Suas aulas da semana"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/suas_aulas_da_semana"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -49,10 +57,10 @@
                     android:id="@+id/tvVerTudo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ver tudo"
-                    android:textSize="15sp"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/ver_tudo"
                     android:textColor="#0000FF"
-                    />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -70,7 +78,10 @@
                     android:id="@+id/tvTituloAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yoga"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/yoga"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -80,7 +91,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvTituloAula1"
                     android:layout_marginTop="4dp"
-                    android:text="Descrição da aula"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -95,35 +109,49 @@
                         android:id="@+id/tvDataAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12/01" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_12_01"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <TextView
                         android:id="@+id/tvHoraAula1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="09:00" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_09_00"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <ImageView
-                        android:id="@+id/btnDeletarAulaHome"
+                        android:id="@+id/btnDeletarAulaHome1"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
-                        android:contentDescription="Excluir"
-                        android:src="@drawable/ic_delete" />
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:tint="@color/unifor_marinho" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnEditarAula"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditarAula1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@color/dark_gray"
-                    android:text="Editar Aula"
-                    android:textColor="#1F0B0B"
-                    android:textSize="16sp" />
+                    android:backgroundTint="@color/unifor_azulclaro"
+                    android:drawableStart="@android:drawable/ic_menu_edit"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/editar_aula"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
+                    android:textSize="16sp"
+                    app:icon="@drawable/baseline_edit_24"
+                    app:iconPadding="6dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/unifor_marinho" />
             </RelativeLayout>
 
             <!-- Card de Aula 2 -->
@@ -140,7 +168,10 @@
                     android:id="@+id/tvTituloAula2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pilates"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/pilates"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -150,7 +181,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvTituloAula2"
                     android:layout_marginTop="4dp"
-                    android:text="Descrição da aula"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/descri_o_da_aula"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColorLink="@color/material_dynamic_neutral30"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -165,93 +199,74 @@
                         android:id="@+id/tvDataAula2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13/01" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_13_01"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <TextView
                         android:id="@+id/tvHoraAula2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="09:00" />
+                        android:fontFamily="@font/satoshi_regular"
+                        android:text="@string/_09_00"
+                        android:textColor="@color/unifor_anil"
+                        android:textColorLink="@color/unifor_anil" />
 
                     <ImageView
                         android:id="@+id/btnDeletarAulaHome"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
-                        android:contentDescription="Excluir"
-                        android:src="@drawable/ic_delete" />
+                        android:contentDescription="@string/excluir"
+                        android:src="@drawable/ic_delete"
+                        app:tint="@color/unifor_marinho" />
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnEditarAula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@color/dark_gray"
-                    android:text="Editar Aula"
-                    android:textColor="#1F0B0B"
-                    android:textSize="16sp" />
+                    android:backgroundTint="@color/unifor_azulclaro"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/editar_aula"
+                    android:textColor="@color/unifor_marinho"
+                    android:textColorLink="@color/unifor_marinho"
+                    android:textSize="16sp"
+                    app:icon="@drawable/baseline_edit_24"
+                    app:iconPadding="6dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/unifor_marinho" />
             </RelativeLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdicionarAula"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginBottom="24dp"
-                android:backgroundTint="@color/black"
-                android:text="Adicionar aula"
-                android:textSize="16sp" />
+                android:backgroundTint="@color/unifor_anil"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/adicionar_aula"
+                android:textColor="@color/unifor_gelo"
+                android:textColorLink="@color/unifor_gelo"
+                android:textSize="16sp"
+                app:icon="@drawable/grafismo_unifor_4"
+                app:iconPadding="6dp"
+                app:iconSize="16dp"
+                app:iconTint="@color/unifor_gelo" />
 
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/llNavegacaoInferior"
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/navMeusAlunos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_ficha"
-            android:gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="Meus Alunos" />
-
-        <TextView
-            android:id="@+id/navPerfilAdmin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_perfil"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp" />
-
-    </LinearLayout>
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

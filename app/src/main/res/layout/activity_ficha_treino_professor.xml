@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/unifor_gelo"
+    tools:context=".FichaTreinoActivity">
+
+    <!-- Cabeçalho com botão e título -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnVoltar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/grafismo_unifor_4"
+            android:backgroundTint="@color/unifor_azulclaro"
+            android:contentDescription="@string/voltar"
+            android:scaleX="-1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/ficha_de_treino"
+            android:textColor="@color/unifor_marinho"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Conteúdo rolável com cards de treino -->
+    <ScrollView
+        android:id="@+id/scrollConteudo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/llTitulo"
+        app:layout_constraintBottom_toTopOf="@id/container_nav_inferior"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/containerTreinos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- CARD 1 -->
+            <LinearLayout
+                android:id="@+id/llCardTreino1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/card_agendados"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <!-- Conteúdo textual -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textTituloFicha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_black"
+                        android:text="@string/treino_ab"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textDescricaoFicha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/treino_com_foco_em_b_ceps_e_costas"
+                        android:textColor="@color/material_dynamic_neutral30"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textListaExercicios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/supino_3x14_puxada_frente_3x10_eleva_o_lateral_4x12_rosca_scott_4x12"
+                        android:textColor="@color/material_dynamic_neutral30"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/btnProfessor1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/nome_do_professor"
+                            android:textColor="@color/unifor_anil"
+                            android:textColorLink="@color/unifor_anil" />
+
+                        <ImageView
+                            android:id="@+id/btnEditarFicha"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/baseline_edit_24"
+                            android:contentDescription="@string/editar"
+                            app:tint="@color/unifor_marinho" />
+
+                        <ImageView
+                            android:id="@+id/btnDeletarFicha"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_delete"
+                            android:contentDescription="@string/excluir"
+                            app:tint="@color/unifor_marinho" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Imagem alinhada ao topo -->
+            </LinearLayout>
+
+            <!-- CARD 2 -->
+            <LinearLayout
+                android:id="@+id/llCardTreino2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/card_agendados"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_black"
+                        android:text="@string/treino_cd"
+                        android:textColor="@color/unifor_marinho"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/treino_com_foco_em_b_ceps_e_costas"
+                        android:textColor="@color/material_dynamic_neutral30"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/exerc_cios_nsupino_3x14_npuxada_frente_3x10_neleva_o_lateral_4x12_nrosca_scott_4x12"
+                        android:textColor="@color/material_dynamic_neutral30"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/btnProfessor2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/nome_do_professor"
+                            android:textColor="@color/unifor_anil"
+                            android:textColorLink="@color/unifor_anil" />
+
+                        <ImageView
+                            android:id="@+id/btnEditarFicha2"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/baseline_edit_24"
+                            android:contentDescription="@string/editar"
+                            app:tint="@color/unifor_marinho" />
+
+                        <ImageView
+                            android:id="@+id/btnDeletarFicha2"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_delete"
+                            android:contentDescription="@string/excluir"
+                            app:tint="@color/unifor_marinho" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Imagem lateral -->
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Navegação inferior -->
+    <FrameLayout
+        android:id="@+id/container_nav_inferior"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

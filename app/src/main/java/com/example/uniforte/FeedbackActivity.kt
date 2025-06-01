@@ -35,6 +35,26 @@ class FeedbackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
 
+        val navInferiorAlunoFragment = NavInferiorAlunoFragment   ()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_nav_inferior, navInferiorAlunoFragment)
+            .commit()
+
+        // Configurar o callback para tratar cliques na navegação inferior
+        navInferiorAlunoFragment.onNavItemSelected = { itemId ->
+            when (itemId) {
+                R.id.navHome -> {
+                    startActivity(Intent(this, HomeAlunoActivity::class.java))
+                }
+                R.id.navFicha -> {
+                    startActivity(Intent(this, FichaTreinoActivity::class.java))
+                }
+                R.id.navPerfil -> {
+                    startActivity(Intent(this, PerfilActivity::class.java))
+                }
+            }
+        }
+
         scrollMessages   = findViewById(R.id.scrollMessages)
         messageContainer = findViewById(R.id.messageContainer)
         etMessage        = findViewById(R.id.etMessage)
@@ -59,7 +79,7 @@ class FeedbackActivity : AppCompatActivity() {
                 false
             }
         }
-        addMessageFromAI("Olá! Eu sou o FitBot, seu assistente virtual da UniFort. Como posso te ajudar hoje? ✨💪")
+        addMessageFromAI("Olá! Eu sou o FitBot, seu assistente virtual da UniForte. Como posso te ajudar hoje? ✨💪")
     }
 
     private fun sendCurrentMessageAndGetResponse() {

@@ -1,121 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_buscar_aluno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/unifor_gelo">
 
-    <!-- CONTENT CONTAINER com peso 1 -->
     <LinearLayout
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginTop="40dp">
+        android:padding="0dp">
 
-        <!-- Linha de busca -->
+        <!-- Cabeçalho fixo no topo -->
         <LinearLayout
-            android:id="@+id/searchRow"
+            android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <ImageButton
-                android:id="@+id/back_button"
+                android:id="@+id/btnVoltar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_back" />
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutSearch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:hint="Buscar aluno por CPF"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
-
-        <!-- Card fixo de Aluno -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAluno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:elevation="4dp"
-            app:cardCornerRadius="8dp">
-
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="60dp">
-
-                <ImageView
-                    android:layout_width="66dp"
-                    android:layout_height="66dp"
-                    android:background="@drawable/background_redondo_escuro"
-                    android:padding="12dp"
-                    android:scaleType="centerCrop"
-                    android:src="@android:drawable/ic_menu_gallery" />
-            </androidx.cardview.widget.CardView>
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="wrap_content" />
+                android:background="@drawable/grafismo_unifor_4"
+                android:backgroundTint="@color/unifor_azulclaro"
+                android:contentDescription="@string/voltar"
+                android:scaleX="-1"
+                android:tint="@color/unifor_azulclaro" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/campoBusca"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_agendados"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageViewBusca"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/cone_de_busca"
+                    android:src="@android:drawable/ic_menu_search"
+                    android:tint="@color/unifor_marinho" />
+
+                <EditText
+                    android:id="@+id/etBuscaAluno"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/buscar_aluno_por_cpf"
+                    android:textColor="@color/unifor_marinho"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:inputType="text" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <ScrollView
+            android:id="@+id/scrollConteudo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textCpfAluno"
-                    android:layout_width="wrap_content"
+                <!-- Card do aluno -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cardDadosAluno"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CPF do Aluno"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/card_agendados"
+                    android:elevation="2dp"
+                    android:padding="12dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
 
-                <TextView
-                    android:id="@+id/textEmailAluno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="aluno@gmail.com"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFotoAluno"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        app:cardCornerRadius="36dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/unifor_marinho"
+                            android:contentDescription="@string/cone_do_aluno"
+                            android:scaleType="centerCrop"
+                            android:src="@android:drawable/ic_menu_gallery" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:id="@+id/llTextosAluno"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnDeletarAluno"
+                        app:layout_constraintStart_toEndOf="@id/cardFotoAluno"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvNomeAluno"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/nome_do_aluno"
+                            android:textColor="@color/unifor_marinho"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvAlunoEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/satoshi_regular"
+                            android:text="@string/aluno_gmail_com"
+                            android:textColor="@color/material_dynamic_neutral30"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnAdicionarAluno"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/excluir"
+                        android:src="@android:drawable/ic_menu_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/unifor_marinho" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/container_nav_inferior"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </LinearLayout>
 
-
-
-</LinearLayout>
+</FrameLayout>

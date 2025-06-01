@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body { margin: 0; background: transparent; }
+        p {
+            opacity: 0;
+            position: absolute;
+            pointer-events: auto;
+            user-select: text;
+            left: 0;
+            top: 0;
+            margin: 0;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<p>Esse é o texto que quero que o VLibras leia.</p>
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+</body>
+</html>

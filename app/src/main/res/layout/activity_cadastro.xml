@@ -6,103 +6,215 @@
     android:id="@+id/clCadastro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFE"
+    android:background="@color/unifor_gelo"
     tools:context=".CadastroActivity">
 
-    <ImageButton
-        android:id="@+id/btnVoltar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imgRegisterIcon"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:layout_marginTop="100dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitCenter"
-        android:src="@drawable/malhado"
+    <!-- Conteúdo rolável para dispositivos com telas pequenas -->
+    <ScrollView
+        android:id="@+id/scrollViewCadastro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- EditText CPF -->
-    <EditText
-        android:id="@+id/etCpf"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:hint="CPF"
-        android:padding="12dp"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@+id/imgRegisterIcon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <!-- EditText Email -->
-    <EditText
-        android:id="@+id/etEmailRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:hint="Email"
-        android:padding="12dp"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/etCpf"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Botão Voltar -->
+            <ImageButton
+                android:id="@+id/btnVoltar"
+                android:scaleX="-1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:backgroundTint="@color/unifor_azulclaro"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/voltar"
+                android:src="@drawable/grafismo_unifor_4"
+                app:tint="@color/unifor_azulclaro"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- EditText Senha -->
-    <EditText
-        android:id="@+id/etSenhaRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:hint="Senha"
-        android:padding="12dp"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailRegister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Mascote -->
+            <ImageView
+                android:id="@+id/imgRegisterIcon"
+                android:layout_width="270dp"
+                android:layout_height="270dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/mascote_uniforte"
+                app:layout_constraintTop_toBottomOf="@id/btnVoltar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- EditText Confirmar Senha -->
-    <EditText
-        android:id="@+id/etConfirmarSenha"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:hint="Confirme sua senha"
-        android:padding="12dp"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etSenhaRegister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Campo CPF -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCpf"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="CPF"
+                app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                app:boxStrokeColor="@color/unifor_azulclaro"
+                app:layout_constraintTop_toBottomOf="@id/imgRegisterIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColorHint="@color/dark_gray"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
 
-    <!-- Botão Cadastrar -->
-    <Button
-        android:id="@+id/btnCadastrar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="#000000"
-        android:text="Cadastrar"
-        app:layout_constraintTop_toBottomOf="@+id/etConfirmarSenha"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCpf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/unifor_anil"
+                    android:textColorHint="@color/dark_gray"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Email"
+                app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                app:boxStrokeColor="@color/unifor_azulclaro"
+                app:layout_constraintTop_toBottomOf="@id/tilCpf"
+                android:textColorHint="@color/dark_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmailRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/unifor_anil"
+                    android:textColorHint="@color/dark_gray"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo Senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSenha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Senha"
+                app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                app:boxStrokeColor="@color/unifor_azulclaro"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/unifor_anil"
+                app:layout_constraintTop_toBottomOf="@id/tilEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColorHint="@color/dark_gray"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSenhaRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/unifor_anil"
+                    android:textColorHint="@color/dark_gray"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo Confirmar Senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilConfirmarSenha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Confirme sua senha"
+                app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                app:boxStrokeColor="@color/unifor_azulclaro"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/unifor_anil"
+                app:layout_constraintTop_toBottomOf="@id/tilSenha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="24dp"
+                android:textColorHint="@color/dark_gray"
+                android:layout_marginEnd="24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmarSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/unifor_anil"
+                    android:textColorHint="@color/dark_gray"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/unifor_anil"
+                    app:hintTextColor="@color/unifor_azulclaro"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botão Cadastrar -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCadastrar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="Cadastrar"
+                android:fontFamily="@font/satoshi_bold"
+                android:textAllCaps="false"
+                android:textColor="@color/unifor_gelo"
+                android:backgroundTint="@color/unifor_anil"
+                app:cornerRadius="40dp"
+                app:layout_constraintTop_toBottomOf="@id/tilConfirmarSenha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

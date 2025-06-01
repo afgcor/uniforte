@@ -1,66 +1,73 @@
 package com.example.uniforte
 
-
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class MeusAlunosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meus_alunos)
 
-        val navHome = findViewById<TextView>(R.id.navHome)
-        navHome.setOnClickListener {
-            val intent = Intent(this, HomeProfessorActivity::class.java)
+        val cardAluno = findViewById<ConstraintLayout>(R.id.cardDadosAluno)
+        cardAluno.setOnClickListener{
+            val intent = Intent(this, PerfilAlunoActivity::class.java)
             startActivity(intent)
         }
 
-        val navMeusAlunos = findViewById<TextView>(R.id.navMeusAlunos)
-        navMeusAlunos.setOnClickListener {
-            val intent = Intent(this, HomeProfessorActivity::class.java)
-            startActivity(intent)
-        }
-
-        val tvAdicionarAluno = findViewById<TextView>(R.id.tvAdicionarAluno)
+        val tvAdicionarAluno = findViewById<ImageButton>(R.id.btnAdicionarAluno)
         tvAdicionarAluno.setOnClickListener{
             val intent = Intent(this, BuscarAlunoActivity::class.java)
             startActivity(intent)
         }
 
-        val navPerfilAdmin = findViewById<TextView>(R.id.navPerfilAdmin)
-        navPerfilAdmin.setOnClickListener {
-            val intent = Intent(this, PerfilAdminActivity::class.java)
-            startActivity(intent)
-        }
-
-        val btnVoltar = findViewById<ImageButton>(R.id.back_button)
+        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener{
             finish()
         }
 
-        val aluno1 = findViewById<TextView>(R.id.bntEditarAluno)
-        aluno1.setOnClickListener{
-            val intent = Intent(this, PerfilAlunoActivity::class.java)
-            startActivity(intent)
+        val deletarListener = View.OnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Confirmar exclusão")
+                .setMessage("Tem certeza que deseja excluir este aluno?")
+                .setPositiveButton("Excluir") { dialog, _ ->
+                    Toast.makeText(this, "Aluno excluído com sucesso!", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancelar") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
-//        val btnEditarAluno = findViewById<Button>(R.id.btnEditarAluno)
-//        btnEditarAluno.setOnClickListener {
-//            val intent = Intent(this, EditarAlunoActivity::class.java)
-//        }
-//
-//        val btnDeletarAluno = findViewById<ImageView>(R.id.btnDeletarMA)
-//        btnDeletarAluno.setOnClickListener{
-//            val intent = Intent(this, xsdkjnsfsf::class.java)
-//        }
-//
-//        val tvAdicionarAluno = findViewById<TextView>(R.id.tvAdicionarAluno)
-//        tvAdicionarAluno.setOnClickListener{
-//            val intent = Intent(this, xxxxxxxxxx::class.java)
-//        }
+        val btnDeletarAluno = findViewById<ImageButton>(R.id.btnDeletarAluno)
+        btnDeletarAluno.setOnClickListener(deletarListener)
+
+        // Inserir o fragmento da navegação inferior no container
+        val navInferiorProfessorFragment = NavInferiorProfessorFragment   ()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_nav_inferior, navInferiorProfessorFragment)
+            .commit()
+
+        // Configurar o callback para tratar cliques na navegação inferior
+        navInferiorProfessorFragment.onNavItemSelected = { itemId ->
+            when (itemId) {
+                R.id.navHome -> {
+                    startActivity(Intent(this, HomeProfessorActivity::class.java))
+                }
+                R.id.navMeusAlunos -> {
+                    // Página atual, nada a fazer
+                }
+                R.id.navPerfilAdmin -> {
+                    startActivity(Intent(this, PerfilAdminActivity::class.java))
+                }
+            }
+        }
 
     }
 }
