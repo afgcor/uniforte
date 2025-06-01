@@ -13,21 +13,32 @@ import com.google.android.material.button.MaterialButton
 
 class HomeAlunoActivity : AppCompatActivity() {
 
+
+    private lateinit var tvOlaUsuario: TextView
+    private lateinit var webVLibras: DraggableWebView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_aluno)
 
-        // Inserir o fragmento da navegação inferior no container
-        val navInferiorAlunoFragment = NavInferiorAlunoFragment   ()
+
+        tvOlaUsuario = findViewById(R.id.tvOlaUsuario)
+        val nomeUsuario = intent.getStringExtra("USER_NAME")
+        if (!nomeUsuario.isNullOrEmpty()) {
+            tvOlaUsuario.text = "Olá, $nomeUsuario!"
+        } else {
+            tvOlaUsuario.text = "Olá!"
+        }
+
+        val navInferiorAlunoFragment = NavInferiorAlunoFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container_nav_inferior, navInferiorAlunoFragment)
             .commit()
 
-        // Configurar o callback para tratar cliques na navegação inferior
+
         navInferiorAlunoFragment.onNavItemSelected = { itemId ->
             when (itemId) {
                 R.id.navHome -> {
-                    // Página atual, nada a fazer
                 }
                 R.id.navFicha -> {
                     startActivity(Intent(this, FichaTreinoActivity::class.java))
@@ -38,7 +49,6 @@ class HomeAlunoActivity : AppCompatActivity() {
             }
         }
 
-        // Navegação da activity (outros botões e textos)
         findViewById<TextView>(R.id.tvVerTudo).setOnClickListener {
             startActivity(Intent(this, AgendamentosActivity::class.java))
         }
@@ -51,8 +61,7 @@ class HomeAlunoActivity : AppCompatActivity() {
             startActivity(Intent(this, FeedbackActivity::class.java))
         }
 
-        // VLibras
-        val webVLibras = findViewById<DraggableWebView>(R.id.webVLibras)
+        webVLibras = findViewById<DraggableWebView>(R.id.webVLibras) // Inicializa webVLibras
         val webSettings = webVLibras.settings
         webSettings.javaScriptEnabled = true
         webVLibras.setBackgroundColor(0x00000000) // Transparente
@@ -118,7 +127,6 @@ class HomeAlunoActivity : AppCompatActivity() {
         })
     }
 
-    // Coleta recursivamente todos os textos visíveis da tela
     private fun coletarTextosDaTela(view: View): String {
         val builder = StringBuilder()
 
@@ -138,30 +146,24 @@ class HomeAlunoActivity : AppCompatActivity() {
 
     // Gera o HTML invisível acessível ao VLibras
     private fun gerarHtmlVLibras(texto: String): String {
+        // Escapar caracteres especiais no texto para evitar problemas no HTML/JS
+        val textoEscapado = android.text.Html.escapeHtml(texto)
         return """
         <!DOCTYPE html>
         <html lang="pt-BR">
         <head>
             <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
             <style>
-                body {
-                    margin: 0;
-                    padding: 0;
-                    background: transparent;
-                }
-                p {
-                    font-size: 16px;
-                    color: transparent;
-                    position: absolute;
-                    pointer-events: auto;
-                    user-select: text;
-                    width: 100%;
-                    height: auto;
-                }
+                body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+                /* Esconde o parágrafo, usado apenas para passar o texto */
+                p { display: none; }
+                /* Ajustes para o botão VLibras */
+                div[vw-access-button] { width: 50px !important; height: 50px !important; }
             </style>
         </head>
         <body>
-            <p>$texto</p>
+            <p id="content">$textoEscapado</p> 
             <div vw class="enabled">
                 <div vw-access-button class="active"></div>
                 <div vw-plugin-wrapper>
@@ -170,7 +172,7 @@ class HomeAlunoActivity : AppCompatActivity() {
             </div>
             <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
             <script>
-                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                new window.VLibras.Widget("https://vlibras.gov.br/app");
             </script>
         </body>
         </html>
@@ -179,8 +181,9 @@ class HomeAlunoActivity : AppCompatActivity() {
 
     // Atualiza o WebView com o novo texto para VLibras
     private fun atualizarTextoVLibras(texto: String) {
-        val webVLibras = findViewById<DraggableWebView>(R.id.webVLibras)
+        // A variável webVLibras já deve estar inicializada no onCreate
         val html = gerarHtmlVLibras(texto)
-        webVLibras.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
+        webVLibras.loadDataWithBaseURL("https://vlibras.gov.br/app", html, "text/html", "UTF-8", null)
     }
 }
+

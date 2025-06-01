@@ -10,17 +10,16 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.uniforte.data.network.RetrofitInstance
-import com.google.android.material.button.MaterialButton
+import androidx.lifecycle.lifecycleScope // Import lifecycleScope
+import com.example.uniforte.data.network.RetrofitInstance // Import RetrofitInstance
+import com.google.android.material.button.MaterialButton // Embora não usado diretamente, pode ser útil manter
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
-import org.json.JSONObject
-import java.io.IOException
+import kotlinx.coroutines.launch // Import launch
+import okhttp3.ResponseBody // Import ResponseBody
+import org.json.JSONObject // Import JSONObject
+import java.io.IOException // Import IOException
 import retrofit2.HttpException
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         tvCadastrar = findViewById(R.id.tvCadastrar)
         imgLogo = findViewById(R.id.imgLogo)
         webVLibras = findViewById(R.id.webVLibras)
-        progressBar = findViewById(R.id.progressBar)
+        progressBar = findViewById(R.id.progressBar) // Inicializar ProgressBar
 
         // Listener do Botão Entrar (com chamada de API)
         btnEntrar.setOnClickListener {
@@ -86,6 +85,10 @@ class MainActivity : AppCompatActivity() {
 
         // Listener da Logo (ação original comentada, decidir se necessário)
         imgLogo.setOnClickListener {
+            // Ação original: navegar para HomeProfessorActivity
+            // val intent = Intent(this, HomeProfessorActivity::class.java)
+            // startActivity(intent)
+            // Considerar remover este listener se não tiver propósito
         }
 
         // Configuração do VLibras
@@ -106,21 +109,35 @@ class MainActivity : AppCompatActivity() {
                 val response = RetrofitInstance.api.login(requestBody)
 
                 if (response.isSuccessful && response.body() != null) {
+                    // Sucesso na chamada
                     val responseBody: ResponseBody? = response.body()
-                    val responseBodyString: String = responseBody?.string() ?: "{}" // Usar elvis operator para garantir não nulidade e tipo String
-
+                    val responseBodyString: String = responseBody?.string() ?: "{}" // Usar elvis operator
                     Log.d("MainActivity", "Resposta JSON: $responseBodyString")
                     try {
-
+                        // Analisar o JSON da resposta
                         val jsonObject = JSONObject(responseBodyString)
                         val token = jsonObject.getString("token")
+                        val userObject = jsonObject.getJSONObject("user")
+                        val userId = userObject.getString("id") // Ou getInt, etc.
+                        val userEmail = userObject.getString("email")
 
-                        Log.i("MainActivity", "Login bem-sucedido! Token: $token")
+                        // --- PASSO 2: Extrair o nome do usuário ---
+                        // Tenta obter o nome; usa o email como fallback se não encontrar "nome"
+                        val userName = userObject.optString("nome", userEmail) // Usa optString para evitar erro se "nome" não existir
+                        // -------------------------------------------
 
+                        Log.i("MainActivity", "Login bem-sucedido! Token: $token, UserID: $userId, Email: $userEmail, Nome: $userName")
+
+                        // TODO: Implementar lógica para guardar o token (ex: SharedPreferences)
+                        // saveTokenToPreferences(token)
+
+                        // Navegar para a próxima tela (ex: HomeAlunoActivity)
                         val intent = Intent(this@MainActivity, HomeAlunoActivity::class.java)
-
+                        // --- PASSO 2: Passar o nome para a próxima Activity ---
+                        intent.putExtra("USER_NAME", userName) // Chave "USER_NAME"
+                        // -----------------------------------------------------
                         startActivity(intent)
-                        finish()
+                        finish() // Fechar MainActivity após login bem-sucedido
 
                     } catch (e: Exception) {
                         // Erro ao analisar o JSON de sucesso
@@ -223,7 +240,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
+        // Tornar VLibras visível após configuração (se desejar)
+        // webVLibras.visibility = View.VISIBLE
     }
 
     // Coleta textos visíveis na tela para o VLibras
@@ -243,6 +261,7 @@ class MainActivity : AppCompatActivity() {
         return builder.toString()
     }
 
+    // Gera o HTML para carregar o plugin VLibras
     private fun gerarHtmlVLibras(texto: String): String {
         // Escapar caracteres especiais no texto para evitar problemas no HTML/JS
         val textoEscapado = android.text.Html.escapeHtml(texto)
@@ -270,7 +289,7 @@ class MainActivity : AppCompatActivity() {
                 </div>
                 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
                 <script>
-                    new window.VLibras.Widget('https://vlibras.gov.br/app');
+                    new window.VLibras.Widget("https://vlibras.gov.br/app");
                     // Opcional: Tentar passar o texto para o widget após inicialização
                     // document.addEventListener('DOMContentLoaded', function() {
                     //     const widget = window.VLibras.widget;
@@ -288,7 +307,7 @@ class MainActivity : AppCompatActivity() {
     // Carrega o HTML gerado no WebView do VLibras
     private fun atualizarTextoVLibras(texto: String) {
         val html = gerarHtmlVLibras(texto)
-
+        // Usar loadDataWithBaseURL para permitir que o plugin carregue recursos relativos
         webVLibras.loadDataWithBaseURL("https://vlibras.gov.br/app", html, "text/html", "UTF-8", null)
     }
 }
