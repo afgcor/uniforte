@@ -9,7 +9,7 @@
     android:background="@color/unifor_gelo"
     tools:context=".CadastroActivity">
 
-    <!-- Conteúdo rolável para dispositivos com telas pequenas -->
+    <!-- Conteúdo rolável -->
     <ScrollView
         android:id="@+id/scrollViewCadastro"
         android:layout_width="0dp"
@@ -22,8 +22,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"> <!-- Adicionado padding inferior -->
 
+            <!-- ProgressBar (mantida) -->
             <ProgressBar
                 android:id="@+id/progressBarCadastro"
                 style="?android:attr/progressBarStyle"
@@ -35,8 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-
-            <!-- Botão Voltar -->
+            <!-- Botão Voltar (mantido) -->
             <ImageButton
                 android:id="@+id/btnVoltar"
                 android:scaleX="-1"
@@ -52,7 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <!-- Mascote -->
+            <!-- Mascote (mantido) -->
             <ImageView
                 android:id="@+id/imgRegisterIcon"
                 android:layout_width="270dp"
@@ -65,17 +66,51 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Campo CPF -->
+            <!-- NOVO: Campo Nome -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNome"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="Nome Completo"
+                app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                app:boxStrokeColor="@color/unifor_azulclaro"
+                app:layout_constraintTop_toBottomOf="@id/imgRegisterIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColorHint="@color/dark_gray"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:fontFamily="@font/satoshi_regular"
+                    android:textColor="@color/unifor_anil"
+                    android:textColorHint="@color/dark_gray"
+                    app:boxBackgroundColor="@color/unifor_azulclaro_low"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/unifor_azulclaro"
+                    app:cursorColor="@color/unifor_azulclaro"
+                    app:hintTextColor="@color/unifor_azulclaro"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo CPF (agora abaixo do Nome) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCpf"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:hint="CPF"
                 app:boxBackgroundColor="@color/unifor_azulclaro_low"
                 app:boxStrokeColor="@color/unifor_azulclaro"
-                app:layout_constraintTop_toBottomOf="@id/imgRegisterIcon"
+                app:layout_constraintTop_toBottomOf="@id/tilNome"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColorHint="@color/dark_gray"
@@ -95,13 +130,11 @@
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="@color/unifor_azulclaro"
                     app:cursorColor="@color/unifor_azulclaro"
-                    app:endIconMode="password_toggle"
-                    app:endIconTint="@color/unifor_anil"
                     app:hintTextColor="@color/unifor_azulclaro"
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Email -->
+            <!-- Campo Email (agora abaixo do CPF) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmail"
                 android:layout_width="0dp"
@@ -129,13 +162,11 @@
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="@color/unifor_azulclaro"
                     app:cursorColor="@color/unifor_azulclaro"
-                    app:endIconMode="password_toggle"
-                    app:endIconTint="@color/unifor_anil"
                     app:hintTextColor="@color/unifor_azulclaro"
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Senha -->
+            <!-- Campo Senha (mantido) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilSenha"
                 android:layout_width="0dp"
@@ -171,7 +202,7 @@
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Confirmar Senha -->
+            <!-- Campo Confirmar Senha (mantido) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilConfirmarSenha"
                 android:layout_width="0dp"
@@ -207,13 +238,12 @@
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Botão Cadastrar -->
+            <!-- Botão Cadastrar (mantido) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCadastrar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
                 android:text="Cadastrar"
                 android:fontFamily="@font/satoshi_bold"
                 android:textAllCaps="false"
@@ -230,3 +260,4 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
