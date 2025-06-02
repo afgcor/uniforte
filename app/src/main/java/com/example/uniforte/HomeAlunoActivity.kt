@@ -34,15 +34,12 @@ class HomeAlunoActivity : AppCompatActivity() {
         progressBarNome = findViewById(R.id.progressBarNome)
         progressBarNome.visibility = View.GONE
 
-        // Registrar o launcher para receber resultado da edição de perfil
         editarPerfilLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
-            // Quando o usuário retornar da tela de edição, atualizar o nome
             atualizarNomeUsuario(true)
         }
 
-        // Carregar o nome do usuário inicialmente
         atualizarNomeUsuario(false)
 
         val navInferiorAlunoFragment = NavInferiorAlunoFragment()
@@ -53,7 +50,6 @@ class HomeAlunoActivity : AppCompatActivity() {
         navInferiorAlunoFragment.onNavItemSelected = { itemId ->
             when (itemId) {
                 R.id.navHome -> {
-                    // Já estamos na Home, não precisa fazer nada
                 }
                 R.id.navFicha -> {
                     startActivity(Intent(this, FichaTreinoActivity::class.java))
@@ -143,7 +139,6 @@ class HomeAlunoActivity : AppCompatActivity() {
         })
     }
 
-    // Método para atualizar o nome do usuário com animação de carregamento
     private fun atualizarNomeUsuario(mostrarCarregamento: Boolean) {
         if (mostrarCarregamento) {
             progressBarNome.visibility = View.VISIBLE
