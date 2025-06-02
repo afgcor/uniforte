@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         tvCadastrar = findViewById(R.id.tvCadastrar)
         imgLogo = findViewById(R.id.imgLogo)
         webVLibras = findViewById(R.id.webVLibras)
-        progressBar = findViewById(R.id.progressBar) // Inicializar ProgressBar
+        progressBar = findViewById(R.id.progressBar)
 
         // Inicializar SharedPreferences
         sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
@@ -69,15 +69,12 @@ class MainActivity : AppCompatActivity() {
                 etSenha.error = "Senha obrigatória"
                 return@setOnClickListener
             }
-            // Limpar erros anteriores
             etLogin.error = null
             etSenha.error = null
 
-            // Chamar a função de login que faz a requisição à API
             fazerLogin(email, senha)
         }
 
-        // Listener e formatação do Texto Cadastrar
         val textoOriginal = "Não possui conta? Cadastre-se :)"
         val spannableString = SpannableString(textoOriginal)
         spannableString.setSpan(
@@ -91,12 +88,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Listener da Logo (ação original comentada, decidir se necessário)
         imgLogo.setOnClickListener {
-            // Ação original: navegar para HomeProfessorActivity
-            // val intent = Intent(this, HomeProfessorActivity::class.java)
-            // startActivity(intent)
-            // Considerar remover este listener se não tiver propósito
+//             Ação: navegar para HomeProfessorActivity
+             val intent = Intent(this, HomeProfessorActivity::class.java)
+             startActivity(intent)
         }
 
         // Configuração do VLibras
@@ -108,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE // Mostrar ProgressBar
         btnEntrar.isEnabled = false // Desabilitar botão
 
-        lifecycleScope.launch { // Usar Coroutine no escopo da Activity
+        lifecycleScope.launch {
             try {
                 // Criar corpo da requisição como Map
                 val requestBody = mapOf("email" to email, "senha" to senha)
