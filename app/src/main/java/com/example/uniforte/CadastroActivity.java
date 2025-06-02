@@ -66,7 +66,6 @@ public class CadastroActivity extends AppCompatActivity {
         String senha = etSenhaRegister.getText().toString().trim();
         String confirmarSenha = etConfirmarSenha.getText().toString().trim();
 
-        // --- Validações de entrada (incluindo nome) ---
         if (nome.isEmpty()) { // Validar nome
             etNome.setError("Informe o nome completo");
             etNome.requestFocus();
@@ -96,7 +95,6 @@ public class CadastroActivity extends AppCompatActivity {
             etSenhaRegister.requestFocus();
             return;
         }
-        // Ajustei a validação de senha para >= 6 caracteres, como no backend
         if (senha.length() < 5) {
             etSenhaRegister.setError("A senha deve ter pelo menos 5 caracteres");
             etSenhaRegister.requestFocus();
@@ -125,9 +123,8 @@ public class CadastroActivity extends AppCompatActivity {
         // --- Iniciar chamada de API ---
         mostrarLoading(true);
 
-        // Criar o corpo da requisição (Map) incluindo o nome
         Map<String, String> requestBody = new HashMap<>();
-        requestBody.put("nome", nome); // Adicionar nome ao corpo da requisição
+        requestBody.put("nome", nome);
         requestBody.put("cpf", cpf);
         requestBody.put("email", email);
         requestBody.put("senha", senha);

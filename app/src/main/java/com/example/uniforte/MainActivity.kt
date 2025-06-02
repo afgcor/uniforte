@@ -1,6 +1,8 @@
 package com.example.uniforte
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -12,14 +14,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope // Import lifecycleScope
-import com.example.uniforte.data.network.RetrofitInstance // Import RetrofitInstance
-import com.google.android.material.button.MaterialButton // Embora não usado diretamente, pode ser útil manter
+import androidx.lifecycle.lifecycleScope
+import com.example.uniforte.data.network.RetrofitInstance
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch // Import launch
-import okhttp3.ResponseBody // Import ResponseBody
-import org.json.JSONObject // Import JSONObject
-import java.io.IOException // Import IOException
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import java.io.IOException
 import retrofit2.HttpException
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var imgLogo: ImageView
     private lateinit var webVLibras: DraggableWebView
     private lateinit var progressBar: ProgressBar
+
+    // SharedPreferences para guardar dados da sessão
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +52,16 @@ class MainActivity : AppCompatActivity() {
         webVLibras = findViewById(R.id.webVLibras)
         progressBar = findViewById(R.id.progressBar) // Inicializar ProgressBar
 
+        // Inicializar SharedPreferences
+        sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+
         // Listener do Botão Entrar (com chamada de API)
         btnEntrar.setOnClickListener {
             val email = etLogin.text.toString().trim()
             val senha = etSenha.text.toString().trim()
 
             // Validações básicas
-            if (email.isEmpty() || !email.contains("@")) {
+            if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 etLogin.error = "E-mail inválido"
                 return@setOnClickListener
             }
@@ -120,22 +128,25 @@ class MainActivity : AppCompatActivity() {
                         val userObject = jsonObject.getJSONObject("user")
                         val userId = userObject.getString("id") // Ou getInt, etc.
                         val userEmail = userObject.getString("email")
-
-                        // --- PASSO 2: Extrair o nome do usuário ---
-                        // Tenta obter o nome; usa o email como fallback se não encontrar "nome"
                         val userName = userObject.optString("nome", userEmail) // Usa optString para evitar erro se "nome" não existir
-                        // -------------------------------------------
 
                         Log.i("MainActivity", "Login bem-sucedido! Token: $token, UserID: $userId, Email: $userEmail, Nome: $userName")
 
-                        // TODO: Implementar lógica para guardar o token (ex: SharedPreferences)
-                        // saveTokenToPreferences(token)
+                        // ***** ALTERAÇÃO: Guardar dados da sessão em SharedPreferences *****
+                        with (sharedPref.edit()) {
+                            putString("USER_ID", userId)
+                            putString("USER_TOKEN", token) // Guardar o token também é útil
+                            putString("USER_NAME", userName)
+                            putString("USER_EMAIL", userEmail)
+                            apply() // Salva de forma assíncrona
+                        }
+                        Log.i("MainActivity", "Dados da sessão guardados em SharedPreferences.")
+                        // *******************************************************************
 
                         // Navegar para a próxima tela (ex: HomeAlunoActivity)
                         val intent = Intent(this@MainActivity, HomeAlunoActivity::class.java)
-                        // --- PASSO 2: Passar o nome para a próxima Activity ---
-                        intent.putExtra("USER_NAME", userName) // Chave "USER_NAME"
-                        // -----------------------------------------------------
+                        // Não precisa mais passar o nome via Intent, pois pode ser lido das SharedPreferences
+                        // intent.putExtra("USER_NAME", userName)
                         startActivity(intent)
                         finish() // Fechar MainActivity após login bem-sucedido
 
@@ -159,7 +170,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: IOException) {
-                // Erro de Rede (sem conexão, timeout)
                 Log.e("MainActivity", "Erro de rede: ${e.message}", e)
                 Toast.makeText(this@MainActivity, "Erro de conexão. Verifique sua internet.", Toast.LENGTH_LONG).show()
             } catch (e: HttpException) {
@@ -280,7 +290,7 @@ class MainActivity : AppCompatActivity() {
                 </style>
             </head>
             <body>
-                <p id="content">$textoEscapado</p> 
+                <p id="content">$textoEscapado</p>
                 <div vw class="enabled">
                     <div vw-access-button class="active"></div>
                     <div vw-plugin-wrapper>
@@ -304,10 +314,8 @@ class MainActivity : AppCompatActivity() {
         """.trimIndent()
     }
 
-    // Carrega o HTML gerado no WebView do VLibras
     private fun atualizarTextoVLibras(texto: String) {
         val html = gerarHtmlVLibras(texto)
-        // Usar loadDataWithBaseURL para permitir que o plugin carregue recursos relativos
         webVLibras.loadDataWithBaseURL("https://vlibras.gov.br/app", html, "text/html", "UTF-8", null)
     }
 }

@@ -1,50 +1,67 @@
 package com.example.uniforte
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 class HomeAlunoActivity : AppCompatActivity() {
 
-
     private lateinit var tvOlaUsuario: TextView
     private lateinit var webVLibras: DraggableWebView
+    private lateinit var progressBarNome: ProgressBar
+    private lateinit var editarPerfilLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_aluno)
 
-
+        // Inicializar views
         tvOlaUsuario = findViewById(R.id.tvOlaUsuario)
-        val nomeUsuario = intent.getStringExtra("USER_NAME")
-        if (!nomeUsuario.isNullOrEmpty()) {
-            tvOlaUsuario.text = "Olá, $nomeUsuario!"
-        } else {
-            tvOlaUsuario.text = "Olá!"
+        webVLibras = findViewById(R.id.webVLibras)
+        progressBarNome = findViewById(R.id.progressBarNome)
+        progressBarNome.visibility = View.GONE
+
+        // Registrar o launcher para receber resultado da edição de perfil
+        editarPerfilLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            // Quando o usuário retornar da tela de edição, atualizar o nome
+            atualizarNomeUsuario(true)
         }
+
+        // Carregar o nome do usuário inicialmente
+        atualizarNomeUsuario(false)
 
         val navInferiorAlunoFragment = NavInferiorAlunoFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container_nav_inferior, navInferiorAlunoFragment)
             .commit()
 
-
         navInferiorAlunoFragment.onNavItemSelected = { itemId ->
             when (itemId) {
                 R.id.navHome -> {
+                    // Já estamos na Home, não precisa fazer nada
                 }
                 R.id.navFicha -> {
                     startActivity(Intent(this, FichaTreinoActivity::class.java))
                 }
                 R.id.navPerfil -> {
-                    startActivity(Intent(this, PerfilActivity::class.java))
+                    // Usar o launcher para iniciar a PerfilActivity
+                    val intent = Intent(this, PerfilActivity::class.java)
+                    editarPerfilLauncher.launch(intent)
                 }
             }
         }
@@ -61,10 +78,10 @@ class HomeAlunoActivity : AppCompatActivity() {
             startActivity(Intent(this, FeedbackActivity::class.java))
         }
 
-        webVLibras = findViewById<DraggableWebView>(R.id.webVLibras) // Inicializa webVLibras
+        webVLibras = findViewById(R.id.webVLibras)
         val webSettings = webVLibras.settings
         webSettings.javaScriptEnabled = true
-        webVLibras.setBackgroundColor(0x00000000) // Transparente
+        webVLibras.setBackgroundColor(0x00000000)
 
         val btnAtivarVLibras = findViewById<MaterialButton>(R.id.btnAtivarVLibras)
 
@@ -76,7 +93,6 @@ class HomeAlunoActivity : AppCompatActivity() {
             }
         }
 
-        // Coletar todos os textos visíveis da tela
         val rootView = findViewById<View>(android.R.id.content)
         val textoCompleto = coletarTextosDaTela(rootView)
         atualizarTextoVLibras(textoCompleto)
@@ -127,6 +143,43 @@ class HomeAlunoActivity : AppCompatActivity() {
         })
     }
 
+    // Método para atualizar o nome do usuário com animação de carregamento
+    private fun atualizarNomeUsuario(mostrarCarregamento: Boolean) {
+        if (mostrarCarregamento) {
+            progressBarNome.visibility = View.VISIBLE
+            tvOlaUsuario.visibility = View.INVISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                val nomeUsuario = sharedPref.getString("USER_NAME", "")
+
+                if (!nomeUsuario.isNullOrEmpty()) {
+                    tvOlaUsuario.text = "Olá, $nomeUsuario!"
+                } else {
+                    tvOlaUsuario.text = "Olá!"
+                }
+
+
+                progressBarNome.visibility = View.GONE
+                tvOlaUsuario.visibility = View.VISIBLE
+            }, 500)
+        } else {
+            val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+            val nomeUsuario = sharedPref.getString("USER_NAME", "")
+
+            if (!nomeUsuario.isNullOrEmpty()) {
+                tvOlaUsuario.text = "Olá, $nomeUsuario!"
+            } else {
+                tvOlaUsuario.text = "Olá!"
+            }
+        }
+    }
+
+        override fun onResume() {
+        super.onResume()
+        atualizarNomeUsuario(false)
+    }
+
     private fun coletarTextosDaTela(view: View): String {
         val builder = StringBuilder()
 
@@ -146,7 +199,6 @@ class HomeAlunoActivity : AppCompatActivity() {
 
     // Gera o HTML invisível acessível ao VLibras
     private fun gerarHtmlVLibras(texto: String): String {
-        // Escapar caracteres especiais no texto para evitar problemas no HTML/JS
         val textoEscapado = android.text.Html.escapeHtml(texto)
         return """
         <!DOCTYPE html>
@@ -181,9 +233,8 @@ class HomeAlunoActivity : AppCompatActivity() {
 
     // Atualiza o WebView com o novo texto para VLibras
     private fun atualizarTextoVLibras(texto: String) {
-        // A variável webVLibras já deve estar inicializada no onCreate
+
         val html = gerarHtmlVLibras(texto)
         webVLibras.loadDataWithBaseURL("https://vlibras.gov.br/app", html, "text/html", "UTF-8", null)
     }
 }
-
