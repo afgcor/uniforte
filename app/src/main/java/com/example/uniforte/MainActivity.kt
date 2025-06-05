@@ -105,10 +105,9 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                // Criar corpo da requisição como Map
                 val requestBody = mapOf("email" to email, "senha" to senha)
 
-                // Chamar a API via Retrofit
+                // Chama a API via Retrofit
                 val response = RetrofitInstance.api.login(requestBody)
 
                 if (response.isSuccessful && response.body() != null) {
@@ -117,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                     val responseBodyString: String = responseBody?.string() ?: "{}" // Usar elvis operator
                     Log.d("MainActivity", "Resposta JSON: $responseBodyString")
                     try {
-                        // Analisar o JSON da resposta
                         val jsonObject = JSONObject(responseBodyString)
                         val token = jsonObject.getString("token")
                         val userObject = jsonObject.getJSONObject("user")
@@ -127,26 +125,21 @@ class MainActivity : AppCompatActivity() {
 
                         Log.i("MainActivity", "Login bem-sucedido! Token: $token, UserID: $userId, Email: $userEmail, Nome: $userName")
 
-                        // ***** ALTERAÇÃO: Guardar dados da sessão em SharedPreferences *****
                         with (sharedPref.edit()) {
                             putString("USER_ID", userId)
-                            putString("USER_TOKEN", token) // Guardar o token também é útil
+                            putString("USER_TOKEN", token)
                             putString("USER_NAME", userName)
                             putString("USER_EMAIL", userEmail)
                             apply() // Salva de forma assíncrona
                         }
                         Log.i("MainActivity", "Dados da sessão guardados em SharedPreferences.")
-                        // *******************************************************************
 
-                        // Navegar para a próxima tela (ex: HomeAlunoActivity)
                         val intent = Intent(this@MainActivity, HomeAlunoActivity::class.java)
-                        // Não precisa mais passar o nome via Intent, pois pode ser lido das SharedPreferences
-                        // intent.putExtra("USER_NAME", userName)
+
                         startActivity(intent)
-                        finish() // Fechar MainActivity após login bem-sucedido
+                        finish()
 
                     } catch (e: Exception) {
-                        // Erro ao analisar o JSON de sucesso
                         Log.e("MainActivity", "Erro ao analisar JSON de sucesso: ${e.message}", e)
                         Toast.makeText(this@MainActivity, "Erro ao processar a resposta do servidor.", Toast.LENGTH_LONG).show()
                     }
@@ -201,7 +194,7 @@ class MainActivity : AppCompatActivity() {
             var dX = 0f
             var dY = 0f
             var isDragging = false
-            val CLICK_DRAG_TOLERANCE = 10f // Tolerância para diferenciar clique de arrasto
+            val CLICK_DRAG_TOLERANCE = 10f
 
             override fun onTouch(view: View, event: MotionEvent): Boolean {
                 when (event.action) {
@@ -211,7 +204,6 @@ class MainActivity : AppCompatActivity() {
                         dX = view.x - downRawX
                         dY = view.y - downRawY
                         isDragging = false
-                        // Retorna false para permitir que o clique seja processado se não for arrasto
                         return false
                     }
 
@@ -237,7 +229,6 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     MotionEvent.ACTION_UP -> {
-                        // Se foi um arrasto, consome o evento. Se não, permite o clique.
                         return isDragging
                     }
 
@@ -245,8 +236,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        // Tornar VLibras visível após configuração (se desejar)
-        // webVLibras.visibility = View.VISIBLE
     }
 
     // Coleta textos visíveis na tela para o VLibras
@@ -255,7 +244,6 @@ class MainActivity : AppCompatActivity() {
         if (view is TextView && view.visibility == View.VISIBLE) {
             val texto = view.text.toString().trim()
             if (texto.isNotEmpty()) {
-                // Adiciona um ponto final para melhor interpretação pelo VLibras
                 builder.append(texto).append(". ")
             }
         } else if (view is ViewGroup) {
