@@ -1,7 +1,6 @@
 package com.example.uniforte.data.network
 
-import com.example.uniforte.data.network.UpdateUsuarioRequest
-import com.example.uniforte.data.network.Usuario
+import com.example.uniforte.data.model.FichaTreino
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -13,11 +12,11 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-    @POST("api/usuarios/login")
-    suspend fun login(@Body requestBody: Map<String, String>): Response<ResponseBody> // Usar Map e ResponseBody
+    @POST("api/usuarios/login"  )
+    suspend fun login(@Body requestBody: Map<String, String>): Response<ResponseBody>
 
     @POST("api/usuarios/")
-    fun cadastrarUsuario(@Body requestBody: Map<String, String>): Call<ResponseBody> // Retorna Call
+    fun cadastrarUsuario(@Body requestBody: Map<String, String>): Call<ResponseBody>
 
     @GET("api/usuarios/{id}")
     suspend fun buscarUsuarioPorId(@Path("id") userId: String): Response<Usuario>
@@ -28,5 +27,7 @@ interface ApiService {
         @Body dadosAtualizacao: UpdateUsuarioRequest
     ): Response<Usuario>
 
-}
+    @GET("api/exercicios-ficha/{usuario_id}")
+    suspend fun getFichasTreinoByUserId(@Path("usuario_id") userId: String): Response<FichaTreino> // Alterado de List<FichaTreino> para FichaTreino
 
+}
