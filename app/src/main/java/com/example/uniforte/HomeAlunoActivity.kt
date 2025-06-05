@@ -16,6 +16,15 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import android.util.Log // Importe para logs
+
+// Imports para Coroutines e Retrofit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import com.example.uniforte.data.network.RetrofitClient
+
 
 class HomeAlunoActivity : AppCompatActivity() {
 
@@ -23,6 +32,13 @@ class HomeAlunoActivity : AppCompatActivity() {
     private lateinit var webVLibras: DraggableWebView
     private lateinit var progressBarNome: ProgressBar
     private lateinit var editarPerfilLauncher: ActivityResultLauncher<Intent>
+
+    // Novos TextViews para exibir o objetivo e nome do professor da ficha de treino
+    private lateinit var tvTituloObjetivo: TextView
+    private lateinit var tvDescricaoObjetivo: TextView
+    // Se você tiver uma ProgressBar para a seção de objetivos, descomente e inicialize
+    // private lateinit var progressBarObjetivos: ProgressBar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +50,18 @@ class HomeAlunoActivity : AppCompatActivity() {
         progressBarNome = findViewById(R.id.progressBarNome)
         progressBarNome.visibility = View.GONE
 
+        // Inicialize os novos TextViews
+        tvTituloObjetivo = findViewById(R.id.tvTituloObjetivo)
+        tvDescricaoObjetivo = findViewById(R.id.tvDescricaoObjetivo)
+        // progressBarObjetivos = findViewById(R.id.progressBarObjetivos) // Se existir
+        // progressBarObjetivos.visibility = View.GONE // Começa invisível
+
         editarPerfilLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             atualizarNomeUsuario(true)
+            // Atualize os objetivos também, caso o perfil tenha alterado algo relacionado
+            fetchFichasTreino()
         }
 
         atualizarNomeUsuario(false)
@@ -50,12 +74,13 @@ class HomeAlunoActivity : AppCompatActivity() {
         navInferiorAlunoFragment.onNavItemSelected = { itemId ->
             when (itemId) {
                 R.id.navHome -> {
+                    // Já está na Home, pode querer forçar um refresh dos dados
+                    fetchFichasTreino()
                 }
                 R.id.navFicha -> {
                     startActivity(Intent(this, FichaTreinoActivity::class.java))
                 }
                 R.id.navPerfil -> {
-                    // Usar o launcher para iniciar a PerfilActivity
                     val intent = Intent(this, PerfilActivity::class.java)
                     editarPerfilLauncher.launch(intent)
                 }
@@ -137,6 +162,9 @@ class HomeAlunoActivity : AppCompatActivity() {
                 }
             }
         })
+
+        // CHAMADA AO BACKEND PARA BUSCAR FICHAS DE TREINO
+        fetchFichasTreino()
     }
 
     private fun atualizarNomeUsuario(mostrarCarregamento: Boolean) {
@@ -146,6 +174,7 @@ class HomeAlunoActivity : AppCompatActivity() {
 
             Handler(Looper.getMainLooper()).postDelayed({
                 val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                // Supondo que você salva o nome do usuário como "USER_NAME"
                 val nomeUsuario = sharedPref.getString("USER_NAME", "")
 
                 if (!nomeUsuario.isNullOrEmpty()) {
@@ -153,7 +182,6 @@ class HomeAlunoActivity : AppCompatActivity() {
                 } else {
                     tvOlaUsuario.text = "Olá!"
                 }
-
 
                 progressBarNome.visibility = View.GONE
                 tvOlaUsuario.visibility = View.VISIBLE
@@ -170,9 +198,75 @@ class HomeAlunoActivity : AppCompatActivity() {
         }
     }
 
-        override fun onResume() {
+    override fun onResume() {
         super.onResume()
+        // Atualiza o nome do usuário e busca as fichas de treino sempre que a Activity volta ao foco
         atualizarNomeUsuario(false)
+        fetchFichasTreino()
+    }
+
+    private fun fetchFichasTreino() {
+        // progressBarObjetivos.visibility = View.VISIBLE // Mostra ProgressBar enquanto carrega
+
+        val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val alunoId = sharedPref.getString("USER_ID", null)
+
+        // LOG 1: Verifica qual alunoId está sendo enviado
+        Log.d("FichaTreinoDebug", "Aluno ID sendo buscado: $alunoId")
+
+        if (alunoId == null) {
+            Log.e("HomeAlunoActivity", "Erro: Aluno ID não encontrado nas SharedPreferences.")
+            tvTituloObjetivo.text = "Erro"
+            tvDescricaoObjetivo.text = "ID do aluno não encontrado."
+            // progressBarObjetivos.visibility = View.GONE
+            return
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.getFichasTreinoByAlunoId(alunoId)
+
+                withContext(Dispatchers.Main) {
+                    // progressBarObjetivos.visibility = View.GONE // Esconde ProgressBar
+
+                    // LOG 2: Verifica o status da resposta
+                    Log.d("FichaTreinoDebug", "API Response Code: ${response.code()}")
+                    Log.d("FichaTreinoDebug", "API Response Message: ${response.message()}")
+
+                    if (response.isSuccessful) {
+                        val fichas = response.body()
+
+                        // LOG 3: Verifica o corpo da resposta (se não for nulo)
+                        Log.d("FichaTreinoDebug", "API Response Body (Sucesso): $fichas")
+
+                        if (!fichas.isNullOrEmpty()) {
+                            val primeiraFicha = fichas[0]
+                            tvTituloObjetivo.text = primeiraFicha.objetivo
+//                            tvDescricaoObjetivo.text = "Professor(a): ${primeiraFicha.nomeProfessor ?: "Não informado"}"
+                        } else {
+                            // Este é o caminho que está sendo executado atualmente
+                            tvTituloObjetivo.text = "Nenhum objetivo encontrado"
+                            tvDescricaoObjetivo.text = "Crie uma nova ficha de treino."
+                            Log.d("FichaTreinoDebug", "Fichas de treino vazias ou nulas para o aluno ID: $alunoId")
+                        }
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        Log.e("HomeAlunoActivity", "Erro ao buscar fichas de treino: ${response.code()} - ${response.message()} - $errorBody")
+                        tvTituloObjetivo.text = "Erro ao carregar objetivos"
+                        tvDescricaoObjetivo.text = "Código: ${response.code()}"
+                        // LOG 4: Log do corpo do erro se a resposta não for bem-sucedida
+                        Log.e("FichaTreinoDebug", "API Error Body: $errorBody")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    // progressBarObjetivos.visibility = View.GONE // Esconde ProgressBar
+                    Log.e("HomeAlunoActivity", "Erro inesperado ao buscar fichas de treino: ${e.message}", e)
+                    tvTituloObjetivo.text = "Erro de conexão"
+                    tvDescricaoObjetivo.text = "Verifique sua internet ou servidor."
+                }
+            }
+        }
     }
 
     private fun coletarTextosDaTela(view: View): String {
@@ -192,7 +286,6 @@ class HomeAlunoActivity : AppCompatActivity() {
         return builder.toString()
     }
 
-    // Gera o HTML invisível acessível ao VLibras
     private fun gerarHtmlVLibras(texto: String): String {
         val textoEscapado = android.text.Html.escapeHtml(texto)
         return """
@@ -226,9 +319,7 @@ class HomeAlunoActivity : AppCompatActivity() {
         """.trimIndent()
     }
 
-    // Atualiza o WebView com o novo texto para VLibras
     private fun atualizarTextoVLibras(texto: String) {
-
         val html = gerarHtmlVLibras(texto)
         webVLibras.loadDataWithBaseURL("https://vlibras.gov.br/app", html, "text/html", "UTF-8", null)
     }

@@ -1,0 +1,54 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textTituloFicha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/unifor_marinho"
+            android:text="Título da Ficha"/>
+
+        <TextView
+            android:id="@+id/textObjetivoFicha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/unifor_marinho"
+            android:layout_marginTop="4dp"
+            android:text="Objetivo: Ganho de Massa"/>
+
+        <TextView
+            android:id="@+id/textProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/unifor_marinho"
+            android:layout_marginTop="4dp"
+            android:text="Professor: Nome do Professor"/>
+
+        <TextView
+            android:id="@+id/textExercicios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/unifor_marinho"
+            android:layout_marginTop="8dp"
+            android:text="Exercícios:\n- Supino Reto: 3x10 (Carga: 50kg)\n- Rosca Direta: 3x12 (Carga: 10kg)"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
