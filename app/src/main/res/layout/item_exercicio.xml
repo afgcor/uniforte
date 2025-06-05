@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/white"
+    app:strokeColor="@color/unifor_azulclaro"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/unifor_azulclaro"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvExercicioNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_medium"
+            android:textColor="@color/unifor_marinho"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Nome do Exercício"/>
+
+        <TextView
+            android:id="@+id/tvExercicioMaquina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_regular"
+            android:textColor="@color/unifor_marinho"
+            android:textSize="14sp"
+            android:text="Máquina: [Máquina]"/>
+
+        <TextView
+            android:id="@+id/tvExercicioSeriesRepeticoesCarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_regular"
+            android:textColor="@color/unifor_marinho"
+            android:textSize="14sp"
+            android:text="Séries: [Séries] Repetições: [Repetições] Carga: [Carga]"/>
+
+        <TextView
+            android:id="@+id/tvExercicioObservacoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_regular"
+            android:textColor="@color/material_dynamic_neutral30"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:text="Observações: [Observações]"/>
+
+        <ImageView
+            android:id="@+id/ivExercicioThumb"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/card_agendados"
+            android:scaleType="center"
+            android:src="@android:drawable/ic_media_play"
+            android:contentDescription="Play video for exercise"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
