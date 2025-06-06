@@ -221,8 +221,8 @@ class HomeAlunoActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         val user = response.body()!!
-                        tvTituloObjetivo.text = user.titulo_objetivo ?: "N/A"
-                        tvDescricaoObjetivo.text = user.descricao_objetivo ?: "N/A"
+                        tvTituloObjetivo.text = user.titulo_objetivo ?: "Bem vindo a Uniforte!"
+                        tvDescricaoObjetivo.text = user.descricao_objetivo ?: "Voce ainda não possui um objetivo... :("
                     } else {
                         val errorBody = response.errorBody()?.string()
                         Log.e("HomeAlunoActivity", "Erro na resposta da API: ${response.code()} - $errorBody")
