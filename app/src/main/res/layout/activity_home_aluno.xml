@@ -288,13 +288,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="2dp"
                         android:fontFamily="@font/satoshi_bold"
                         android:text="@string/perda_de_gordura"
                         android:textColor="@color/unifor_anil"
                         android:textColorLink="@color/unifor_anil"
-                        android:textSize="18sp"
+                        android:textSize="19sp"
                         android:textStyle="bold" />
 
                     <TextView

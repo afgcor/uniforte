@@ -20,7 +20,13 @@ data class Usuario(
     val telefone: String? = null,
 
     @SerializedName("endereco")
-    val endereco: String? = null
+    val endereco: String? = null,
+
+    @SerializedName("titulo_objetivo")
+    val titulo_objetivo: String?,
+
+    @SerializedName("descricao_objetivo")
+    val descricao_objetivo: String?
 )
 
 data class UpdateUsuarioRequest(
@@ -34,5 +40,11 @@ data class UpdateUsuarioRequest(
     val telefone: String? = null,
 
     @SerializedName("endereco")
-    val endereco: String? = null
+    val endereco: String? = null,
+
+//    @SerializedName("titulo_objetivo")
+//    val titulo_objetivo: String?,
+//
+//    @SerializedName("descricao_objetivo")
+//    val descricao_objetivo: String?
 )

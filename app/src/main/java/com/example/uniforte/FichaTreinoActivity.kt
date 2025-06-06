@@ -149,9 +149,9 @@ class FichaTreinoActivity : AppCompatActivity() {
         }
 
         fichas.forEach { ficha ->
-            // ESTE ERA O ERRO: Você estava inflando o layout da Activity aqui.
+
             // val cardView = LayoutInflater.from(this).inflate(R.layout.activity_ficha_treino, containerTreinos, false) as LinearLayout
-            // O correto seria inflar R.layout.item_ficha_treino
+
             val cardView = LayoutInflater.from(this).inflate(R.layout.item_ficha_treino, containerTreinos, false) as LinearLayout
 
 

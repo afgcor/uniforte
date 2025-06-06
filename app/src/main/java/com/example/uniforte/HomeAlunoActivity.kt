@@ -16,14 +16,15 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
-import android.util.Log // Importe para logs
-
-// Imports para Coroutines e Retrofit
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.uniforte.data.network.RetrofitClient
+import com.example.uniforte.data.network.RetrofitInstance
+import com.example.uniforte.data.network.Usuario
+
 
 
 class HomeAlunoActivity : AppCompatActivity() {
@@ -33,10 +34,8 @@ class HomeAlunoActivity : AppCompatActivity() {
     private lateinit var progressBarNome: ProgressBar
     private lateinit var editarPerfilLauncher: ActivityResultLauncher<Intent>
 
-    // Novos TextViews para exibir o objetivo e nome do professor da ficha de treino
     private lateinit var tvTituloObjetivo: TextView
     private lateinit var tvDescricaoObjetivo: TextView
-    // Se você tiver uma ProgressBar para a seção de objetivos, descomente e inicialize
     // private lateinit var progressBarObjetivos: ProgressBar
 
 
@@ -53,6 +52,8 @@ class HomeAlunoActivity : AppCompatActivity() {
         // Inicialize os novos TextViews
         tvTituloObjetivo = findViewById(R.id.tvTituloObjetivo)
         tvDescricaoObjetivo = findViewById(R.id.tvDescricaoObjetivo)
+
+        fetchUserObjectives()
         // progressBarObjetivos = findViewById(R.id.progressBarObjetivos) // Se existir
         // progressBarObjetivos.visibility = View.GONE // Começa invisível
 
@@ -60,9 +61,10 @@ class HomeAlunoActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             atualizarNomeUsuario(true)
-            // Atualize os objetivos também, caso o perfil tenha alterado algo relacionado
-            fetchFichasTreino()
+
         }
+
+
 
         atualizarNomeUsuario(false)
 
@@ -74,8 +76,7 @@ class HomeAlunoActivity : AppCompatActivity() {
         navInferiorAlunoFragment.onNavItemSelected = { itemId ->
             when (itemId) {
                 R.id.navHome -> {
-                    // Já está na Home, pode querer forçar um refresh dos dados
-                    fetchFichasTreino()
+
                 }
                 R.id.navFicha -> {
                     startActivity(Intent(this, FichaTreinoActivity::class.java))
@@ -163,8 +164,6 @@ class HomeAlunoActivity : AppCompatActivity() {
             }
         })
 
-        // CHAMADA AO BACKEND PARA BUSCAR FICHAS DE TREINO
-        fetchFichasTreino()
     }
 
     private fun atualizarNomeUsuario(mostrarCarregamento: Boolean) {
@@ -200,74 +199,47 @@ class HomeAlunoActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Atualiza o nome do usuário e busca as fichas de treino sempre que a Activity volta ao foco
         atualizarNomeUsuario(false)
-        fetchFichasTreino()
     }
 
-    private fun fetchFichasTreino() {
-        // progressBarObjetivos.visibility = View.VISIBLE // Mostra ProgressBar enquanto carrega
-
+    private fun fetchUserObjectives() {
+        // Obter o ID do usuário autenticado (assumindo que está salvo em SharedPreferences)
         val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
-        val alunoId = sharedPref.getString("USER_ID", null)
+        val userId = sharedPref.getString("USER_ID", null) // Assumindo que o ID do usuário é salvo como "USER_ID"
 
-        // LOG 1: Verifica qual alunoId está sendo enviado
-        Log.d("FichaTreinoDebug", "Aluno ID sendo buscado: $alunoId")
-
-        if (alunoId == null) {
-            Log.e("HomeAlunoActivity", "Erro: Aluno ID não encontrado nas SharedPreferences.")
+        if (userId.isNullOrEmpty()) {
+            Log.e("HomeAlunoActivity", "User ID not found in SharedPreferences.")
             tvTituloObjetivo.text = "Erro"
-            tvDescricaoObjetivo.text = "ID do aluno não encontrado."
-            // progressBarObjetivos.visibility = View.GONE
+            tvDescricaoObjetivo.text = "ID do usuário não encontrado."
             return
         }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitClient.instance.getFichasTreinoByAlunoId(alunoId)
+                val response = RetrofitClient.instance.buscarUsuarioPorId(userId)
 
                 withContext(Dispatchers.Main) {
-                    // progressBarObjetivos.visibility = View.GONE // Esconde ProgressBar
-
-                    // LOG 2: Verifica o status da resposta
-                    Log.d("FichaTreinoDebug", "API Response Code: ${response.code()}")
-                    Log.d("FichaTreinoDebug", "API Response Message: ${response.message()}")
-
-                    if (response.isSuccessful) {
-                        val fichas = response.body()
-
-                        // LOG 3: Verifica o corpo da resposta (se não for nulo)
-                        Log.d("FichaTreinoDebug", "API Response Body (Sucesso): $fichas")
-
-                        if (!fichas.isNullOrEmpty()) {
-                            val primeiraFicha = fichas[0]
-                            tvTituloObjetivo.text = primeiraFicha.objetivo
-//                            tvDescricaoObjetivo.text = "Professor(a): ${primeiraFicha.nomeProfessor ?: "Não informado"}"
-                        } else {
-                            // Este é o caminho que está sendo executado atualmente
-                            tvTituloObjetivo.text = "Nenhum objetivo encontrado"
-                            tvDescricaoObjetivo.text = "Crie uma nova ficha de treino."
-                            Log.d("FichaTreinoDebug", "Fichas de treino vazias ou nulas para o aluno ID: $alunoId")
-                        }
+                    if (response.isSuccessful && response.body() != null) {
+                        val user = response.body()!!
+                        tvTituloObjetivo.text = user.titulo_objetivo ?: "N/A"
+                        tvDescricaoObjetivo.text = user.descricao_objetivo ?: "N/A"
                     } else {
                         val errorBody = response.errorBody()?.string()
-                        Log.e("HomeAlunoActivity", "Erro ao buscar fichas de treino: ${response.code()} - ${response.message()} - $errorBody")
-                        tvTituloObjetivo.text = "Erro ao carregar objetivos"
-                        tvDescricaoObjetivo.text = "Código: ${response.code()}"
-                        // LOG 4: Log do corpo do erro se a resposta não for bem-sucedida
-                        Log.e("FichaTreinoDebug", "API Error Body: $errorBody")
+                        Log.e("HomeAlunoActivity", "Erro na resposta da API: ${response.code()} - $errorBody")
+                        tvTituloObjetivo.text = "Erro"
+                        tvDescricaoObjetivo.text = "Falha ao carregar objetivos."
                     }
                 }
             } catch (e: Exception) {
+                Log.e("HomeAlunoActivity", "Erro ao buscar objetivos do usuário: ${e.message}", e)
                 withContext(Dispatchers.Main) {
-                    // progressBarObjetivos.visibility = View.GONE // Esconde ProgressBar
-                    Log.e("HomeAlunoActivity", "Erro inesperado ao buscar fichas de treino: ${e.message}", e)
-                    tvTituloObjetivo.text = "Erro de conexão"
-                    tvDescricaoObjetivo.text = "Verifique sua internet ou servidor."
+                    tvTituloObjetivo.text = "Erro"
+                    tvDescricaoObjetivo.text = "Erro de conexão ou dados."
                 }
             }
         }
     }
+
 
     private fun coletarTextosDaTela(view: View): String {
         val builder = StringBuilder()

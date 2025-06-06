@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshi_black"
-            android:text="Minhas Fichas de Treino"
+            android:text="Ficha de treino"
             android:textColor="@color/unifor_marinho"
             android:textSize="20sp"
             android:textStyle="bold"
