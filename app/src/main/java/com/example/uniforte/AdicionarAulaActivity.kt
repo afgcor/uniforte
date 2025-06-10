@@ -1,24 +1,27 @@
 package com.example.uniforte
 
 import android.content.Intent
-import java.util.Locale
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import java.util.Calendar
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.uniforte.data.SupabaseInit
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
 
 class AdicionarAulaActivity : AppCompatActivity() {
+
+    // Cliente Supabase centralizado
+    private val supabase = SupabaseInit.supabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adicionar_aula)
 
         // Inserir o fragmento da navegação inferior no container
-        val navInferiorProfessorFragment = NavInferiorProfessorFragment   ()
+        val navInferiorProfessorFragment = NavInferiorProfessorFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container_nav_inferior, navInferiorProfessorFragment)
             .commit()
@@ -38,49 +41,63 @@ class AdicionarAulaActivity : AppCompatActivity() {
             }
         }
 
-        val inputDataAula = findViewById<TextInputEditText>(R.id.inputDataAula)
-        inputDataAula.setOnClickListener {
-            val c = Calendar.getInstance()
-            val ano = c.get(Calendar.YEAR)
-            val mes = c.get(Calendar.MONTH)
-            val dia = c.get(Calendar.DAY_OF_MONTH)
-
-            val datePickerDialog = DatePickerDialog(this, { _, y, m, d ->
-                val dataFormatada = String.format(Locale.getDefault(), "%02d/%02d/%04d", d, m + 1, y)
-                inputDataAula.setText(dataFormatada)
-            }, ano, mes, dia)
-
-            datePickerDialog.show()
-        }
-
-        val inputHorarioAula = findViewById<TextInputEditText>(R.id.inputHorarioAula)
-        inputHorarioAula.setOnClickListener {
-            val c = Calendar.getInstance()
-            val hora = c.get(Calendar.HOUR_OF_DAY)
-            val minuto = c.get(Calendar.MINUTE)
-
-            val timePickerDialog = TimePickerDialog(this, { _, h, m ->
-                val horarioFormatado = String.format(Locale.getDefault(), "%02d:%02d", h, m)
-                inputHorarioAula.setText(horarioFormatado)
-            }, hora, minuto, true)
-
-            timePickerDialog.show()
-        }
-
-        val btnVoltar = findViewById<ImageView>(R.id.btnVoltar)
-        btnVoltar.setOnClickListener{
+        val btnVoltar = findViewById<ImageView>(R.id.buttonVoltar)
+        btnVoltar.setOnClickListener {
             finish()
-        }
-
-        val btnSalvar = findViewById<Button>(R.id.buttonSalvar)
-        btnSalvar.setOnClickListener{
-            finish()
-            Toast.makeText(this, "Aula adicionada com sucesso!", Toast.LENGTH_SHORT).show()
         }
 
         val btnCancelar = findViewById<Button>(R.id.buttonCancelar)
-        btnCancelar.setOnClickListener{
+        btnCancelar.setOnClickListener {
             finish()
+        }
+
+        val inputTituloAula = findViewById<TextInputEditText>(R.id.editTitulo)
+        val inputDescricaoAula = findViewById<TextInputEditText>(R.id.editDescricao)
+        val inputDataAula = findViewById<TextInputEditText>(R.id.editData)
+        val inputHorarioAula = findViewById<TextInputEditText>(R.id.editHorario)
+
+        // Lógica do botão salvar
+        val btnSalvar = findViewById<Button>(R.id.buttonSalvar)
+        btnSalvar.setOnClickListener {
+            val titulo = inputTituloAula.text?.toString()?.trim() ?: ""
+            val descricao = inputDescricaoAula.text?.toString()?.trim() ?: ""
+            val data = inputDataAula.text?.toString()?.trim() ?: ""
+            val horario = inputHorarioAula.text?.toString()?.trim() ?: ""
+
+            if (titulo.isBlank() || descricao.isBlank() || data.isBlank() || horario.isBlank()) {
+                Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            lifecycleScope.launch {
+                val res = supabase
+                    .from("adicionar_aula")
+                    .insert(
+                        mapOf(
+                            "titulo" to titulo,
+                            "descricao" to descricao,
+                            "data" to data,
+                            "horario" to horario
+                        )
+                    )
+                    .execute()
+
+                if (res.error == null) {
+                    Toast.makeText(
+                        this@AdicionarAulaActivity,
+                        "Aula adicionada com sucesso!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    setResult(RESULT_OK)
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this@AdicionarAulaActivity,
+                        "Erro ao adicionar aula: ${res.error.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
         }
     }
 }

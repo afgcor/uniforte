@@ -1,86 +1,92 @@
-package com.example.uniforte
+package com.example.uniforte.ui
 
-import android.content.Intent
-import java.util.Locale
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import java.util.Calendar
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.uniforte.R
+import com.example.uniforte.data.SupabaseInit
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
 
 class EditarAulaActivity : AppCompatActivity() {
+
+    // usa o cliente Supabase já inicializado em SupabaseInit
+    private val supabase = SupabaseInit.supabase
+
+    private lateinit var aulaId: String
+    private lateinit var editTitulo: TextInputEditText
+    private lateinit var editDescricao: TextInputEditText
+    private lateinit var editData: TextInputEditText
+    private lateinit var editHorario: TextInputEditText
+    private lateinit var btnSalvar: Button
+    private lateinit var btnVoltar: ImageView
+    private lateinit var btnCancelar: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_aula)
 
-        // Inserir o fragmento da navegação inferior no container
-        val navInferiorProfessorFragment = NavInferiorProfessorFragment   ()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container_nav_inferior, navInferiorProfessorFragment)
-            .commit()
+        // 1) vincula os campos do layout
+        editTitulo     = findViewById(R.id.editTitulo)
+        editDescricao  = findViewById(R.id.editDescricao)
+        editData       = findViewById(R.id.editData)
+        editHorario    = findViewById(R.id.editHorario)
+        btnVoltar      = findViewById(R.id.buttonVoltar)
+        btnSalvar      = findViewById(R.id.buttonSalvar)
+        btnCancelar    = findViewById(R.id.buttonCancelar)
 
-        // Configurar o callback para tratar cliques na navegação inferior
-        navInferiorProfessorFragment.onNavItemSelected = { itemId ->
-            when (itemId) {
-                R.id.navHome -> {
-                    startActivity(Intent(this, HomeProfessorActivity::class.java))
-                }
-                R.id.navMeusAlunos -> {
-                    startActivity(Intent(this, MeusAlunosActivity::class.java))
-                }
-                R.id.navPerfilAdmin -> {
-                    startActivity(Intent(this, PerfilAdminActivity::class.java))
+        // 2) carrega dados que vieram na Intent
+        aulaId = intent.getStringExtra("AULA_ID")
+            ?: throw IllegalStateException("ID da aula não enviado")
+        editTitulo.setText(intent.getStringExtra("AULA_TITULO"))
+        editDescricao.setText(intent.getStringExtra("AULA_DESCRICAO"))
+        editData.setText(intent.getStringExtra("AULA_DATA"))
+        editHorario.setText(intent.getStringExtra("AULA_HORARIO"))
+
+        // 3) configura botões
+        btnVoltar.setOnClickListener { finish() }
+        btnCancelar.setOnClickListener { finish() }
+
+        btnSalvar.setOnClickListener {
+            val novoTitulo  = editTitulo.text.toString().trim()
+            val novaDesc    = editDescricao.text.toString().trim()
+            val novaData    = editData.text.toString().trim()
+            val novoHorario = editHorario.text.toString().trim()
+
+            // 4) faz o update na tabela "adicionar_aula" usando as colunas corretas
+            lifecycleScope.launch {
+                val response = supabase
+                    .from("adicionar_aula")
+                    .update(
+                        mapOf(
+                            "titulo"    to novoTitulo,
+                            "descricao" to novaDesc,
+                            "data"      to novaData,
+                            "horario"   to novoHorario
+                        )
+                    )
+                    .eq("id", aulaId)
+                    .execute()
+
+                if (response.error == null) {
+                    Toast.makeText(
+                        this@EditarAulaActivity,
+                        "Aula atualizada com sucesso!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    setResult(RESULT_OK)
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this@EditarAulaActivity,
+                        "Erro ao atualizar: ${response.error.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
-        }
-
-        val inputDataAula = findViewById<TextInputEditText>(R.id.inputDataAula)
-        inputDataAula.setOnClickListener {
-            val c = Calendar.getInstance()
-            val ano = c.get(Calendar.YEAR)
-            val mes = c.get(Calendar.MONTH)
-            val dia = c.get(Calendar.DAY_OF_MONTH)
-
-            val datePickerDialog = DatePickerDialog(this, { _, y, m, d ->
-                val dataFormatada = String.format(Locale.getDefault(), "%02d/%02d/%04d", d, m + 1, y)
-                inputDataAula.setText(dataFormatada)
-            }, ano, mes, dia)
-
-            datePickerDialog.show()
-        }
-
-        val inputHorarioAula = findViewById<TextInputEditText>(R.id.inputHorarioAula)
-        inputHorarioAula.setOnClickListener {
-            val c = Calendar.getInstance()
-            val hora = c.get(Calendar.HOUR_OF_DAY)
-            val minuto = c.get(Calendar.MINUTE)
-
-            val timePickerDialog = TimePickerDialog(this, { _, h, m ->
-                val horarioFormatado = String.format(Locale.getDefault(), "%02d:%02d", h, m)
-                inputHorarioAula.setText(horarioFormatado)
-            }, hora, minuto, true)
-
-            timePickerDialog.show()
-        }
-
-        val btnVoltar = findViewById<ImageView>(R.id.btnVoltar)
-        btnVoltar.setOnClickListener{
-            finish()
-        }
-
-        val btnSalvar = findViewById<Button>(R.id.buttonSalvar)
-        btnSalvar.setOnClickListener{
-            finish()
-            Toast.makeText(this, "Aula editada com sucesso!", Toast.LENGTH_SHORT).show()
-        }
-
-        val btnCancelar = findViewById<Button>(R.id.buttonCancelar)
-        btnCancelar.setOnClickListener{
-            finish()
         }
     }
 }

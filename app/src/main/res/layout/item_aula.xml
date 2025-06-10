@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:layout_marginTop="16dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -13,54 +11,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@drawable/card_agendados">
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/aulaNomeTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textSize="18sp"
-            android:text="Nome da Aula" />
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/aulaDescricaoTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDescricao"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Descrição da Aula" />
+            android:layout_marginTop="8dp"
+            android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/aulaHorarioDataTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Horário e Data" />
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/aulaProfessorTextView"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvData"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvHorario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textStyle="italic"
-            android:text="Professor: Nome do Professor" />
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnAgendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/unifor_azulclaro"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/unifor_gelo"
-            android:fontFamily="@font/satoshi_bold"
-            android:text="@string/agendar"
-            android:textColorLink="@color/unifor_marinho"
-            app:icon="@drawable/grafismo_unifor_4"
-            app:iconPadding="6dp"
-            app:iconSize="16dp" />
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Editar" />
 
+            <Button
+                android:id="@+id/btnExcluir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="Excluir" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

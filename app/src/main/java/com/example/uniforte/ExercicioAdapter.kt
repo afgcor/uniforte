@@ -1,6 +1,7 @@
 // com.example.uniforte.adapter.ExercicioAdapter.kt
 package com.example.uniforte
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uniforte.R
 import com.example.uniforte.data.model.ExercicioFichaDetalhes
+import com.example.uniforte.ui.EditarExercicioFichaActivity
 
-class ExercicioAdapter(private val exercicios: List<ExercicioFichaDetalhes>) :
-    RecyclerView.Adapter<ExercicioAdapter.ExercicioViewHolder>() {
+class ExercicioAdapter(
+    private val exercicios: List<ExercicioFichaDetalhes>,
+    private val onEditarClick: (ExercicioFichaDetalhes) -> Unit
+) : RecyclerView.Adapter<ExercicioAdapter.ExercicioViewHolder>() {
 
     class ExercicioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvExercicioNome: TextView = itemView.findViewById(R.id.tvExercicioNome)
@@ -19,6 +23,7 @@ class ExercicioAdapter(private val exercicios: List<ExercicioFichaDetalhes>) :
         val tvExercicioSeriesRepeticoesCarga: TextView = itemView.findViewById(R.id.tvExercicioSeriesRepeticoesCarga)
         val tvExercicioObservacoes: TextView = itemView.findViewById(R.id.tvExercicioObservacoes)
         val ivExercicioThumb: ImageView = itemView.findViewById(R.id.ivExercicioThumb)
+        val btnEditar: ImageView = itemView.findViewById(R.id.btnEditar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercicioViewHolder {
@@ -36,6 +41,11 @@ class ExercicioAdapter(private val exercicios: List<ExercicioFichaDetalhes>) :
 
         // TODO: Lógica para carregar a imagem/thumbnail do exercício (ex: com Glide/Picasso)
         holder.ivExercicioThumb.setImageResource(R.drawable.ic_ficha) // Placeholder
+
+        // Configura o botão de editar
+        holder.btnEditar.setOnClickListener {
+            onEditarClick(exercicio)
+        }
     }
 
     override fun getItemCount(): Int = exercicios.size

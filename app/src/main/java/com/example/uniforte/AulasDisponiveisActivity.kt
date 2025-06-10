@@ -18,13 +18,14 @@ import androidx.lifecycle.lifecycleScope
 import com.example.uniforte.data.network.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
-import com.example.uniforte.data.network.AgendamentoRequest // Import the new data class
-import android.content.Context // Import Context for SharedPreferences
+import com.example.uniforte.data.network.AgendamentoRequest
+import android.content.Context
 
 class AulasDisponiveisActivity : AppCompatActivity() {
 
     private lateinit var aulasRecyclerView: RecyclerView
     private lateinit var aulaAdapter: AulaAdapter
+    private val REQUEST_EDITAR_AULA = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,17 +55,37 @@ class AulasDisponiveisActivity : AppCompatActivity() {
             finish()
         }
 
-        // Initialize AulaAdapter with a click listener for the agendar button
-        aulaAdapter = AulaAdapter(mutableListOf()) { aula ->
-            // This lambda will be called when the agendar button is clicked
-            agendarAula(aula)
-        }
+        // Initialize AulaAdapter with click listeners for both agendar and editar buttons
+        aulaAdapter = AulaAdapter(
+            mutableListOf(),
+            onAgendarClick = { aula -> agendarAula(aula) },
+            onEditarClick = { aula -> editarAula(aula) }
+        )
 
         aulasRecyclerView = findViewById(R.id.aulasRecyclerView)
         aulasRecyclerView.layoutManager = LinearLayoutManager(this)
         aulasRecyclerView.adapter = aulaAdapter
 
         fetchAulasComProfessor()
+    }
+
+    private fun editarAula(aula: Aula) {
+        val intent = Intent(this, EditarAulaActivity::class.java).apply {
+            putExtra("AULA_ID", aula.id)
+            putExtra("AULA_TITULO", aula.nome)
+            putExtra("AULA_DESCRICAO", aula.descricao)
+            putExtra("AULA_DATA", aula.data)
+            putExtra("AULA_HORARIO", aula.horario)
+        }
+        startActivityForResult(intent, REQUEST_EDITAR_AULA)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_EDITAR_AULA && resultCode == RESULT_OK) {
+            // Recarrega a lista de aulas após a edição
+            fetchAulasComProfessor()
+        }
     }
 
     private fun fetchAulasComProfessor() {

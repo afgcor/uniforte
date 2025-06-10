@@ -22,25 +22,32 @@ class PerfilActivity : AppCompatActivity() {
     private lateinit var tvEmail: TextView
     private lateinit var tvTelefone: TextView
     private lateinit var tvEndereco: TextView
-    // Adicione outras referências se necessário (ex: ImageView para foto)
-    // private lateinit var imgUsuario: ImageView
+    private var usuarioAtual: Usuario? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
         // Inicializar as views
-        tvNome = findViewById(R.id.textNome) // ID do layout activity_perfil.xml
-        tvEmail = findViewById(R.id.tvEmail) // ID do layout activity_perfil.xml
-        tvTelefone = findViewById(R.id.tvTelefone) // ID do layout activity_perfil.xml
-        tvEndereco = findViewById(R.id.tvEndereco) // ID do layout activity_perfil.xml
-        // imgUsuario = findViewById(R.id.imgUsuario)
+        tvNome = findViewById(R.id.textNome)
+        tvEmail = findViewById(R.id.tvEmail)
+        tvTelefone = findViewById(R.id.tvTelefone)
+        tvEndereco = findViewById(R.id.tvEndereco)
 
         val btnEditarInformacoes = findViewById<Button>(R.id.btnEditarInformacoes)
         btnEditarInformacoes.setOnClickListener {
-            val intent = Intent(this, EditarInformacoesActivity::class.java)
-            intent.putExtra("tipoUsuario", "aluno")
-            startActivity(intent)
+            usuarioAtual?.let { usuario ->
+                val intent = Intent(this, EditarInformacoesActivity::class.java).apply {
+                    putExtra("USUARIO_ID", usuario.id)
+                    putExtra("USUARIO_NOME", usuario.nome)
+                    putExtra("USUARIO_EMAIL", usuario.email)
+                    putExtra("USUARIO_TELEFONE", usuario.telefone)
+                    putExtra("USUARIO_ENDERECO", usuario.endereco)
+                }
+                startActivityForResult(intent, REQUEST_EDITAR_INFORMACOES)
+            } ?: run {
+                Toast.makeText(this, "Erro: Dados do usuário não carregados.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val btnSair = findViewById<Button>(R.id.btnSair)
@@ -57,15 +64,12 @@ class PerfilActivity : AppCompatActivity() {
             finish()
         }
 
-
-
         val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener {
             finish()
         }
 
         setupNavInferior()
-
     }
 
     override fun onResume() {
@@ -134,10 +138,22 @@ class PerfilActivity : AppCompatActivity() {
     }
 
     private fun displayUserData(usuario: Usuario) {
+        usuarioAtual = usuario
         tvNome.text = usuario.nome ?: "Nome não disponível"
         tvEmail.text = usuario.email ?: "E-mail não disponível"
-        tvTelefone.text = usuario.telefone ?: "Telefone não disponível" // Não precisa mais de toString() pois agora é String
+        tvTelefone.text = usuario.telefone ?: "Telefone não disponível"
         tvEndereco.text = usuario.endereco ?: "Endereço não disponível"
+    }
 
+    companion object {
+        private const val REQUEST_EDITAR_INFORMACOES = 1
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_EDITAR_INFORMACOES && resultCode == RESULT_OK) {
+            // Recarrega os dados do usuário após a edição
+            fetchUserData()
+        }
     }
 }
