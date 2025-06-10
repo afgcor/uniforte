@@ -18,6 +18,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.uniforte.data.network.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
+import com.example.uniforte.data.network.AgendamentoRequest // Import the new data class
+import android.content.Context // Import Context for SharedPreferences
 
 class AulasDisponiveisActivity : AppCompatActivity() {
 
@@ -52,15 +54,14 @@ class AulasDisponiveisActivity : AppCompatActivity() {
             finish()
         }
 
-//        val btnAgendarAula = findViewById<Button>(R.id.agendarPilates)
-//        btnAgendarAula.setOnClickListener{
-//            finish()
-//            Toast.makeText(this, "Aula agendada com sucesso!", Toast.LENGTH_SHORT).show()
-//        }
+        // Initialize AulaAdapter with a click listener for the agendar button
+        aulaAdapter = AulaAdapter(mutableListOf()) { aula ->
+            // This lambda will be called when the agendar button is clicked
+            agendarAula(aula)
+        }
 
         aulasRecyclerView = findViewById(R.id.aulasRecyclerView)
         aulasRecyclerView.layoutManager = LinearLayoutManager(this)
-        aulaAdapter = AulaAdapter(mutableListOf())
         aulasRecyclerView.adapter = aulaAdapter
 
         fetchAulasComProfessor()
@@ -109,6 +110,82 @@ class AulasDisponiveisActivity : AppCompatActivity() {
             }
         }
     }
-}
 
+    private fun agendarAula(aula: Aula) {
+        val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val alunoId = sharedPref.getString("USER_ID", null)
+
+        if (alunoId == null) {
+            Toast.makeText(this, "Erro: ID do aluno não encontrado. Por favor, faça login novamente.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val agendamentosResponse = RetrofitInstance.api.getAgendamentosByAlunoId(alunoId)
+
+                if (agendamentosResponse.isSuccessful) {
+                    val agendamentos = agendamentosResponse.body()
+                    val aulaJaAgendada = agendamentos?.any { it.aulaId == aula.id.toInt() } ?: false
+
+                    if (aulaJaAgendada) {
+                        launch(Dispatchers.Main) {
+                            Toast.makeText(this@AulasDisponiveisActivity, "Você já possui essa aula agendada!", Toast.LENGTH_LONG).show()
+                        }
+                        return@launch
+                    }
+                } else {
+                    val errorBody = agendamentosResponse.errorBody()?.string()
+                    Log.e("AulasDisponiveisActivity", "Erro ao verificar agendamentos: ${agendamentosResponse.code()} - $errorBody")
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(this@AulasDisponiveisActivity, "Erro ao verificar agendamentos: ${agendamentosResponse.code()} - $errorBody", Toast.LENGTH_LONG).show()
+                    }
+                    return@launch
+                }
+
+                val agendamentoRequest = AgendamentoRequest(
+                    aulaId = aula.id.toInt(),
+                    alunoId = alunoId,
+                    nome = aula.nome,
+                    data = aula.data,
+                    descricao = aula.descricao,
+                    horario = aula.horario
+                )
+
+                val response = RetrofitInstance.api.agendarAula(agendamentoRequest)
+
+                if (response.isSuccessful) {
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(this@AulasDisponiveisActivity, "Aula agendada com sucesso!", Toast.LENGTH_SHORT).show()
+                        // Redirect to HomeAlunoActivity
+                        val intent = Intent(this@AulasDisponiveisActivity, HomeAlunoActivity::class.java)
+                        startActivity(intent)
+                        finish() // Finish current activity
+                    }
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("AulasDisponiveisActivity", "Erro ao agendar aula: ${response.code()} - $errorBody")
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(this@AulasDisponiveisActivity, "Erro ao agendar aula: ${response.code()} - $errorBody", Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: IOException) {
+                Log.e("AulasDisponiveisActivity", "Erro de rede ao agendar aula: ${e.message}", e)
+                launch(Dispatchers.Main) {
+                    Toast.makeText(this@AulasDisponiveisActivity, "Erro de conexão. Verifique sua internet ou o endereço do servidor.", Toast.LENGTH_LONG).show()
+                }
+            } catch (e: HttpException) {
+                Log.e("AulasDisponiveisActivity", "Erro HTTP ao agendar aula: ${e.code()} - ${e.message()}", e)
+                launch(Dispatchers.Main) {
+                    Toast.makeText(this@AulasDisponiveisActivity, "Erro no servidor ao agendar aula: ${e.code()}", Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                Log.e("AulasDisponiveisActivity", "Erro inesperado ao agendar aula: ${e.message}", e)
+                launch(Dispatchers.Main) {
+                    Toast.makeText(this@AulasDisponiveisActivity, "Ocorreu um erro inesperado ao agendar aula.", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+}
 

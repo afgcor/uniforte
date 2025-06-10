@@ -51,5 +51,9 @@ interface ApiService {
     @GET("api/aulas/professor/{professor_id}")
     suspend fun getAulasByProfessorId(@Path("professor_id") professorId: String): Response<List<Aula>>
 
-}
+    @POST("api/agendamentos")
+    suspend fun agendarAula(@Body request: AgendamentoRequest): Response<Void>
 
+    @GET("api/agendamentos/aluno/{aluno_id}")
+    suspend fun getAgendamentosByAlunoId(@Path("aluno_id") alunoId: String): Response<List<AgendamentoRequest>>
+}

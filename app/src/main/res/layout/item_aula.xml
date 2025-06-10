@@ -47,7 +47,7 @@
             android:text="Professor: Nome do Professor" />
 
         <Button
-            android:id="@+id/btnAgendarAula"
+            android:id="@+id/btnAgendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
