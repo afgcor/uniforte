@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,6 +31,7 @@ import retrofit2.Response;
 public class CadastroActivity extends AppCompatActivity {
 
     private EditText etNome, etCpf, etEmailRegister, etSenhaRegister, etConfirmarSenha;
+    private AutoCompleteTextView autoCompleteTvTipoUsuario;
     private Button btnCadastrar;
     private ProgressBar progressBarCadastro;
 
@@ -42,8 +45,14 @@ public class CadastroActivity extends AppCompatActivity {
         etEmailRegister = findViewById(R.id.etEmailRegister);
         etSenhaRegister = findViewById(R.id.etSenhaRegister);
         etConfirmarSenha = findViewById(R.id.etConfirmarSenha);
+        autoCompleteTvTipoUsuario = findViewById(R.id.autoCompleteTvTipoUsuario);
         btnCadastrar = findViewById(R.id.btnCadastrar);
         progressBarCadastro = findViewById(R.id.progressBarCadastro);
+
+        // Configura o AutoCompleteTextView com as opções de tipo de usuário
+        String[] tiposUsuario = {"Aluno", "Professor"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, tiposUsuario);
+        autoCompleteTvTipoUsuario.setAdapter(adapter);
 
         // Botão voltar (mantido)
         ImageButton btnVoltar = findViewById(R.id.btnVoltar);
@@ -65,6 +74,7 @@ public class CadastroActivity extends AppCompatActivity {
         String email = etEmailRegister.getText().toString().trim();
         String senha = etSenhaRegister.getText().toString().trim();
         String confirmarSenha = etConfirmarSenha.getText().toString().trim();
+        String tipoUsuario = autoCompleteTvTipoUsuario.getText().toString().trim();
 
         if (nome.isEmpty()) { // Validar nome
             etNome.setError("Informe o nome completo");
@@ -113,12 +123,19 @@ public class CadastroActivity extends AppCompatActivity {
             return;
         }
 
+        if (tipoUsuario.isEmpty()) {
+            autoCompleteTvTipoUsuario.setError("Selecione o tipo de usuário");
+            autoCompleteTvTipoUsuario.requestFocus();
+            return;
+        }
+
         // Limpar erros se passou nas validações
         etNome.setError(null);
         etCpf.setError(null);
         etEmailRegister.setError(null);
         etSenhaRegister.setError(null);
         etConfirmarSenha.setError(null);
+        autoCompleteTvTipoUsuario.setError(null);
 
         // --- Iniciar chamada de API ---
         mostrarLoading(true);
@@ -128,6 +145,7 @@ public class CadastroActivity extends AppCompatActivity {
         requestBody.put("cpf", cpf);
         requestBody.put("email", email);
         requestBody.put("senha", senha);
+        requestBody.put("tipo_usuario", tipoUsuario);
 
         // Obter instância do serviço Retrofit
         ApiService apiService = RetrofitInstance.INSTANCE.getApi();
@@ -186,4 +204,3 @@ public class CadastroActivity extends AppCompatActivity {
         }
     }
 }
-

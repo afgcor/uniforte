@@ -90,8 +90,8 @@ class MainActivity : AppCompatActivity() {
 
         imgLogo.setOnClickListener {
 //             Ação: navegar para HomeProfessorActivity
-             val intent = Intent(this, HomeProfessorActivity::class.java)
-             startActivity(intent)
+            val intent = Intent(this, HomeProfessorActivity::class.java)
+            startActivity(intent)
         }
 
         // Configuração do VLibras
@@ -122,19 +122,27 @@ class MainActivity : AppCompatActivity() {
                         val userId = userObject.getString("id") // Ou getInt, etc.
                         val userEmail = userObject.getString("email")
                         val userName = userObject.optString("nome", userEmail) // Usa optString para evitar erro se "nome" não existir
+                        val userType = userObject.optString("tipo_usuario", "")
 
-                        Log.i("MainActivity", "Login bem-sucedido! Token: $token, UserID: $userId, Email: $userEmail, Nome: $userName")
+                        Log.i("MainActivity", "Login bem-sucedido! Token: $token, UserID: $userId, Email: $userEmail, Nome: $userName, Tipo: $userType")
 
                         with (sharedPref.edit()) {
                             putString("USER_ID", userId)
                             putString("USER_TOKEN", token)
                             putString("USER_NAME", userName)
                             putString("USER_EMAIL", userEmail)
+                            putString("USER_TYPE", userType) // Salva o tipo de usuário
                             apply() // Salva de forma assíncrona
                         }
+                        Log.d("DEBUG_APP", "MainActivity - USER_NAME salvo: " + sharedPref.getString("USER_NAME", "Default"))
                         Log.i("MainActivity", "Dados da sessão guardados em SharedPreferences.")
 
-                        val intent = Intent(this@MainActivity, HomeAlunoActivity::class.java)
+                        val intent: Intent
+                        if (userType == "Professor") {
+                            intent = Intent(this@MainActivity, HomeProfessorActivity::class.java)
+                        } else {
+                            intent = Intent(this@MainActivity, HomeAlunoActivity::class.java)
+                        }
 
                         startActivity(intent)
                         finish()
@@ -302,4 +310,3 @@ class MainActivity : AppCompatActivity() {
         webVLibras.loadDataWithBaseURL("https://vlibras.gov.br/app", html, "text/html", "UTF-8", null)
     }
 }
-

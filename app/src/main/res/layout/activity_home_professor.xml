@@ -22,17 +22,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvOlaUsuario"
+                android:id="@+id/tvOlaProfessor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/satoshi_bold"
-                android:text="@string/ol_usu_rio"
+                android:text="Olá professor!"
                 android:textColor="@color/unifor_marinho"
                 android:textColorLink="@color/unifor_marinho"
                 android:textSize="22sp"
                 android:textStyle="bold" />
+
+
+
 
             <LinearLayout
                 android:id="@+id/llAgendamentosHeader"

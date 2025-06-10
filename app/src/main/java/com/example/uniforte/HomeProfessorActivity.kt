@@ -14,11 +14,19 @@ import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
+import android.content.Context
+import android.os.Handler
+import android.os.Looper
 
 class HomeProfessorActivity : AppCompatActivity() {
+
+    private lateinit var tvOlaProfessor: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_professor)
+
+        tvOlaProfessor = findViewById(R.id.tvOlaProfessor)
 
         // Inserir o fragmento da navegação inferior no container
         val navInferiorProfessorFragment = NavInferiorProfessorFragment()
@@ -60,6 +68,24 @@ class HomeProfessorActivity : AppCompatActivity() {
 
         // Chamar a API para buscar aulas do professor
         fetchAulasProfessor()
+        atualizarNomeProfessor(false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        atualizarNomeProfessor(false)
+    }
+
+    private fun atualizarNomeProfessor(mostrarCarregamento: Boolean) {
+        // Não há ProgressBar no layout do professor, então ignoramos o mostrarCarregamento por enquanto
+        val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val nomeProfessor = sharedPref.getString("USER_NAME", "")
+
+        if (!nomeProfessor.isNullOrEmpty()) {
+            tvOlaProfessor.text = "Olá professor, $nomeProfessor!"
+        } else {
+            tvOlaProfessor.text = "Olá professor!"
+        }
     }
 
     private fun fetchAulasProfessor() {
@@ -125,4 +151,5 @@ class HomeProfessorActivity : AppCompatActivity() {
         }
     }
 }
+
 

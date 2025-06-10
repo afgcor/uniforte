@@ -8,6 +8,7 @@
     <color name="unifor_marinho">#132190</color>
     <color name="unifor_gelo">#E4F2FE</color>
     <color name="unifor_azulclaro">#87B7FE</color>
-    <color name="unifor_azulclaro_low">#BFCDE3F9</color>
+    <color name="unifor_azulclaro_low">#CDE3F9</color>
+
 
 </resources>
