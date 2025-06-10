@@ -1,11 +1,14 @@
 package com.example.uniforte.data.network
 
+import android.adservices.adid.AdId
 import com.example.uniforte.data.model.FichaTreino
 import com.example.uniforte.data.Aula
+import com.example.uniforte.data.model.Agendamento
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -15,7 +18,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @POST("api/usuarios/login"  )
+    @POST("api/usuarios/login")
     suspend fun login(@Body requestBody: Map<String, String>): Response<ResponseBody>
 
     @POST("api/usuarios/")
@@ -51,9 +54,13 @@ interface ApiService {
     @GET("api/aulas/professor/{professor_id}")
     suspend fun getAulasByProfessorId(@Path("professor_id") professorId: String): Response<List<Aula>>
 
+
+    @GET("api/agendamentos/aluno/{aluno_id}")
+    suspend fun getAgendamentosByAlunoId(@Path("aluno_id") alunoId: String): Response<List<Agendamento>>
+
     @POST("api/agendamentos")
     suspend fun agendarAula(@Body request: AgendamentoRequest): Response<Void>
 
-    @GET("api/agendamentos/aluno/{aluno_id}")
-    suspend fun getAgendamentosByAlunoId(@Path("aluno_id") alunoId: String): Response<List<AgendamentoRequest>>
+    @DELETE("api/agendamentos/{agendamento_id}") // This path matches your backend's expectation of an 'id' from req.params
+    suspend fun deleteAgendamento(@Path("agendamento_id") agendamento_id: String): Response<Void>
 }
