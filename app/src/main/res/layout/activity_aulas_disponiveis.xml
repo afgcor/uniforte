@@ -30,7 +30,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <TextView
             android:id="@+id/tituloTextView"
             android:layout_width="wrap_content"
@@ -45,191 +44,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Conteúdo rolável -->
-    <ScrollView
-        android:id="@+id/scrollConteudo"
+    <!-- RecyclerView (conteúdo rolável principal) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/aulasRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/llTitulo"
         app:layout_constraintBottom_toTopOf="@id/container_nav_inferior"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llTitulo">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Aula 1 -->
-            <LinearLayout
-                android:id="@+id/aulaPilates"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/card_agendados"
-                android:elevation="2dp"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/satoshi_bold"
-                    android:text="@string/pilates"
-                    android:textColor="@color/unifor_marinho"
-                    android:textColorLink="@color/unifor_marinho"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/satoshi_medium"
-                    android:text="@string/descri_o_da_aula"
-                    android:textColor="@color/material_dynamic_neutral30"
-                    android:textColorLink="@color/material_dynamic_neutral30"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_12_01"
-                        android:textColor="@color/unifor_anil"
-                        android:textColorLink="@color/unifor_anil" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_17_00"
-                        android:textColor="@color/unifor_anil"
-                        android:textColorLink="@color/unifor_anil" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/satoshi_medium"
-                    android:text="@string/nome_do_professor"
-                    android:textColor="@color/material_dynamic_neutral30"
-                    android:textColorLink="@color/material_dynamic_neutral30"
-                    android:textSize="14sp" />
-
-                <Button
-                    android:id="@+id/agendarPilates"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="12dp"
-                    android:backgroundTint="@color/unifor_azulclaro"
-                    android:drawablePadding="8dp"
-                    android:drawableTint="@color/unifor_gelo"
-                    android:fontFamily="@font/satoshi_bold"
-                    android:text="@string/agendar"
-                    android:textColorLink="@color/unifor_marinho"
-                    app:icon="@drawable/grafismo_unifor_4"
-                    app:iconPadding="6dp"
-                    app:iconSize="16dp" />
-            </LinearLayout>
-
-            <!-- Aula 2 -->
-            <LinearLayout
-                android:id="@+id/aulaZumba"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/card_agendados"
-                android:elevation="2dp"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/satoshi_bold"
-                    android:text="@string/zumba"
-                    android:textColor="@color/unifor_marinho"
-                    android:textColorLink="@color/unifor_marinho"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/satoshi_medium"
-                    android:text="@string/descri_o_da_aula"
-                    android:textColor="@color/material_dynamic_neutral30"
-                    android:textColorLink="@color/material_dynamic_neutral30"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_13_01"
-                        android:textColor="@color/unifor_anil"
-                        android:textColorLink="@color/unifor_anil" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_19_30"
-                        android:textColor="@color/unifor_anil"
-                        android:textColorLink="@color/unifor_anil" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/satoshi_medium"
-                    android:text="@string/nome_do_professor"
-                    android:textColor="@color/material_dynamic_neutral30"
-                    android:textColorLink="@color/material_dynamic_neutral30"
-                    android:textSize="14sp" />
-
-                <Button
-                    android:id="@+id/agendarZumba"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="12dp"
-                    android:backgroundTint="@color/unifor_azulclaro"
-                    android:drawablePadding="8dp"
-                    android:drawableTint="@color/unifor_gelo"
-                    android:fontFamily="@font/satoshi_bold"
-                    android:text="@string/agendar"
-                    android:textColorLink="@color/unifor_marinho"
-                    app:icon="@drawable/grafismo_unifor_4"
-                    app:iconPadding="6dp"
-                    app:iconSize="16dp" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Navegação inferior fixa -->
     <FrameLayout

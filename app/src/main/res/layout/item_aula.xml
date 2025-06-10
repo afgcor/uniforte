@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/card_agendados">
+
+        <TextView
+            android:id="@+id/aulaNomeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Nome da Aula" />
+
+        <TextView
+            android:id="@+id/aulaDescricaoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Descrição da Aula" />
+
+        <TextView
+            android:id="@+id/aulaHorarioDataTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Horário e Data" />
+
+        <TextView
+            android:id="@+id/aulaProfessorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textStyle="italic"
+            android:text="Professor: Nome do Professor" />
+
+        <Button
+            android:id="@+id/btnAgendarAula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/unifor_azulclaro"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/unifor_gelo"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/agendar"
+            android:textColorLink="@color/unifor_marinho"
+            app:icon="@drawable/grafismo_unifor_4"
+            app:iconPadding="6dp"
+            app:iconSize="16dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
