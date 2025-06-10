@@ -10,10 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.uniforte.data.network.RetrofitInstance
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
+import com.example.uniforte.data.Aula // Importar a classe Aula
 
 class HomeProfessorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,44 +72,28 @@ class HomeProfessorActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
+                // Usar getAulasByProfessorId que aceita o ID do professor
                 val response = RetrofitInstance.api.getAulasByProfessorId(professorId)
 
                 if (response.isSuccessful && response.body() != null) {
-                    val responseBodyString = response.body()?.string() ?: "[]"
-                    Log.d("HomeProfessorActivity", "Aulas do Professor: $responseBodyString")
+                    val aulas: List<Aula> = response.body()!!
+                    Log.d("HomeProfessorActivity", "Aulas do Professor: ${aulas.size} encontradas")
 
-                    try {
-                        val jsonArray = JSONArray(responseBodyString)
-                        // Exemplo de como você pode processar os dados sem criar um modelo
-                        // Você pode iterar sobre o jsonArray e extrair as informações necessárias
-                        // para exibir na UI, por exemplo, em um RecyclerView ou TextViews.
-                        // Para este exemplo, vamos apenas mostrar um Toast com o número de aulas.
-                        Toast.makeText(this@HomeProfessorActivity, "Aulas encontradas: ${jsonArray.length()}", Toast.LENGTH_LONG).show()
-
-                        // Exemplo de como acessar o título da primeira aula (se houver)
-                        if (jsonArray.length() > 0) {
-                            val firstAula = jsonArray.getJSONObject(0)
-                            val tituloAula = firstAula.optString("titulo", "Sem título")
-                            Log.d("HomeProfessorActivity", "Título da primeira aula: $tituloAula")
-                            // Você pode atualizar um TextView aqui, por exemplo:
-                            // findViewById<TextView>(R.id.tvTituloAula).text = tituloAula
-                        }
-
-                    } catch (e: Exception) {
-                        Log.e("HomeProfessorActivity", "Erro ao analisar JSON de aulas: ${e.message}", e)
-                        Toast.makeText(this@HomeProfessorActivity, "Erro ao processar dados das aulas.", Toast.LENGTH_LONG).show()
+                    if (aulas.isNotEmpty()) {
+                        Toast.makeText(this@HomeProfessorActivity, "Aulas encontradas: ${aulas.size}", Toast.LENGTH_LONG).show()
+                        val firstAula = aulas[0]
+                        val tituloAula = firstAula.nome // Assumindo que 'nome' é o título da aula
+                        Log.d("HomeProfessorActivity", "Título da primeira aula: $tituloAula")
+                        // Você pode atualizar um TextView aqui, por exemplo:
+                        // findViewById<TextView>(R.id.tvTituloAula).text = tituloAula
+                    } else {
+                        Toast.makeText(this@HomeProfessorActivity, "Nenhuma aula encontrada para este professor.", Toast.LENGTH_LONG).show()
                     }
 
                 } else {
                     val errorBodyString = response.errorBody()?.string() ?: "{\"error\": \"Erro desconhecido\"}"
                     Log.e("HomeProfessorActivity", "Erro da API ao buscar aulas: ${response.code()} - $errorBodyString")
-                    try {
-                        val jsonObject = JSONObject(errorBodyString)
-                        val errorMessage = jsonObject.getString("error")
-                        Toast.makeText(this@HomeProfessorActivity, errorMessage, Toast.LENGTH_LONG).show()
-                    } catch (e: Exception) {
-                        Toast.makeText(this@HomeProfessorActivity, "Erro ao buscar aulas. Tente novamente.", Toast.LENGTH_LONG).show()
-                    }
+                    Toast.makeText(this@HomeProfessorActivity, "Erro ao buscar aulas. Tente novamente.", Toast.LENGTH_LONG).show()
                 }
             } catch (e: IOException) {
                 Log.e("HomeProfessorActivity", "Erro de rede ao buscar aulas: ${e.message}", e)
@@ -125,4 +108,5 @@ class HomeProfessorActivity : AppCompatActivity() {
         }
     }
 }
+
 
