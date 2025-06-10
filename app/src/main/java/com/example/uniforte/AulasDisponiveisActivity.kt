@@ -145,7 +145,7 @@ class AulasDisponiveisActivity : AppCompatActivity() {
 
                 val agendamentoRequest = AgendamentoRequest(
                     aulaId = aula.id.toInt(),
-                    alunoId = alunoId,
+                    aluno_id = alunoId,
                     nome = aula.nome,
                     data = aula.data,
                     descricao = aula.descricao,

@@ -151,15 +151,6 @@
                         android:textColor="@color/unifor_anil"
                         android:textColorLink="@color/unifor_anil" />
 
-                    <ImageView
-                        android:id="@+id/btnDeletarAulaHome1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="8dp"
-                        android:contentDescription="@string/excluir"
-                        android:src="@drawable/ic_delete"
-                        app:tint="@color/unifor_marinho" />
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -219,15 +210,6 @@
                         android:text="@string/_09_00"
                         android:textColor="@color/unifor_anil"
                         android:textColorLink="@color/unifor_anil" />
-
-                    <ImageView
-                        android:id="@+id/btnDeletarAulaHome2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="8dp"
-                        android:contentDescription="@string/excluir"
-                        android:src="@drawable/ic_delete"
-                        app:tint="@color/unifor_marinho" />
 
                 </LinearLayout>
             </LinearLayout>

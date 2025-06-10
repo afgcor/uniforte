@@ -1,24 +1,23 @@
 package com.example.uniforte
-
+import com.example.uniforte.data.network.AgendamentoRequest
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.ImageView // Use ImageView for btnBack as per activity_agendamentos.xml
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.uniforte.data.network.AgendamentoRequest // Import your AgendamentoRequest data class
-import com.example.uniforte.data.network.RetrofitClient // Import your RetrofitClient
+import com.example.uniforte.data.model.Agendamento
+import com.example.uniforte.data.network.RetrofitClient // Assuming RetrofitClient is your setup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import android.util.Log // Import Log for debugging
 
 class AgendamentosActivity : AppCompatActivity() {
 
@@ -30,10 +29,11 @@ class AgendamentosActivity : AppCompatActivity() {
 
         llAgendamentosContainer = findViewById(R.id.llAgendamentosContainer)
 
-        val btnVoltar: ImageButton = findViewById(R.id.btnVoltar)
+        // Corrected: Use R.id.btnBack as per activity_agendamentos.xml
+        val btnVoltar: ImageView = findViewById(R.id.btnVoltar)
 
-        btnVoltar.setOnClickListener {
-            finish()
+        btnVoltar.setOnClickListener { // Changed from btnVoltar
+            onBackPressedDispatcher.onBackPressed() // Use onBackPressedDispatcher for modern Android
         }
 
         // Inserir o fragmento da navegação inferior no container
@@ -80,7 +80,6 @@ class AgendamentosActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // Ensure your ApiService has this method: @GET("agendamentos/aluno/{alunoId}") suspend fun getAgendamentosByAlunoId(@Path("alunoId") alunoId: String): Response<List<AgendamentoRequest>>
                 val response = RetrofitClient.instance.getAgendamentosByAlunoId(userId)
 
                 withContext(Dispatchers.Main) {
@@ -117,7 +116,7 @@ class AgendamentosActivity : AppCompatActivity() {
         }
     }
 
-    private fun addAgendamentoCard(agendamento: AgendamentoRequest) {
+    private fun addAgendamentoCard(agendamento: Agendamento) { // <-- CHANGED PARAMETER TYPE TO Agendamento
         val inflater = LayoutInflater.from(this)
         val cardView = inflater.inflate(R.layout.item_agendamento_card, llAgendamentosContainer, false)
 
@@ -133,17 +132,19 @@ class AgendamentosActivity : AppCompatActivity() {
         tvTime.text = "Hora: ${agendamento.horario}"
 
         ivDelete.setOnClickListener {
-            showDeleteConfirmationDialog(agendamento.aulaId)
+            // Pass the primary key 'id' of the agendamento
+            showDeleteConfirmationDialog(agendamento.id) // <-- CORRECTED HERE to use agendamento.id
         }
 
         llAgendamentosContainer.addView(cardView)
     }
 
-    private fun showDeleteConfirmationDialog(aulaId: Int) {
+    private fun showDeleteConfirmationDialog(agendamentoIdToDelete: Int) { // Renamed parameter for clarity
         AlertDialog.Builder(this)
             .setTitle("Confirmar exclusão")
             .setMessage("Tem certeza que deseja excluir esta aula?")
             .setPositiveButton("Excluir") { dialog, _ ->
+                deleteAgendamento(agendamentoIdToDelete) // Pass the correct ID
                 dialog.dismiss()
             }
             .setNegativeButton("Cancelar") { dialog, _ ->
@@ -152,28 +153,29 @@ class AgendamentosActivity : AppCompatActivity() {
             .show()
     }
 
-//    private fun deleteAgendamento(aulaId: Int) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                // Ensure your ApiService has this method: @DELETE("agendamentos/{aulaId}") suspend fun deleteAgendamento(@Path("aulaId") aulaId: Int): Response<ResponseBody>
-//                val response = RetrofitClient.instance.deleteAgendamento(aulaId)
-//
-//                withContext(Dispatchers.Main) {
-//                    if (response.isSuccessful) {
-//                        Toast.makeText(this@AgendamentosActivity, "Aula excluída com sucesso!", Toast.LENGTH_SHORT).show()
-//                        fetchAgendamentos() // Refresh the list after successful deletion
-//                    } else {
-//                        val errorBody = response.errorBody()?.string()
-//                        Log.e("AgendamentosActivity", "Error deleting appointment: ${response.code()} - $errorBody")
-//                        Toast.makeText(this@AgendamentosActivity, "Falha ao excluir aula: ${response.code()}", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                Log.e("AgendamentosActivity", "Exception deleting appointment: ${e.message}", e)
-//                withContext(Dispatchers.Main) {
-//                    Toast.makeText(this@AgendamentosActivity, "Erro de conexão ao excluir aula.", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
+    // This function signature and internal call are already correct for converting Int to String for API
+    private fun deleteAgendamento(agendamentoID: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // The API expects a String, so .toString() is correctly used here
+                val response = RetrofitClient.instance.deleteAgendamento(agendamentoID.toString())
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@AgendamentosActivity, "Aula excluída com sucesso!", Toast.LENGTH_SHORT).show()
+                        fetchAgendamentos() // Refresh the list after successful deletion
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        Log.e("AgendamentosActivity", "Error deleting appointment: ${response.code()} - $errorBody")
+                        Toast.makeText(this@AgendamentosActivity, "Falha ao excluir aula: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("AgendamentosActivity", "Exception deleting appointment: ${e.message}", e)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@AgendamentosActivity, "Erro de conexão ao excluir aula.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 }
