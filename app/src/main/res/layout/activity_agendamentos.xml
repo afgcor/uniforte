@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/unifor_gelo">
 
-    <!-- Cabeçalho -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llTitulo"
         android:layout_width="0dp"
@@ -32,7 +31,6 @@
         <TextView
             android:id="@+id/tituloTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:fontFamily="@font/satoshi_bold"
             android:text="@string/agendamentos"
             android:textColor="@color/unifor_marinho"
@@ -41,10 +39,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Conteúdo rolável -->
     <ScrollView
         android:id="@+id/scrollConteudo"
         android:layout_width="0dp"
@@ -56,155 +54,14 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/llAgendamentosContainer"  android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Card Aula 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/card_agendados"
-                android:elevation="2dp"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/satoshi_bold"
-                    android:text="@string/pilates"
-                    android:textColor="@color/unifor_marinho"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/satoshi_medium"
-                    android:text="@string/descri_o_da_aula"
-                    android:textColor="@color/material_dynamic_neutral30"
-                    android:textSize="14sp" />
-
-                <!-- Linha com data, hora e ícone -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:id="@+id/txtData1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_12_01"
-                        android:textColor="@color/unifor_anil"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txtHora1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_18_00"
-                        android:textColor="@color/unifor_anil"
-                        app:layout_constraintStart_toEndOf="@id/txtData1"
-                        app:layout_constraintTop_toTopOf="@id/txtData1"
-                        app:layout_constraintBottom_toBottomOf="@id/txtData1" />
-
-                    <ImageView
-                        android:id="@+id/btnDeletarAula1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginEnd="0dp"
-                        android:contentDescription="@string/excluir"
-                        android:src="@drawable/ic_delete"
-                        app:tint="@color/unifor_marinho"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/txtData1"
-                        app:layout_constraintBottom_toBottomOf="@id/txtData1" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
-            <!-- Card Aula 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/card_agendados"
-                android:elevation="2dp"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/satoshi_bold"
-                    android:text="@string/yoga"
-                    android:textColor="@color/unifor_marinho"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/satoshi_medium"
-                    android:text="@string/descri_o_da_aula"
-                    android:textColor="@color/material_dynamic_neutral30"
-                    android:textSize="14sp" />
-
-                <!-- Linha com data, hora e ícone -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:id="@+id/txtData2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_13_01"
-                        android:textColor="@color/unifor_anil"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txtHora2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/satoshi_regular"
-                        android:text="@string/_09_00"
-                        android:textColor="@color/unifor_anil"
-                        app:layout_constraintStart_toEndOf="@id/txtData2"
-                        app:layout_constraintTop_toTopOf="@id/txtData2"
-                        app:layout_constraintBottom_toBottomOf="@id/txtData2" />
-
-                    <ImageView
-                        android:id="@+id/btnDeletarAula2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/excluir"
-                        app:srcCompat="@drawable/ic_delete"
-                        app:tint="@color/unifor_marinho"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/txtData2"
-                        app:layout_constraintBottom_toBottomOf="@id/txtData2" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Navegação inferior -->
     <FrameLayout
         android:id="@+id/container_nav_inferior"
         android:layout_width="match_parent"
