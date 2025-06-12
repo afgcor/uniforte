@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:background="@drawable/card_agendados"
+    android:elevation="4dp"
+    android:padding="16dp">
+
+    <!-- Título da aula -->
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nome da Aula"
+        android:textColor="@color/unifor_marinho"
+        android:textSize="16sp"
+        android:fontFamily="@font/satoshi_bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Descrição da aula -->
+    <TextView
+        android:id="@+id/txtDescricao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Descrição da Aula"
+        android:textColor="@color/material_dynamic_neutral30"
+        android:textSize="14sp"
+        android:fontFamily="@font/satoshi_medium"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Data e horário -->
+    <TextView
+        android:id="@+id/txtDataHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/06/2025 - 14:00"
+        android:textColor="@color/unifor_anil"
+        android:textSize="14sp"
+        android:fontFamily="@font/satoshi_regular"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/txtDescricao"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Botão editar -->
+    <ImageView
+        android:id="@+id/btnEditar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:src="@android:drawable/ic_menu_edit"
+        android:tint="@color/unifor_marinho"
+        app:layout_constraintTop_toTopOf="@id/txtDataHora"
+        app:layout_constraintEnd_toStartOf="@id/btnExcluir"
+        app:layout_constraintBottom_toBottomOf="@id/txtDataHora" />
+
+    <!-- Botão excluir -->
+    <ImageView
+        android:id="@+id/btnExcluir"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_delete"
+        android:tint="@color/unifor_marinho"
+        app:layout_constraintTop_toTopOf="@id/txtDataHora"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/txtDataHora" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

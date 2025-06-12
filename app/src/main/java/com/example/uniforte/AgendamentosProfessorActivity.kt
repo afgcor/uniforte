@@ -54,15 +54,15 @@ class AgendamentosProfessorActivity : AppCompatActivity() {
                 .show()
         }
 
-        val btnDeletarAula = findViewById<ImageView>(R.id.btnDeletarAula1)
-        btnDeletarAula.setOnClickListener(deletarListener)
+        val btnExcluir = findViewById<ImageView>(R.id.btnExcluir)
+        btnExcluir.setOnClickListener(deletarListener)
 
         val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener{
             finish()
         }
 
-        val btnEditar = findViewById<ImageView>(R.id.btnEditarAula)
+        val btnEditar = findViewById<ImageView>(R.id.btnEditar)
         btnEditar.setOnClickListener{
             val intent = Intent(this, EditarAulaActivity::class.java)
             startActivity(intent)
